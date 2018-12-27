@@ -1,0 +1,6 @@
+/*
+ * Public API Surface of ngx-okode-common
+ */
+export * from './lib/environment.service';
+export * from './lib/ngx-okode-common.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL25neC1va29kZS1jb21tb24vIiwic291cmNlcyI6WyJwdWJsaWNfYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBRUgsY0FBYywyQkFBMkIsQ0FBQztBQUMxQyxjQUFjLCtCQUErQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBuZ3gtb2tvZGUtY29tbW9uXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9saWIvZW52aXJvbm1lbnQuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZ3gtb2tvZGUtY29tbW9uLm1vZHVsZSc7XG4iXX0=

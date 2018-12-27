@@ -1,16 +1,10 @@
 {
   "name": "ngx-okode-common",
   "version": "0.1.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^1.9.0"
+  },
   "devDependencies": {
     "@angular/common": "~7.1.4",
     "@angular/core": "~7.1.4",
@@ -42,5 +36,15 @@
     "@angular/router": "~7.1.4",
     "@ionic/angular": "4.0.0-rc.0",
     "@ionic/storage": "2.2.0"
-  }
+  },
+  "main": "bundles/ngx-okode-common.umd.js",
+  "module": "fesm5/ngx-okode-common.js",
+  "es2015": "fesm2015/ngx-okode-common.js",
+  "esm5": "esm5/ngx-okode-common.js",
+  "esm2015": "esm2015/ngx-okode-common.js",
+  "fesm5": "fesm5/ngx-okode-common.js",
+  "fesm2015": "fesm2015/ngx-okode-common.js",
+  "typings": "ngx-okode-common.d.ts",
+  "metadata": "ngx-okode-common.metadata.json",
+  "sideEffects": false
 }
