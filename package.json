@@ -1,6 +1,10 @@
 {
   "name": "ngx-okode-common",
   "version": "0.1.0",
+  "main": "dist/public_api.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
