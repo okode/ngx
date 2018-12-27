@@ -2,6 +2,7 @@
   "name": "ngx-okode-common",
   "version": "0.1.0",
   "main": "bundles/ngx-okode-common.umd.js",
+  "types": "./dist/public_api.d.ts",
   "files": [
     "dist"
   ],
