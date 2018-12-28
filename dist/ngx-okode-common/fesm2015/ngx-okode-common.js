@@ -4,7 +4,17 @@ import { ActionSheetController, Platform } from '@ionic/angular';
 import { __awaiter } from 'tslib';
 import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class Environment {
+    /**
+     * @param {?} http
+     * @param {?} storage
+     * @param {?} actionSheetCtrl
+     * @param {?} platform
+     */
     constructor(http, storage, actionSheetCtrl, platform) {
         this.http = http;
         this.storage = storage;
@@ -16,12 +26,18 @@ class Environment {
         this.readyPromiseResolve = [];
         this.readyPromiseReject = [];
     }
+    /**
+     * @return {?}
+     */
     static config() {
         if (!Environment.isReady) {
             console.error(`Environment config is not ready (wait for Environment.ready())`);
         }
         return Environment.environmentConfig;
     }
+    /**
+     * @return {?}
+     */
     ready() {
         if (Environment.isReady) {
             return Promise.resolve();
@@ -35,6 +51,10 @@ class Environment {
             this.readyPromiseReject.push(reject);
         });
     }
+    /**
+     * @private
+     * @return {?}
+     */
     initEnvs() {
         this.http.get(this.JSON_PATH).subscribe(json => {
             if (json == null || Object.keys(json).length === 0) {
@@ -42,6 +62,7 @@ class Environment {
                 console.error(`EnvironmentService fails: '${this.JSON_PATH}' is empty or invalid`);
                 return;
             }
+            /** @type {?} */
             const environments = Object.keys(json).filter(environment => environment !== 'default');
             if (environments == null || environments.length === 0) {
                 this.setEnv(false, 'default', json['default']);
@@ -55,6 +76,7 @@ class Environment {
                                 this.showEnvironmentActionSheet(environments, json);
                             }
                             else {
+                                /** @type {?} */
                                 const environment = environments[0];
                                 this.setEnv(true, environment, json['default'], json[environment]);
                             }
@@ -72,6 +94,14 @@ class Environment {
             this.readyPromiseReject.forEach((reject) => reject());
         });
     }
+    /**
+     * @private
+     * @param {?} save
+     * @param {?} environmentKey
+     * @param {?} configBase
+     * @param {?=} configEnvironment
+     * @return {?}
+     */
     setEnv(save, environmentKey, configBase, configEnvironment) {
         console.log(`Applying environment: ${environmentKey}`);
         Environment.environmentConfig = configBase;
@@ -85,9 +115,16 @@ class Environment {
         Environment.isReady = true;
         this.readyPromiseResolve.forEach((resolve) => resolve());
     }
+    /**
+     * @private
+     * @param {?} environments
+     * @param {?} configs
+     * @return {?}
+     */
     showEnvironmentActionSheet(environments, configs) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.platform.ready();
+            /** @type {?} */
             const actionSheet = yield this.actionSheetCtrl.create({
                 header: 'Select environment',
                 backdropDismiss: false,
@@ -115,8 +152,15 @@ Environment.ctorParameters = () => [
     { type: Platform }
 ];
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // @dynamic
 class NgxOkodeCommonModule {
+    /**
+     * @return {?}
+     */
     static forRoot() {
         return {
             ngModule: NgxOkodeCommonModule,
@@ -134,20 +178,26 @@ NgxOkodeCommonModule.decorators = [
                 exports: []
             },] }
 ];
+/**
+ * @param {?} environment
+ * @return {?}
+ */
 function envInitializer(environment) {
     return () => __awaiter(this, void 0, void 0, function* () {
         yield environment.ready();
     });
 }
 
-/*
- * Public API Surface of ngx-okode-common
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { Environment, NgxOkodeCommonModule, envInitializer };
+export { Environment, envInitializer, NgxOkodeCommonModule };
 
 //# sourceMappingURL=ngx-okode-common.js.map

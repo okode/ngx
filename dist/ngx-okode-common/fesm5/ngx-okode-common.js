@@ -4,6 +4,10 @@ import { ActionSheetController, Platform } from '@ionic/angular';
 import { __awaiter, __generator, __assign } from 'tslib';
 import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var Environment = /** @class */ (function () {
     function Environment(http, storage, actionSheetCtrl, platform) {
         this.http = http;
@@ -16,13 +20,25 @@ var Environment = /** @class */ (function () {
         this.readyPromiseResolve = [];
         this.readyPromiseReject = [];
     }
-    Environment.config = function () {
+    /**
+     * @return {?}
+     */
+    Environment.config = /**
+     * @return {?}
+     */
+    function () {
         if (!Environment.isReady) {
             console.error("Environment config is not ready (wait for Environment.ready())");
         }
         return Environment.environmentConfig;
     };
-    Environment.prototype.ready = function () {
+    /**
+     * @return {?}
+     */
+    Environment.prototype.ready = /**
+     * @return {?}
+     */
+    function () {
         var _this = this;
         if (Environment.isReady) {
             return Promise.resolve();
@@ -36,7 +52,15 @@ var Environment = /** @class */ (function () {
             _this.readyPromiseReject.push(reject);
         });
     };
-    Environment.prototype.initEnvs = function () {
+    /**
+     * @private
+     * @return {?}
+     */
+    Environment.prototype.initEnvs = /**
+     * @private
+     * @return {?}
+     */
+    function () {
         var _this = this;
         this.http.get(this.JSON_PATH).subscribe(function (json) {
             if (json == null || Object.keys(json).length === 0) {
@@ -44,6 +68,7 @@ var Environment = /** @class */ (function () {
                 console.error("EnvironmentService fails: '" + _this.JSON_PATH + "' is empty or invalid");
                 return;
             }
+            /** @type {?} */
             var environments = Object.keys(json).filter(function (environment) { return environment !== 'default'; });
             if (environments == null || environments.length === 0) {
                 _this.setEnv(false, 'default', json['default']);
@@ -57,6 +82,7 @@ var Environment = /** @class */ (function () {
                                 _this.showEnvironmentActionSheet(environments, json);
                             }
                             else {
+                                /** @type {?} */
                                 var environment = environments[0];
                                 _this.setEnv(true, environment, json['default'], json[environment]);
                             }
@@ -74,7 +100,23 @@ var Environment = /** @class */ (function () {
             _this.readyPromiseReject.forEach(function (reject) { return reject(); });
         });
     };
-    Environment.prototype.setEnv = function (save, environmentKey, configBase, configEnvironment) {
+    /**
+     * @private
+     * @param {?} save
+     * @param {?} environmentKey
+     * @param {?} configBase
+     * @param {?=} configEnvironment
+     * @return {?}
+     */
+    Environment.prototype.setEnv = /**
+     * @private
+     * @param {?} save
+     * @param {?} environmentKey
+     * @param {?} configBase
+     * @param {?=} configEnvironment
+     * @return {?}
+     */
+    function (save, environmentKey, configBase, configEnvironment) {
         console.log("Applying environment: " + environmentKey);
         Environment.environmentConfig = configBase;
         if (configEnvironment != null) {
@@ -87,7 +129,19 @@ var Environment = /** @class */ (function () {
         Environment.isReady = true;
         this.readyPromiseResolve.forEach(function (resolve) { return resolve(); });
     };
-    Environment.prototype.showEnvironmentActionSheet = function (environments, configs) {
+    /**
+     * @private
+     * @param {?} environments
+     * @param {?} configs
+     * @return {?}
+     */
+    Environment.prototype.showEnvironmentActionSheet = /**
+     * @private
+     * @param {?} environments
+     * @param {?} configs
+     * @return {?}
+     */
+    function (environments, configs) {
         return __awaiter(this, void 0, void 0, function () {
             var actionSheet;
             var _this = this;
@@ -129,11 +183,21 @@ var Environment = /** @class */ (function () {
     return Environment;
 }());
 
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // @dynamic
 var NgxOkodeCommonModule = /** @class */ (function () {
     function NgxOkodeCommonModule() {
     }
-    NgxOkodeCommonModule.forRoot = function () {
+    /**
+     * @return {?}
+     */
+    NgxOkodeCommonModule.forRoot = /**
+     * @return {?}
+     */
+    function () {
         return {
             ngModule: NgxOkodeCommonModule,
             providers: [
@@ -151,6 +215,10 @@ var NgxOkodeCommonModule = /** @class */ (function () {
     ];
     return NgxOkodeCommonModule;
 }());
+/**
+ * @param {?} environment
+ * @return {?}
+ */
 function envInitializer(environment) {
     var _this = this;
     return function () { return __awaiter(_this, void 0, void 0, function () {
@@ -165,14 +233,16 @@ function envInitializer(environment) {
     }); };
 }
 
-/*
- * Public API Surface of ngx-okode-common
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
- * Generated bundle index. Do not edit.
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { Environment, NgxOkodeCommonModule, envInitializer };
+export { Environment, envInitializer, NgxOkodeCommonModule };
 
 //# sourceMappingURL=ngx-okode-common.js.map
