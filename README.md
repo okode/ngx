@@ -10,7 +10,7 @@ Okode Common for Ionic 4+ projects
    - `npm adduser` (username: okode, email: developers@okode.com)
 - Build and publish
 ```
-ng build NgxOkodeCommon && cd dist/ngx-okode-common && npm publish
+npm run build -- NgxOkodeCommon && cd dist/ngx-okode-common && npm publish
 ```
 - Commit changes
 
