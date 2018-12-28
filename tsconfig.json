@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "ngx-okode-common": [
-        "dist/ngx-okode-common"
+      "common": [
+        "dist/common"
       ],
-      "ngx-okode-common/*": [
-        "dist/ngx-okode-common/*"
+      "common/*": [
+        "dist/common/*"
       ]
     }
   }
