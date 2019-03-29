@@ -4,7 +4,7 @@ import { ActionSheetController, Platform, NavController, Config } from '@ionic/a
 import { iosTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/ios.transition';
 import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/md.transition';
 import { __awaiter } from 'tslib';
-import { Injectable, APP_INITIALIZER, NgModule, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -158,7 +158,7 @@ Environment.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class Navigator$1 {
+class Navigator {
     /**
      * @param {?} navCtrl
      * @param {?} config
@@ -173,7 +173,7 @@ class Navigator$1 {
      * @return {?}
      */
     getParams() {
-        return this.params || {};
+        return this.params;
     }
     /**
      * @param {?} url
@@ -211,6 +211,19 @@ class Navigator$1 {
         return this.navCtrl.navigateRoot(url);
     }
     /**
+     * @return {?}
+     */
+    getViews() {
+        /** @type {?} */
+        const c = Object.assign({}, this.navCtrl);
+        /** @type {?} */
+        let views = [];
+        if (c && c.topOutlet && c.topOutlet.stackCtrl) {
+            views = c.topOutlet.stackCtrl.views;
+        }
+        return views;
+    }
+    /**
      * @private
      * @return {?}
      */
@@ -227,20 +240,6 @@ class Navigator$1 {
         /** @type {?} */
         const views = this.getViews();
         return (views && views.length) ? views[0].url : '';
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    getViews() {
-        /** @type {?} */
-        const c = Object.assign({}, this.navCtrl);
-        /** @type {?} */
-        let views = [];
-        if (c && c.topOutlet && c.topOutlet.stackCtrl) {
-            views = c.topOutlet.stackCtrl.views;
-        }
-        return views;
     }
     /**
      * @private
@@ -269,17 +268,14 @@ class Navigator$1 {
         });
     }
 }
-Navigator$1.decorators = [
-    { type: Injectable, args: [{
-                providedIn: 'root',
-            },] }
+Navigator.decorators = [
+    { type: Injectable }
 ];
 /** @nocollapse */
-Navigator$1.ctorParameters = () => [
+Navigator.ctorParameters = () => [
     { type: NavController },
     { type: Config }
 ];
-/** @nocollapse */ Navigator$1.ngInjectableDef = defineInjectable({ factory: function Navigator_Factory() { return new Navigator$1(inject(NavController), inject(Config)); }, token: Navigator$1, providedIn: "root" });
 /**
  * @param {?} a
  * @param {?} b
@@ -400,6 +396,6 @@ function envInitializer(environment) {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { Environment, fadeAnimation, Navigator$1 as Navigator, envInitializer, OkodeNgxCommonModule };
+export { Environment, fadeAnimation, Navigator, envInitializer, OkodeNgxCommonModule };
 
 //# sourceMappingURL=okode-ngx-common.js.map

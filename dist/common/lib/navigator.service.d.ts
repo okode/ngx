@@ -11,9 +11,9 @@ export declare class Navigator {
     pop(url?: string, params?: {}): Promise<boolean>;
     popToRoot(): Promise<boolean>;
     setRoot(url: string, params?: {}): Promise<boolean>;
+    getViews(): any[];
     private getPreviousPageUrl;
     private getRootPageUrl;
-    private getViews;
     private setAnimationConfig;
 }
 export declare function fadeAnimation(AnimationC: Animation, _: HTMLElement, opts: any): Promise<any>;

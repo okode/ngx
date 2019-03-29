@@ -1,8 +1,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@ionic/storage'), require('@ionic/angular'), require('@ionic/core/dist/collection/utils/transition/ios.transition'), require('@ionic/core/dist/collection/utils/transition/md.transition'), require('@angular/core')) :
     typeof define === 'function' && define.amd ? define('@okode/ngx-common', ['exports', '@angular/common/http', '@ionic/storage', '@ionic/angular', '@ionic/core/dist/collection/utils/transition/ios.transition', '@ionic/core/dist/collection/utils/transition/md.transition', '@angular/core'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-common'] = {}),global.ng.common.http,global.storage,global.i1,global.ios_transition,global.md_transition,global.ng.core));
-}(this, (function (exports,http,storage,i1,ios_transition,md_transition,i0) { 'use strict';
+    (factory((global.okode = global.okode || {}, global.okode['ngx-common'] = {}),global.ng.common.http,global.storage,global.angular,global.ios_transition,global.md_transition,global.ng.core));
+}(this, (function (exports,http,storage,angular,ios_transition,md_transition,core) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -287,15 +287,15 @@
         Environment.isReady = false;
         Environment.environmentConfig = {};
         Environment.decorators = [
-            { type: i0.Injectable }
+            { type: core.Injectable }
         ];
         /** @nocollapse */
         Environment.ctorParameters = function () {
             return [
                 { type: http.HttpClient },
                 { type: storage.Storage },
-                { type: i1.ActionSheetController },
-                { type: i1.Platform }
+                { type: angular.ActionSheetController },
+                { type: angular.Platform }
             ];
         };
         return Environment;
@@ -305,7 +305,7 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var Navigator$1 = /** @class */ (function () {
+    var Navigator = /** @class */ (function () {
         function Navigator(navCtrl, config) {
             this.navCtrl = navCtrl;
             this.config = config;
@@ -319,7 +319,7 @@
          * @return {?}
          */
             function () {
-                return this.params || {};
+                return this.params;
             };
         /**
          * @param {?} url
@@ -379,6 +379,22 @@
                 return this.navCtrl.navigateRoot(url);
             };
         /**
+         * @return {?}
+         */
+        Navigator.prototype.getViews = /**
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var c = __assign({}, this.navCtrl);
+                /** @type {?} */
+                var views = [];
+                if (c && c.topOutlet && c.topOutlet.stackCtrl) {
+                    views = c.topOutlet.stackCtrl.views;
+                }
+                return views;
+            };
+        /**
          * @private
          * @return {?}
          */
@@ -403,24 +419,6 @@
                 /** @type {?} */
                 var views = this.getViews();
                 return (views && views.length) ? views[0].url : '';
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        Navigator.prototype.getViews = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                /** @type {?} */
-                var c = __assign({}, this.navCtrl);
-                /** @type {?} */
-                var views = [];
-                if (c && c.topOutlet && c.topOutlet.stackCtrl) {
-                    views = c.topOutlet.stackCtrl.views;
-                }
-                return views;
             };
         /**
          * @private
@@ -454,18 +452,15 @@
                 });
             };
         Navigator.decorators = [
-            { type: i0.Injectable, args: [{
-                        providedIn: 'root',
-                    },] }
+            { type: core.Injectable }
         ];
         /** @nocollapse */
         Navigator.ctorParameters = function () {
             return [
-                { type: i1.NavController },
-                { type: i1.Config }
+                { type: angular.NavController },
+                { type: angular.Config }
             ];
         };
-        /** @nocollapse */ Navigator.ngInjectableDef = i0.defineInjectable({ factory: function Navigator_Factory() { return new Navigator(i0.inject(i1.NavController), i0.inject(i1.Config)); }, token: Navigator, providedIn: "root" });
         return Navigator;
     }());
     /**
@@ -561,12 +556,12 @@
                     providers: [
                         Environment,
                         Navigator,
-                        { provide: i0.APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
+                        { provide: core.APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
                     ]
                 };
             };
         OkodeNgxCommonModule.decorators = [
-            { type: i0.NgModule, args: [{
+            { type: core.NgModule, args: [{
                         declarations: [],
                         imports: [],
                         exports: []
@@ -606,7 +601,7 @@
 
     exports.Environment = Environment;
     exports.fadeAnimation = fadeAnimation;
-    exports.Navigator = Navigator$1;
+    exports.Navigator = Navigator;
     exports.envInitializer = envInitializer;
     exports.OkodeNgxCommonModule = OkodeNgxCommonModule;
 
