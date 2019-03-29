@@ -4,9 +4,7 @@ import { Animation } from '@ionic/core';
 import { iosTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/ios.transition';
 import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/md.transition';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class Navigator {
 
   private params;
