@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { ActionSheetController, Platform } from '@ionic/angular';
+import { ActionSheetController, Platform, NavController, Config } from '@ionic/angular';
+import { iosTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/ios.transition';
+import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/md.transition';
 import { __awaiter } from 'tslib';
-import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
+import { Injectable, APP_INITIALIZER, NgModule, defineInjectable, inject } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -156,6 +158,205 @@ Environment.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class Navigator$1 {
+    /**
+     * @param {?} navCtrl
+     * @param {?} config
+     */
+    constructor(navCtrl, config) {
+        this.navCtrl = navCtrl;
+        this.config = config;
+        this.animation = 'push';
+        this.setAnimationConfig();
+    }
+    /**
+     * @return {?}
+     */
+    getParams() {
+        return this.params || {};
+    }
+    /**
+     * @param {?} url
+     * @param {?=} params
+     * @param {?=} animation
+     * @return {?}
+     */
+    push(url, params, animation = 'push') {
+        this.params = params;
+        this.animation = animation;
+        return this.navCtrl.navigateForward(url);
+    }
+    /**
+     * @param {?=} url
+     * @param {?=} params
+     * @return {?}
+     */
+    pop(url, params) {
+        this.params = params;
+        return this.navCtrl.navigateBack(url || this.getPreviousPageUrl());
+    }
+    /**
+     * @return {?}
+     */
+    popToRoot() {
+        return this.navCtrl.navigateBack(this.getRootPageUrl());
+    }
+    /**
+     * @param {?} url
+     * @param {?=} params
+     * @return {?}
+     */
+    setRoot(url, params) {
+        this.params = params;
+        return this.navCtrl.navigateRoot(url);
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getPreviousPageUrl() {
+        /** @type {?} */
+        const views = this.getViews();
+        return (views && views.length > 1) ? views[views.length - 2].url : '';
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getRootPageUrl() {
+        /** @type {?} */
+        const views = this.getViews();
+        return (views && views.length) ? views[0].url : '';
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getViews() {
+        /** @type {?} */
+        const c = Object.assign({}, this.navCtrl);
+        /** @type {?} */
+        let views = [];
+        if (c && c.topOutlet && c.topOutlet.stackCtrl) {
+            views = c.topOutlet.stackCtrl.views;
+        }
+        return views;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    setAnimationConfig() {
+        this.config.set('navAnimation', (AnimationC, baseEl, opts) => {
+            /** @type {?} */
+            let anim = this.animation;
+            if (opts.direction === 'back') {
+                anim = opts.enteringEl.getAttribute('animation-leave');
+            }
+            opts.enteringEl.setAttribute('animation-enter', this.animation);
+            opts.leavingEl.setAttribute('animation-leave', this.animation);
+            /** @type {?} */
+            const animPlatform = ((opts && opts.mode === 'ios') ? 'ios' : 'md') + '_' + anim;
+            switch (animPlatform) {
+                case 'ios_push': return animationPush(AnimationC, baseEl, opts);
+                case 'ios_modal': return animationModal(AnimationC, baseEl, opts);
+                case 'ios_fade': return animationFade(AnimationC, baseEl, opts);
+                case 'md_push': return animationModal(AnimationC, baseEl, opts);
+                case 'md_modal': return animationModal(AnimationC, baseEl, opts);
+                case 'md_fade': return animationFade(AnimationC, baseEl, opts);
+                default: return animationModal(AnimationC, baseEl, opts);
+            }
+        });
+    }
+}
+Navigator$1.decorators = [
+    { type: Injectable, args: [{
+                providedIn: 'root',
+            },] }
+];
+/** @nocollapse */
+Navigator$1.ctorParameters = () => [
+    { type: NavController },
+    { type: Config }
+];
+/** @nocollapse */ Navigator$1.ngInjectableDef = defineInjectable({ factory: function Navigator_Factory() { return new Navigator$1(inject(NavController), inject(Config)); }, token: Navigator$1, providedIn: "root" });
+/**
+ * @param {?} a
+ * @param {?} b
+ * @param {?} o
+ * @return {?}
+ */
+function animationPush(a, b, o) { return iosTransitionAnimation(a, b, o); }
+/**
+ * @param {?} a
+ * @param {?} b
+ * @param {?} o
+ * @return {?}
+ */
+function animationModal(a, b, o) { return mdTransitionAnimation(a, b, o); }
+/**
+ * @param {?} a
+ * @param {?} b
+ * @param {?} o
+ * @return {?}
+ */
+function animationFade(a, b, o) { return fadeAnimation(a, b, o); }
+/**
+ * @param {?} AnimationC
+ * @param {?} _
+ * @param {?} opts
+ * @return {?}
+ */
+function fadeAnimation(AnimationC, _, opts) {
+    /** @type {?} */
+    const getIonPageElement = function (element) {
+        if (element.classList.contains('ion-page')) {
+            return element;
+        }
+        /** @type {?} */
+        const page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+        return page || element;
+    };
+    /** @type {?} */
+    const enteringEl = opts.enteringEl;
+    /** @type {?} */
+    const leavingEl = opts.leavingEl;
+    /** @type {?} */
+    const ionPageElement = getIonPageElement(enteringEl);
+    /** @type {?} */
+    const rootTransition = new AnimationC();
+    rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
+    if (opts.direction === 'back') { // animate the component itself
+        rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+    }
+    else {
+        rootTransition.duration(opts.duration || 280)
+            .easing('cubic-bezier(0.36,0.66,0.04,1)').fromTo('opacity', 0.01, 1, true);
+    }
+    /** @type {?} */
+    const enteringToolbarEle = ionPageElement.querySelector('ion-toolbar');
+    if (enteringToolbarEle) { // Animate toolbar if it's there
+        // Animate toolbar if it's there
+        /** @type {?} */
+        const enteringToolBar = new AnimationC();
+        enteringToolBar.addElement(enteringToolbarEle);
+        rootTransition.add(enteringToolBar);
+    }
+    // setup leaving view
+    if (leavingEl && (opts.direction === 'back')) { // leaving content
+        rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+        /** @type {?} */
+        const leavingPage = new AnimationC();
+        leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('opacity', 1, 0);
+        rootTransition.add(leavingPage);
+    }
+    return Promise.resolve(rootTransition);
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // @dynamic
 class OkodeNgxCommonModule {
     /**
@@ -166,6 +367,7 @@ class OkodeNgxCommonModule {
             ngModule: OkodeNgxCommonModule,
             providers: [
                 Environment,
+                Navigator,
                 { provide: APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
             ]
         };
@@ -198,6 +400,6 @@ function envInitializer(environment) {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { Environment, envInitializer, OkodeNgxCommonModule };
+export { Environment, fadeAnimation, Navigator$1 as Navigator, envInitializer, OkodeNgxCommonModule };
 
 //# sourceMappingURL=okode-ngx-common.js.map

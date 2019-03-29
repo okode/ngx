@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@ionic/storage'), require('@ionic/angular'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@okode/ngx-common', ['exports', '@angular/common/http', '@ionic/storage', '@ionic/angular', '@angular/core'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-common'] = {}),global.ng.common.http,global.storage,global.angular,global.ng.core));
-}(this, (function (exports,http,storage,angular,core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@ionic/storage'), require('@ionic/angular'), require('@ionic/core/dist/collection/utils/transition/ios.transition'), require('@ionic/core/dist/collection/utils/transition/md.transition'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@okode/ngx-common', ['exports', '@angular/common/http', '@ionic/storage', '@ionic/angular', '@ionic/core/dist/collection/utils/transition/ios.transition', '@ionic/core/dist/collection/utils/transition/md.transition', '@angular/core'], factory) :
+    (factory((global.okode = global.okode || {}, global.okode['ngx-common'] = {}),global.ng.common.http,global.storage,global.i1,global.ios_transition,global.md_transition,global.ng.core));
+}(this, (function (exports,http,storage,i1,ios_transition,md_transition,i0) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -287,19 +287,259 @@
         Environment.isReady = false;
         Environment.environmentConfig = {};
         Environment.decorators = [
-            { type: core.Injectable }
+            { type: i0.Injectable }
         ];
         /** @nocollapse */
         Environment.ctorParameters = function () {
             return [
                 { type: http.HttpClient },
                 { type: storage.Storage },
-                { type: angular.ActionSheetController },
-                { type: angular.Platform }
+                { type: i1.ActionSheetController },
+                { type: i1.Platform }
             ];
         };
         return Environment;
     }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var Navigator$1 = /** @class */ (function () {
+        function Navigator(navCtrl, config) {
+            this.navCtrl = navCtrl;
+            this.config = config;
+            this.animation = 'push';
+            this.setAnimationConfig();
+        }
+        /**
+         * @return {?}
+         */
+        Navigator.prototype.getParams = /**
+         * @return {?}
+         */
+            function () {
+                return this.params || {};
+            };
+        /**
+         * @param {?} url
+         * @param {?=} params
+         * @param {?=} animation
+         * @return {?}
+         */
+        Navigator.prototype.push = /**
+         * @param {?} url
+         * @param {?=} params
+         * @param {?=} animation
+         * @return {?}
+         */
+            function (url, params, animation) {
+                if (animation === void 0) {
+                    animation = 'push';
+                }
+                this.params = params;
+                this.animation = animation;
+                return this.navCtrl.navigateForward(url);
+            };
+        /**
+         * @param {?=} url
+         * @param {?=} params
+         * @return {?}
+         */
+        Navigator.prototype.pop = /**
+         * @param {?=} url
+         * @param {?=} params
+         * @return {?}
+         */
+            function (url, params) {
+                this.params = params;
+                return this.navCtrl.navigateBack(url || this.getPreviousPageUrl());
+            };
+        /**
+         * @return {?}
+         */
+        Navigator.prototype.popToRoot = /**
+         * @return {?}
+         */
+            function () {
+                return this.navCtrl.navigateBack(this.getRootPageUrl());
+            };
+        /**
+         * @param {?} url
+         * @param {?=} params
+         * @return {?}
+         */
+        Navigator.prototype.setRoot = /**
+         * @param {?} url
+         * @param {?=} params
+         * @return {?}
+         */
+            function (url, params) {
+                this.params = params;
+                return this.navCtrl.navigateRoot(url);
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        Navigator.prototype.getPreviousPageUrl = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var views = this.getViews();
+                return (views && views.length > 1) ? views[views.length - 2].url : '';
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        Navigator.prototype.getRootPageUrl = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var views = this.getViews();
+                return (views && views.length) ? views[0].url : '';
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        Navigator.prototype.getViews = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var c = __assign({}, this.navCtrl);
+                /** @type {?} */
+                var views = [];
+                if (c && c.topOutlet && c.topOutlet.stackCtrl) {
+                    views = c.topOutlet.stackCtrl.views;
+                }
+                return views;
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        Navigator.prototype.setAnimationConfig = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.config.set('navAnimation', function (AnimationC, baseEl, opts) {
+                    /** @type {?} */
+                    var anim = _this.animation;
+                    if (opts.direction === 'back') {
+                        anim = opts.enteringEl.getAttribute('animation-leave');
+                    }
+                    opts.enteringEl.setAttribute('animation-enter', _this.animation);
+                    opts.leavingEl.setAttribute('animation-leave', _this.animation);
+                    /** @type {?} */
+                    var animPlatform = ((opts && opts.mode === 'ios') ? 'ios' : 'md') + '_' + anim;
+                    switch (animPlatform) {
+                        case 'ios_push': return animationPush(AnimationC, baseEl, opts);
+                        case 'ios_modal': return animationModal(AnimationC, baseEl, opts);
+                        case 'ios_fade': return animationFade(AnimationC, baseEl, opts);
+                        case 'md_push': return animationModal(AnimationC, baseEl, opts);
+                        case 'md_modal': return animationModal(AnimationC, baseEl, opts);
+                        case 'md_fade': return animationFade(AnimationC, baseEl, opts);
+                        default: return animationModal(AnimationC, baseEl, opts);
+                    }
+                });
+            };
+        Navigator.decorators = [
+            { type: i0.Injectable, args: [{
+                        providedIn: 'root',
+                    },] }
+        ];
+        /** @nocollapse */
+        Navigator.ctorParameters = function () {
+            return [
+                { type: i1.NavController },
+                { type: i1.Config }
+            ];
+        };
+        /** @nocollapse */ Navigator.ngInjectableDef = i0.defineInjectable({ factory: function Navigator_Factory() { return new Navigator(i0.inject(i1.NavController), i0.inject(i1.Config)); }, token: Navigator, providedIn: "root" });
+        return Navigator;
+    }());
+    /**
+     * @param {?} a
+     * @param {?} b
+     * @param {?} o
+     * @return {?}
+     */
+    function animationPush(a, b, o) { return ios_transition.iosTransitionAnimation(a, b, o); }
+    /**
+     * @param {?} a
+     * @param {?} b
+     * @param {?} o
+     * @return {?}
+     */
+    function animationModal(a, b, o) { return md_transition.mdTransitionAnimation(a, b, o); }
+    /**
+     * @param {?} a
+     * @param {?} b
+     * @param {?} o
+     * @return {?}
+     */
+    function animationFade(a, b, o) { return fadeAnimation(a, b, o); }
+    /**
+     * @param {?} AnimationC
+     * @param {?} _
+     * @param {?} opts
+     * @return {?}
+     */
+    function fadeAnimation(AnimationC, _, opts) {
+        /** @type {?} */
+        var getIonPageElement = function (element) {
+            if (element.classList.contains('ion-page')) {
+                return element;
+            }
+            /** @type {?} */
+            var page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+            return page || element;
+        };
+        /** @type {?} */
+        var enteringEl = opts.enteringEl;
+        /** @type {?} */
+        var leavingEl = opts.leavingEl;
+        /** @type {?} */
+        var ionPageElement = getIonPageElement(enteringEl);
+        /** @type {?} */
+        var rootTransition = new AnimationC();
+        rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
+        if (opts.direction === 'back') { // animate the component itself
+            rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+        }
+        else {
+            rootTransition.duration(opts.duration || 280)
+                .easing('cubic-bezier(0.36,0.66,0.04,1)').fromTo('opacity', 0.01, 1, true);
+        }
+        /** @type {?} */
+        var enteringToolbarEle = ionPageElement.querySelector('ion-toolbar');
+        if (enteringToolbarEle) { // Animate toolbar if it's there
+            // Animate toolbar if it's there
+            /** @type {?} */
+            var enteringToolBar = new AnimationC();
+            enteringToolBar.addElement(enteringToolbarEle);
+            rootTransition.add(enteringToolBar);
+        }
+        // setup leaving view
+        if (leavingEl && (opts.direction === 'back')) { // leaving content
+            rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+            /** @type {?} */
+            var leavingPage = new AnimationC();
+            leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('opacity', 1, 0);
+            rootTransition.add(leavingPage);
+        }
+        return Promise.resolve(rootTransition);
+    }
 
     /**
      * @fileoverview added by tsickle
@@ -320,12 +560,13 @@
                     ngModule: OkodeNgxCommonModule,
                     providers: [
                         Environment,
-                        { provide: core.APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
+                        Navigator,
+                        { provide: i0.APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
                     ]
                 };
             };
         OkodeNgxCommonModule.decorators = [
-            { type: core.NgModule, args: [{
+            { type: i0.NgModule, args: [{
                         declarations: [],
                         imports: [],
                         exports: []
@@ -364,6 +605,8 @@
      */
 
     exports.Environment = Environment;
+    exports.fadeAnimation = fadeAnimation;
+    exports.Navigator = Navigator$1;
     exports.envInitializer = envInitializer;
     exports.OkodeNgxCommonModule = OkodeNgxCommonModule;
 
