@@ -2,7 +2,7 @@
 
 Okode Angular components.
 
-## @okode/ngx-common
+# @okode/ngx-common
 
 Okode Common for Ionic 4+ projects.
 
@@ -23,11 +23,24 @@ npm run build -- common && cd dist/common && npm publish --access=public
 ```
 npm i @okode/ngx-common
 ```
-<br><br><br>
 
-# Services
+#### Usage
 
-## Environment
+In app/core module:
+```typescript
+import { NgModule } from '@angular/core';
+import { OkodeNgxCommonModule } from '@okode/ngx-common';
+
+@NgModule({
+  imports: [
+    OkodeNgxCommonModule.forRoot(),
+```
+
+<br><br>
+
+## Services
+
+### Environment
 This service allows the selection of environment config before starting the app.
 
 It requires that the file  `src/assets/environments.json` exists in the project: 
@@ -38,36 +51,43 @@ It requires that the file  `src/assets/environments.json` exists in the project:
     "version": "0.1.100",
     "versionCode": "1100"
   },
-  "dev": {
-    "envName": "dev",
-    ...
-  },
-  "pre": {
-    "envName": "pre",
-    ...
-  },
-  "pro": {
-    "envName": "pro",
-    ...
-  },
+  "dev": { "envName": "dev", [...] },
+  "pre": { "envName": "pre", [...] },
+  "pro": { "envName": "pro", [...] },
   ...
 }
 ```
-* If only `default` and other environment exist, the selector will not appear.
+> If only `default` and other environment exist, the selector will not appear.
 
-### Usage
+##### Usage
 
-In app/core module:
-```
-import { NgModule } from '@angular/core';
-import { OkodeNgxCommonModule } from '@okode/ngx-common';
-
-@NgModule({
-  imports: [
-    OkodeNgxCommonModule.forRoot(),
-```
 Access to environment config value:
-```
+```typescript
 import { Environment } from '@okode/ngx-common';
 console.log('Selected environment', Environment.config().envName);
 ```
+
+### Navigator
+Ionic NavController wrapper with custom transitions
+
+##### Functions
+```typescript
+push(url: string, params?: {}, animation: 'push' | 'modal' | 'fade' = 'push'): Promise<boolean>
+pop(url?: string, params?: {}): Promise<boolean>
+popToRoot(): Promise<boolean>
+setRoot(url: string, params?: {}): Promise<boolean>
+getParams(): {}
+```
+
+##### Usage
+```typescript
+import { Navigator } from '@okode/ngx-common';
+constructor(private nav: Navigator) {}
+ngOnInit() {
+  console.log('Nav params:', this.nav.getParams());
+}
+navToDetail(id: number) {
+  this.nav.push(`/foo/detail/${id}`);
+}
+```
+

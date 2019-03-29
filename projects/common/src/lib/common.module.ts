@@ -14,6 +14,7 @@ export class OkodeNgxCommonModule {
       ngModule: OkodeNgxCommonModule,
       providers: [
         Environment,
+        Navigator,
         { provide: APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
       ]
     };
