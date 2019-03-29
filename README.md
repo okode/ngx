@@ -77,7 +77,8 @@ push(url: string, params?: {}, animation: 'push' | 'modal' | 'fade' = 'push'): P
 pop(url?: string, params?: {}): Promise<boolean>
 popToRoot(): Promise<boolean>
 setRoot(url: string, params?: {}): Promise<boolean>
-getParams(): {}
+getParams(): any
+getViews(): RouteView[] // @ionic/angular interface
 ```
 
 ##### Usage

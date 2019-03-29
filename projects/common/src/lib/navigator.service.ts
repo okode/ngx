@@ -18,7 +18,7 @@ export class Navigator {
   }
 
   getParams() {
-    return this.params || {};
+    return this.params;
   }
 
   push(url: string, params?: {}, animation: 'push' | 'modal' | 'fade' = 'push') {
@@ -41,6 +41,13 @@ export class Navigator {
     return this.navCtrl.navigateRoot(url);
   }
 
+  getViews() {
+    const c: any = { ...this.navCtrl };
+    let views = [];
+    if (c && c.topOutlet && c.topOutlet.stackCtrl) { views = c.topOutlet.stackCtrl.views; }
+    return views;
+  }
+
   private getPreviousPageUrl() {
     const views = this.getViews();
     return (views && views.length > 1) ? views[views.length - 2].url : '';
@@ -49,13 +56,6 @@ export class Navigator {
   private getRootPageUrl() {
     const views = this.getViews();
     return (views && views.length) ? views[0].url : '';
-  }
-
-  private getViews() {
-    const c: any = { ...this.navCtrl };
-    let views = [];
-    if (c && c.topOutlet && c.topOutlet.stackCtrl) { views = c.topOutlet.stackCtrl.views; }
-    return views;
   }
 
   private setAnimationConfig() {
