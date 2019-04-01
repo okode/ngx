@@ -2,6 +2,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { Environment } from './environment.service';
 import { Navigator } from './navigator.service';
+import { HardwareBackButton } from './hardware-back-button.service';
 
 // @dynamic
 @NgModule({
@@ -16,14 +17,24 @@ export class OkodeNgxCommonModule {
       providers: [
         Environment,
         Navigator,
-        { provide: APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
+        HardwareBackButton,
+        {
+          provide: APP_INITIALIZER,
+          useFactory: moduleInitializer,
+          deps: [Environment, HardwareBackButton],
+          multi: true
+        },
       ]
     };
   }
 }
 
-export function envInitializer(environment: Environment) {
+export function moduleInitializer(
+  environment: Environment,
+  hardwareBackButton: HardwareBackButton
+) {
   return async () => {
     await environment.ready();
+    hardwareBackButton.enable();
   };
 }

@@ -73,13 +73,15 @@ Ionic NavController wrapper with custom transitions
 
 ##### Functions
 ```typescript
-push(url: string, params?: {}, animation: 'push' | 'modal' | 'fade' = 'push'): Promise<boolean>
+push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' = 'default'): Promise<boolean>
 pop(url?: string, params?: {}): Promise<boolean>
 popToRoot(): Promise<boolean>
 setRoot(url: string, params?: {}): Promise<boolean>
 getParams(): any
-getViews(): RouteView[] // @ionic/angular interface
+getViews(): RouteView[] // RouteView: @ionic/angular interface
 ```
+> Animation `default` in iOS performs `push`, and `modal` in Android (default native behavior)
+
 
 ##### Usage
 ```typescript
@@ -91,5 +93,32 @@ ngOnInit() {
 navToDetail(id: number) {
   this.nav.push(`/foo/detail/${id}`);
 }
+```
+
+### HardwareBackButton
+This service allows you to control the behavior of the Android physical button. By default, this service
+is enabled and try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading).
+
+##### Functions
+```typescript
+enable(condition?:() => boolean)
+disable()
+```
+> `condition` (optional) is a filter function that allows to customize behavior and determine (with boolean return value) if continue with the default behavior or not.
+
+> It's possible to customize behavior of hardware back on a particular page implementing `OnHardwareBackButton` inferface.
+
+
+##### Usage
+```typescript
+import { HardwareBackButton } from '@okode/ngx-common';
+constructor(private hardwareBackButton: HardwareBackButton) {}
+this.hardwareBackButton.disable();
+```
+`OnHardwareBackButton` inferface:
+```typescript
+import { OnHardwareBackButton } from '@okode/ngx-common';
+export class MyPage implements OnHardwareBackButton {
+kdOnHardwareBackButton() { /* overwrite back button behavior on this page */ }
 ```
 

@@ -8,7 +8,7 @@ import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transit
 export class Navigator {
 
   private params;
-  private animation: 'push' | 'modal' | 'fade' = 'push';
+  private animation: 'default' | 'push' | 'modal' | 'fade' = 'push';
 
   constructor(
     private navCtrl: NavController,
@@ -21,7 +21,7 @@ export class Navigator {
     return this.params;
   }
 
-  push(url: string, params?: {}, animation: 'push' | 'modal' | 'fade' = 'push') {
+  push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' = 'default') {
     this.params = params;
     this.animation = animation;
     return this.navCtrl.navigateForward(url);
@@ -65,15 +65,15 @@ export class Navigator {
         if (opts.direction === 'back') { anim = opts.enteringEl.getAttribute('animation-leave'); }
         opts.enteringEl.setAttribute('animation-enter', this.animation);
         opts.leavingEl.setAttribute('animation-leave', this.animation);
-        const animPlatform = ((opts && opts.mode === 'ios') ? 'ios' : 'md') + '_' + anim;
-        switch (animPlatform) {
-          case 'ios_push':  return animationPush(AnimationC, baseEl, opts);
-          case 'ios_modal': return animationModal(AnimationC, baseEl, opts);
-          case 'ios_fade':  return animationFade(AnimationC, baseEl, opts);
-          case 'md_push':   return animationModal(AnimationC, baseEl, opts);
-          case 'md_modal':  return animationModal(AnimationC, baseEl, opts);
-          case 'md_fade':   return animationFade(AnimationC, baseEl, opts);
-          default:          return animationModal(AnimationC, baseEl, opts);
+        const ios = (opts && opts.mode === 'ios');
+        switch (anim) {
+          case 'default':
+            if (ios)    return animationPush(AnimationC, baseEl, opts);
+            else        return animationModal(AnimationC, baseEl, opts);
+          case 'push':  return animationPush(AnimationC, baseEl, opts);
+          case 'modal': return animationModal(AnimationC, baseEl, opts);
+          case 'fade':  return animationFade(AnimationC, baseEl, opts);
+          default:      return animationModal(AnimationC, baseEl, opts);
         }
       }
     );
