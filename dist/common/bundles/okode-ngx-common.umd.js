@@ -310,7 +310,7 @@
             this.navCtrl = navCtrl;
             this.config = config;
             this.animation = 'push';
-            this.setAnimationConfig();
+            this.animationConfigReady = false;
         }
         /**
          * @return {?}
@@ -336,6 +336,9 @@
             function (url, params, animation) {
                 if (animation === void 0) {
                     animation = 'default';
+                }
+                if (!this.animationConfigReady) {
+                    this.setAnimationConfig();
                 }
                 this.params = params;
                 this.animation = animation;
@@ -430,6 +433,7 @@
          */
             function () {
                 var _this = this;
+                this.animationConfigReady = true;
                 this.config.set('navAnimation', function (AnimationC, baseEl, opts) {
                     /** @type {?} */
                     var anim = _this.animation;

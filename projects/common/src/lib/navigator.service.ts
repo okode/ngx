@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NavController, Config, Platform } from '@ionic/angular';
+import { NavController, Config } from '@ionic/angular';
 import { Animation } from '@ionic/core';
 import { iosTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/ios.transition';
 import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/md.transition';
@@ -9,22 +9,19 @@ export class Navigator {
 
   private params;
   private animation: 'default' | 'push' | 'modal' | 'fade' = 'push';
+  private animationConfigReady = false;
 
   constructor(
     private navCtrl: NavController,
-    private config: Config,
-    private platform: Platform
-  ) {
-    this.platform.ready().then(() => {
-      this.setAnimationConfig();
-    });
-  }
+    private config: Config
+  ) {}
 
   getParams() {
     return this.params;
   }
 
   push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' = 'default') {
+    if (!this.animationConfigReady) { this.setAnimationConfig(); }
     this.params = params;
     this.animation = animation;
     return this.navCtrl.navigateForward(url);
@@ -62,6 +59,7 @@ export class Navigator {
   }
 
   private setAnimationConfig() {
+    this.animationConfigReady = true;
     this.config.set('navAnimation',
       (AnimationC: Animation, baseEl: HTMLElement, opts: any): Promise<Animation> => {
         let anim = this.animation;

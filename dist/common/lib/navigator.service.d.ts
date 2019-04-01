@@ -5,6 +5,7 @@ export declare class Navigator {
     private config;
     private params;
     private animation;
+    private animationConfigReady;
     constructor(navCtrl: NavController, config: Config);
     getParams(): any;
     push(url: string, params?: {}, animation?: 'default' | 'push' | 'modal' | 'fade'): Promise<boolean>;

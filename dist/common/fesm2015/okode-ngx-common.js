@@ -169,7 +169,7 @@ class Navigator {
         this.navCtrl = navCtrl;
         this.config = config;
         this.animation = 'push';
-        this.setAnimationConfig();
+        this.animationConfigReady = false;
     }
     /**
      * @return {?}
@@ -184,6 +184,9 @@ class Navigator {
      * @return {?}
      */
     push(url, params, animation = 'default') {
+        if (!this.animationConfigReady) {
+            this.setAnimationConfig();
+        }
         this.params = params;
         this.animation = animation;
         return this.navCtrl.navigateForward(url);
@@ -248,6 +251,7 @@ class Navigator {
      * @return {?}
      */
     setAnimationConfig() {
+        this.animationConfigReady = true;
         this.config.set('navAnimation', (AnimationC, baseEl, opts) => {
             /** @type {?} */
             let anim = this.animation;

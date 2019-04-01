@@ -196,7 +196,7 @@ var Navigator = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.config = config;
         this.animation = 'push';
-        this.setAnimationConfig();
+        this.animationConfigReady = false;
     }
     /**
      * @return {?}
@@ -221,6 +221,9 @@ var Navigator = /** @class */ (function () {
      */
     function (url, params, animation) {
         if (animation === void 0) { animation = 'default'; }
+        if (!this.animationConfigReady) {
+            this.setAnimationConfig();
+        }
         this.params = params;
         this.animation = animation;
         return this.navCtrl.navigateForward(url);
@@ -314,6 +317,7 @@ var Navigator = /** @class */ (function () {
      */
     function () {
         var _this = this;
+        this.animationConfigReady = true;
         this.config.set('navAnimation', function (AnimationC, baseEl, opts) {
             /** @type {?} */
             var anim = _this.animation;
