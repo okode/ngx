@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NavController, Config } from '@ionic/angular';
+import { NavController, Config, Platform } from '@ionic/angular';
 import { Animation } from '@ionic/core';
 import { iosTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/ios.transition';
 import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/md.transition';
@@ -12,9 +12,12 @@ export class Navigator {
 
   constructor(
     private navCtrl: NavController,
-    private config: Config
+    private config: Config,
+    private platform: Platform
   ) {
-    this.setAnimationConfig();
+    this.platform.ready().then(() => {
+      this.setAnimationConfig();
+    });
   }
 
   getParams() {
