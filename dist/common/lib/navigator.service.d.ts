@@ -7,7 +7,7 @@ export declare class Navigator {
     private animation;
     constructor(navCtrl: NavController, config: Config);
     getParams(): any;
-    push(url: string, params?: {}, animation?: 'push' | 'modal' | 'fade'): Promise<boolean>;
+    push(url: string, params?: {}, animation?: 'default' | 'push' | 'modal' | 'fade'): Promise<boolean>;
     pop(url?: string, params?: {}): Promise<boolean>;
     popToRoot(): Promise<boolean>;
     setRoot(url: string, params?: {}): Promise<boolean>;

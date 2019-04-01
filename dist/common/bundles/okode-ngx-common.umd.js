@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@ionic/storage'), require('@ionic/angular'), require('@ionic/core/dist/collection/utils/transition/ios.transition'), require('@ionic/core/dist/collection/utils/transition/md.transition'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@okode/ngx-common', ['exports', '@angular/common/http', '@ionic/storage', '@ionic/angular', '@ionic/core/dist/collection/utils/transition/ios.transition', '@ionic/core/dist/collection/utils/transition/md.transition', '@angular/core'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-common'] = {}),global.ng.common.http,global.storage,global.angular,global.ios_transition,global.md_transition,global.ng.core));
-}(this, (function (exports,http,storage,angular,ios_transition,md_transition,core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common/http'), require('@ionic/storage'), require('@ionic/core/dist/collection/utils/transition/ios.transition'), require('@ionic/core/dist/collection/utils/transition/md.transition'), require('rxjs'), require('rxjs/operators'), require('@ionic/angular'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@okode/ngx-common', ['exports', '@angular/common/http', '@ionic/storage', '@ionic/core/dist/collection/utils/transition/ios.transition', '@ionic/core/dist/collection/utils/transition/md.transition', 'rxjs', 'rxjs/operators', '@ionic/angular', '@angular/core'], factory) :
+    (factory((global.okode = global.okode || {}, global.okode['ngx-common'] = {}),global.ng.common.http,global.storage,global.ios_transition,global.md_transition,global.rxjs,global.rxjs.operators,global.angular,global.ng.core));
+}(this, (function (exports,http,storage,ios_transition,md_transition,rxjs,operators,angular,core) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -335,7 +335,7 @@
          */
             function (url, params, animation) {
                 if (animation === void 0) {
-                    animation = 'push';
+                    animation = 'default';
                 }
                 this.params = params;
                 this.animation = animation;
@@ -439,14 +439,16 @@
                     opts.enteringEl.setAttribute('animation-enter', _this.animation);
                     opts.leavingEl.setAttribute('animation-leave', _this.animation);
                     /** @type {?} */
-                    var animPlatform = ((opts && opts.mode === 'ios') ? 'ios' : 'md') + '_' + anim;
-                    switch (animPlatform) {
-                        case 'ios_push': return animationPush(AnimationC, baseEl, opts);
-                        case 'ios_modal': return animationModal(AnimationC, baseEl, opts);
-                        case 'ios_fade': return animationFade(AnimationC, baseEl, opts);
-                        case 'md_push': return animationModal(AnimationC, baseEl, opts);
-                        case 'md_modal': return animationModal(AnimationC, baseEl, opts);
-                        case 'md_fade': return animationFade(AnimationC, baseEl, opts);
+                    var ios = (opts && opts.mode === 'ios');
+                    switch (anim) {
+                        case 'default':
+                            if (ios)
+                                return animationPush(AnimationC, baseEl, opts);
+                            else
+                                return animationModal(AnimationC, baseEl, opts);
+                        case 'push': return animationPush(AnimationC, baseEl, opts);
+                        case 'modal': return animationModal(AnimationC, baseEl, opts);
+                        case 'fade': return animationFade(AnimationC, baseEl, opts);
                         default: return animationModal(AnimationC, baseEl, opts);
                     }
                 });
@@ -540,6 +542,128 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var HardwareBackButton = /** @class */ (function () {
+        function HardwareBackButton(nav, navController, platform) {
+            this.nav = nav;
+            this.navController = navController;
+            this.platform = platform;
+            this.filterCondition = function () { return true; };
+            this.intialized = false;
+        }
+        /**
+         * @param {?=} condition
+         * @return {?}
+         */
+        HardwareBackButton.prototype.enable = /**
+         * @param {?=} condition
+         * @return {?}
+         */
+            function (condition) {
+                if (!this.intialized) {
+                    this.init();
+                }
+                this.filterCondition = condition || (function () { return true; });
+            };
+        /**
+         * @return {?}
+         */
+        HardwareBackButton.prototype.disable = /**
+         * @return {?}
+         */
+            function () {
+                if (!this.intialized) {
+                    this.init();
+                }
+                this.filterCondition = function () { return false; };
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        HardwareBackButton.prototype.init = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                this.intialized = true;
+                /** @type {?} */
+                var hwBackSubject = new rxjs.Subject();
+                hwBackSubject.pipe(operators.throttleTime(500), operators.filter(this.filterCondition)).subscribe(function () {
+                    return __awaiter(_this, void 0, void 0, function () {
+                        var overlaySelector, overlay, view;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    // check ionic overlays (dismiss if is presented and backdropDismiss == true)
+                                    overlaySelector = 'ion-alert-controller, ion-action-sheet, ion-loading-controller';
+                                    overlay = document.querySelector(overlaySelector);
+                                    if (!(overlay && overlay.getTop))
+                                        return [3 /*break*/, 2];
+                                    return [4 /*yield*/, overlay.getTop()];
+                                case 1:
+                                    overlay = _a.sent();
+                                    _a.label = 2;
+                                case 2:
+                                    if (overlay) {
+                                        if (overlay && overlay.backdropDismiss === true) {
+                                            overlay.dismiss();
+                                        }
+                                        return [2 /*return*/];
+                                    }
+                                    // check if active view has implemented `onHardwareBack()`, else performs nav.pop()
+                                    view = this.getActiveViewRefInstance();
+                                    if (view && view.kdOnHardwareBackButton) {
+                                        view.kdOnHardwareBackButton();
+                                    }
+                                    else {
+                                        this.nav.pop();
+                                    }
+                                    return [2 /*return*/];
+                            }
+                        });
+                    });
+                });
+                // Overring default hardware back button behaviour
+                this.platform.ready().then(function () {
+                    _this.platform.backButton.subscribeWithPriority(9999, function () { hwBackSubject.next(event); });
+                });
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        HardwareBackButton.prototype.getActiveViewRefInstance = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                /** @type {?} */
+                var nav = __assign({}, this.navController);
+                if (nav && nav.topOutlet && nav.topOutlet.stackCtrl && nav.topOutlet.stackCtrl.activeView &&
+                    nav.topOutlet.stackCtrl.activeView && nav.topOutlet.stackCtrl.activeView.ref) {
+                    return nav.topOutlet.stackCtrl.activeView.ref.instance;
+                }
+                return null;
+            };
+        HardwareBackButton.decorators = [
+            { type: core.Injectable }
+        ];
+        /** @nocollapse */
+        HardwareBackButton.ctorParameters = function () {
+            return [
+                { type: Navigator },
+                { type: angular.NavController },
+                { type: angular.Platform }
+            ];
+        };
+        return HardwareBackButton;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     // @dynamic
     var OkodeNgxCommonModule = /** @class */ (function () {
         function OkodeNgxCommonModule() {
@@ -556,7 +680,13 @@
                     providers: [
                         Environment,
                         Navigator,
-                        { provide: core.APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
+                        HardwareBackButton,
+                        {
+                            provide: core.APP_INITIALIZER,
+                            useFactory: moduleInitializer,
+                            deps: [Environment, HardwareBackButton],
+                            multi: true
+                        },
                     ]
                 };
             };
@@ -571,9 +701,10 @@
     }());
     /**
      * @param {?} environment
+     * @param {?} hardwareBackButton
      * @return {?}
      */
-    function envInitializer(environment) {
+    function moduleInitializer(environment, hardwareBackButton) {
         var _this = this;
         return function () {
             return __awaiter(_this, void 0, void 0, function () {
@@ -582,6 +713,7 @@
                         case 0: return [4 /*yield*/, environment.ready()];
                         case 1:
                             _a.sent();
+                            hardwareBackButton.enable();
                             return [2 /*return*/];
                     }
                 });
@@ -602,7 +734,8 @@
     exports.Environment = Environment;
     exports.fadeAnimation = fadeAnimation;
     exports.Navigator = Navigator;
-    exports.envInitializer = envInitializer;
+    exports.HardwareBackButton = HardwareBackButton;
+    exports.moduleInitializer = moduleInitializer;
     exports.OkodeNgxCommonModule = OkodeNgxCommonModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });

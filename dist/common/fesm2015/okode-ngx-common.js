@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { ActionSheetController, Platform, NavController, Config } from '@ionic/angular';
 import { iosTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/ios.transition';
 import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transition/md.transition';
+import { Subject } from 'rxjs';
+import { throttleTime, filter } from 'rxjs/operators';
+import { ActionSheetController, Platform, NavController, Config } from '@ionic/angular';
 import { __awaiter } from 'tslib';
 import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
 
@@ -181,7 +183,7 @@ class Navigator {
      * @param {?=} animation
      * @return {?}
      */
-    push(url, params, animation = 'push') {
+    push(url, params, animation = 'default') {
         this.params = params;
         this.animation = animation;
         return this.navCtrl.navigateForward(url);
@@ -255,14 +257,16 @@ class Navigator {
             opts.enteringEl.setAttribute('animation-enter', this.animation);
             opts.leavingEl.setAttribute('animation-leave', this.animation);
             /** @type {?} */
-            const animPlatform = ((opts && opts.mode === 'ios') ? 'ios' : 'md') + '_' + anim;
-            switch (animPlatform) {
-                case 'ios_push': return animationPush(AnimationC, baseEl, opts);
-                case 'ios_modal': return animationModal(AnimationC, baseEl, opts);
-                case 'ios_fade': return animationFade(AnimationC, baseEl, opts);
-                case 'md_push': return animationModal(AnimationC, baseEl, opts);
-                case 'md_modal': return animationModal(AnimationC, baseEl, opts);
-                case 'md_fade': return animationFade(AnimationC, baseEl, opts);
+            const ios = (opts && opts.mode === 'ios');
+            switch (anim) {
+                case 'default':
+                    if (ios)
+                        return animationPush(AnimationC, baseEl, opts);
+                    else
+                        return animationModal(AnimationC, baseEl, opts);
+                case 'push': return animationPush(AnimationC, baseEl, opts);
+                case 'modal': return animationModal(AnimationC, baseEl, opts);
+                case 'fade': return animationFade(AnimationC, baseEl, opts);
                 default: return animationModal(AnimationC, baseEl, opts);
             }
         });
@@ -353,6 +357,104 @@ function fadeAnimation(AnimationC, _, opts) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class HardwareBackButton {
+    /**
+     * @param {?} nav
+     * @param {?} navController
+     * @param {?} platform
+     */
+    constructor(nav, navController, platform) {
+        this.nav = nav;
+        this.navController = navController;
+        this.platform = platform;
+        this.filterCondition = () => true;
+        this.intialized = false;
+    }
+    /**
+     * @param {?=} condition
+     * @return {?}
+     */
+    enable(condition) {
+        if (!this.intialized) {
+            this.init();
+        }
+        this.filterCondition = condition || (() => true);
+    }
+    /**
+     * @return {?}
+     */
+    disable() {
+        if (!this.intialized) {
+            this.init();
+        }
+        this.filterCondition = () => false;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    init() {
+        this.intialized = true;
+        /** @type {?} */
+        const hwBackSubject = new Subject();
+        hwBackSubject.pipe(throttleTime(500), filter(this.filterCondition)).subscribe(() => __awaiter(this, void 0, void 0, function* () {
+            // check ionic overlays (dismiss if is presented and backdropDismiss == true)
+            /** @type {?} */
+            const overlaySelector = 'ion-alert-controller, ion-action-sheet, ion-loading-controller';
+            /** @type {?} */
+            let overlay = document.querySelector(overlaySelector);
+            if (overlay && overlay.getTop) {
+                overlay = yield overlay.getTop();
+            }
+            if (overlay) {
+                if (overlay && overlay.backdropDismiss === true) {
+                    overlay.dismiss();
+                }
+                return;
+            }
+            // check if active view has implemented `onHardwareBack()`, else performs nav.pop()
+            /** @type {?} */
+            let view = this.getActiveViewRefInstance();
+            if (view && view.kdOnHardwareBackButton) {
+                view.kdOnHardwareBackButton();
+            }
+            else {
+                this.nav.pop();
+            }
+        }));
+        // Overring default hardware back button behaviour
+        this.platform.ready().then(() => {
+            this.platform.backButton.subscribeWithPriority(9999, () => { hwBackSubject.next(event); });
+        });
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getActiveViewRefInstance() {
+        /** @type {?} */
+        const nav = Object.assign({}, this.navController);
+        if (nav && nav.topOutlet && nav.topOutlet.stackCtrl && nav.topOutlet.stackCtrl.activeView &&
+            nav.topOutlet.stackCtrl.activeView && nav.topOutlet.stackCtrl.activeView.ref) {
+            return nav.topOutlet.stackCtrl.activeView.ref.instance;
+        }
+        return null;
+    }
+}
+HardwareBackButton.decorators = [
+    { type: Injectable }
+];
+/** @nocollapse */
+HardwareBackButton.ctorParameters = () => [
+    { type: Navigator },
+    { type: NavController },
+    { type: Platform }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 // @dynamic
 class OkodeNgxCommonModule {
     /**
@@ -364,7 +466,13 @@ class OkodeNgxCommonModule {
             providers: [
                 Environment,
                 Navigator,
-                { provide: APP_INITIALIZER, useFactory: envInitializer, deps: [Environment], multi: true },
+                HardwareBackButton,
+                {
+                    provide: APP_INITIALIZER,
+                    useFactory: moduleInitializer,
+                    deps: [Environment, HardwareBackButton],
+                    multi: true
+                },
             ]
         };
     }
@@ -378,11 +486,13 @@ OkodeNgxCommonModule.decorators = [
 ];
 /**
  * @param {?} environment
+ * @param {?} hardwareBackButton
  * @return {?}
  */
-function envInitializer(environment) {
+function moduleInitializer(environment, hardwareBackButton) {
     return () => __awaiter(this, void 0, void 0, function* () {
         yield environment.ready();
+        hardwareBackButton.enable();
     });
 }
 
@@ -396,6 +506,6 @@ function envInitializer(environment) {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { Environment, fadeAnimation, Navigator, envInitializer, OkodeNgxCommonModule };
+export { Environment, fadeAnimation, Navigator, HardwareBackButton, moduleInitializer, OkodeNgxCommonModule };
 
 //# sourceMappingURL=okode-ngx-common.js.map
