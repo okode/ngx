@@ -326,10 +326,12 @@ var Navigator = /** @class */ (function () {
             var ios = (opts && opts.mode === 'ios');
             switch (anim) {
                 case 'default':
-                    if (ios)
+                    if (ios) {
                         return animationPush(AnimationC, baseEl, opts);
-                    else
+                    }
+                    else {
                         return animationModal(AnimationC, baseEl, opts);
+                    }
                 case 'push': return animationPush(AnimationC, baseEl, opts);
                 case 'modal': return animationModal(AnimationC, baseEl, opts);
                 case 'fade': return animationFade(AnimationC, baseEl, opts);
