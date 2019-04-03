@@ -309,7 +309,7 @@
         function Navigator(navCtrl, config) {
             this.navCtrl = navCtrl;
             this.config = config;
-            this.animation = 'push';
+            this.animation = 'default';
             this.animationConfigReady = false;
         }
         /**
@@ -455,6 +455,7 @@
                         case 'push': return animationPush(AnimationC, baseEl, opts);
                         case 'modal': return animationModal(AnimationC, baseEl, opts);
                         case 'fade': return animationFade(AnimationC, baseEl, opts);
+                        case 'safepush': return animationSafePush(AnimationC, baseEl, opts);
                         default: return animationModal(AnimationC, baseEl, opts);
                     }
                 });
@@ -493,6 +494,13 @@
      */
     function animationFade(a, b, o) { return fadeAnimation(a, b, o); }
     /**
+     * @param {?} a
+     * @param {?} b
+     * @param {?} o
+     * @return {?}
+     */
+    function animationSafePush(a, b, o) { return safePushAnimation(a, b, o); }
+    /**
      * @param {?} AnimationC
      * @param {?} _
      * @param {?} opts
@@ -518,10 +526,10 @@
         var rootTransition = new AnimationC();
         rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
         if (opts.direction === 'back') { // animate the component itself
-            rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+            rootTransition.duration(opts.duration || 300).easing('cubic-bezier(0.47,0,0.745,0.715)');
         }
         else {
-            rootTransition.duration(opts.duration || 280)
+            rootTransition.duration(opts.duration || 400)
                 .easing('cubic-bezier(0.36,0.66,0.04,1)').fromTo('opacity', 0.01, 1, true);
         }
         /** @type {?} */
@@ -535,12 +543,54 @@
         }
         // setup leaving view
         if (leavingEl && (opts.direction === 'back')) { // leaving content
-            rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+            rootTransition.duration(opts.duration || 300).easing('cubic-bezier(0.47,0,0.745,0.715)');
             /** @type {?} */
             var leavingPage = new AnimationC();
             leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('opacity', 1, 0);
             rootTransition.add(leavingPage);
         }
+        return Promise.resolve(rootTransition);
+    }
+    /**
+     * @param {?} AnimationC
+     * @param {?} _
+     * @param {?} opts
+     * @return {?}
+     */
+    function safePushAnimation(AnimationC, _, opts) {
+        /** @type {?} */
+        var getIonPageElement = function (element) {
+            if (element.classList.contains('ion-page')) {
+                return element;
+            }
+            /** @type {?} */
+            var page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+            return page || element;
+        };
+        /** @type {?} */
+        var enteringEl = opts.enteringEl;
+        /** @type {?} */
+        var leavingEl = opts.leavingEl;
+        /** @type {?} */
+        var ionPageElement = getIonPageElement(enteringEl);
+        /** @type {?} */
+        var rootTransition = new AnimationC();
+        rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
+        rootTransition.duration(opts.duration || 500).easing('cubic-bezier(0.36,0.66,0.04,1)');
+        /** @type {?} */
+        var leavingPage = new AnimationC();
+        /** @type {?} */
+        var enteringPage = new AnimationC();
+        if (opts.direction === 'back') {
+            leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('translateX', '0', '100%');
+            enteringPage.addElement(getIonPageElement(enteringEl)).fromTo('translateX', '-100%', '0');
+        }
+        else {
+            leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('translateX', '0', '-100%');
+            enteringPage.addElement(getIonPageElement(enteringEl)).fromTo('translateX', '100%', '0');
+        }
+        rootTransition.add(leavingPage);
+        rootTransition.add(enteringPage);
         return Promise.resolve(rootTransition);
     }
 
@@ -739,6 +789,7 @@
 
     exports.Environment = Environment;
     exports.fadeAnimation = fadeAnimation;
+    exports.safePushAnimation = safePushAnimation;
     exports.Navigator = Navigator;
     exports.HardwareBackButton = HardwareBackButton;
     exports.moduleInitializer = moduleInitializer;

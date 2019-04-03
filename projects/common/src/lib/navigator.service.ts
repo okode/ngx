@@ -8,7 +8,7 @@ import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transit
 export class Navigator {
 
   private params;
-  private animation: 'default' | 'push' | 'modal' | 'fade' = 'push';
+  private animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default';
   private animationConfigReady = false;
 
   constructor(
@@ -20,7 +20,7 @@ export class Navigator {
     return this.params;
   }
 
-  push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' = 'default') {
+  push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default') {
     if (!this.animationConfigReady) { this.setAnimationConfig(); }
     this.params = params;
     this.animation = animation;
@@ -69,12 +69,13 @@ export class Navigator {
         const ios = (opts && opts.mode === 'ios');
         switch (anim) {
           case 'default':
-            if (ios) {  return animationPush(AnimationC, baseEl, opts); }
-            else {      return animationModal(AnimationC, baseEl, opts); }
-          case 'push':  return animationPush(AnimationC, baseEl, opts);
-          case 'modal': return animationModal(AnimationC, baseEl, opts);
-          case 'fade':  return animationFade(AnimationC, baseEl, opts);
-          default:      return animationModal(AnimationC, baseEl, opts);
+            if (ios) {      return animationPush(AnimationC, baseEl, opts); }
+            else {          return animationModal(AnimationC, baseEl, opts); }
+          case 'push':      return animationPush(AnimationC, baseEl, opts);
+          case 'modal':     return animationModal(AnimationC, baseEl, opts);
+          case 'fade':      return animationFade(AnimationC, baseEl, opts);
+          case 'safepush':  return animationSafePush(AnimationC, baseEl, opts);
+          default:          return animationModal(AnimationC, baseEl, opts);
         }
       }
     );
@@ -82,9 +83,10 @@ export class Navigator {
 
 }
 
-function animationPush    (a, b, o)  { return iosTransitionAnimation(a, b, o); }
-function animationModal   (a, b, o)  { return mdTransitionAnimation(a, b, o); }
-function animationFade    (a, b, o)  { return fadeAnimation(a, b, o); }
+function animationPush     (a, b, o)  { return iosTransitionAnimation(a, b, o); }
+function animationModal    (a, b, o)  { return mdTransitionAnimation(a, b, o); }
+function animationFade     (a, b, o)  { return fadeAnimation(a, b, o); }
+function animationSafePush (a, b, o)  { return safePushAnimation(a, b, o); }
 
 export function fadeAnimation(AnimationC: Animation, _: HTMLElement, opts: any) {
   const getIonPageElement = function (element: HTMLElement) {
@@ -98,9 +100,9 @@ export function fadeAnimation(AnimationC: Animation, _: HTMLElement, opts: any) 
   const rootTransition = new AnimationC();
   rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
   if (opts.direction === 'back') { // animate the component itself
-    rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+    rootTransition.duration(opts.duration || 300).easing('cubic-bezier(0.47,0,0.745,0.715)');
   } else {
-    rootTransition.duration(opts.duration || 280)
+    rootTransition.duration(opts.duration || 400)
       .easing('cubic-bezier(0.36,0.66,0.04,1)').fromTo('opacity', 0.01, 1, true);
   }
   const enteringToolbarEle = ionPageElement.querySelector('ion-toolbar');
@@ -111,10 +113,37 @@ export function fadeAnimation(AnimationC: Animation, _: HTMLElement, opts: any) 
   }
   // setup leaving view
   if (leavingEl && (opts.direction === 'back')) { // leaving content
-    rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+    rootTransition.duration(opts.duration || 300).easing('cubic-bezier(0.47,0,0.745,0.715)');
     const leavingPage = new AnimationC();
     leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('opacity', 1, 0);
     rootTransition.add(leavingPage);
   }
   return Promise.resolve(rootTransition);
 }
+
+export function safePushAnimation(AnimationC: Animation, _: HTMLElement, opts: any) {
+  const getIonPageElement = function (element: HTMLElement) {
+    if (element.classList.contains('ion-page')) { return element; }
+    const page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+    return page || element;
+  };
+  const enteringEl = opts.enteringEl;
+  const leavingEl = opts.leavingEl;
+  const ionPageElement = getIonPageElement(enteringEl);
+  const rootTransition = new AnimationC();
+  rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
+  rootTransition.duration(opts.duration || 500).easing('cubic-bezier(0.36,0.66,0.04,1)');
+  const leavingPage = new AnimationC();
+  const enteringPage = new AnimationC();
+  if (opts.direction === 'back') {
+    leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('translateX', '0', '100%');
+    enteringPage.addElement(getIonPageElement(enteringEl)).fromTo('translateX', '-100%', '0');
+  } else {
+    leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('translateX', '0', '-100%');
+    enteringPage.addElement(getIonPageElement(enteringEl)).fromTo('translateX', '100%', '0');
+  }
+  rootTransition.add(leavingPage);
+  rootTransition.add(enteringPage);
+  return Promise.resolve(rootTransition);
+}
+

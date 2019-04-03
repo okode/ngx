@@ -168,7 +168,7 @@ class Navigator {
     constructor(navCtrl, config) {
         this.navCtrl = navCtrl;
         this.config = config;
-        this.animation = 'push';
+        this.animation = 'default';
         this.animationConfigReady = false;
     }
     /**
@@ -273,6 +273,7 @@ class Navigator {
                 case 'push': return animationPush(AnimationC, baseEl, opts);
                 case 'modal': return animationModal(AnimationC, baseEl, opts);
                 case 'fade': return animationFade(AnimationC, baseEl, opts);
+                case 'safepush': return animationSafePush(AnimationC, baseEl, opts);
                 default: return animationModal(AnimationC, baseEl, opts);
             }
         });
@@ -308,6 +309,13 @@ function animationModal(a, b, o) { return mdTransitionAnimation(a, b, o); }
  */
 function animationFade(a, b, o) { return fadeAnimation(a, b, o); }
 /**
+ * @param {?} a
+ * @param {?} b
+ * @param {?} o
+ * @return {?}
+ */
+function animationSafePush(a, b, o) { return safePushAnimation(a, b, o); }
+/**
  * @param {?} AnimationC
  * @param {?} _
  * @param {?} opts
@@ -333,10 +341,10 @@ function fadeAnimation(AnimationC, _, opts) {
     const rootTransition = new AnimationC();
     rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
     if (opts.direction === 'back') { // animate the component itself
-        rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+        rootTransition.duration(opts.duration || 300).easing('cubic-bezier(0.47,0,0.745,0.715)');
     }
     else {
-        rootTransition.duration(opts.duration || 280)
+        rootTransition.duration(opts.duration || 400)
             .easing('cubic-bezier(0.36,0.66,0.04,1)').fromTo('opacity', 0.01, 1, true);
     }
     /** @type {?} */
@@ -350,12 +358,54 @@ function fadeAnimation(AnimationC, _, opts) {
     }
     // setup leaving view
     if (leavingEl && (opts.direction === 'back')) { // leaving content
-        rootTransition.duration(opts.duration || 200).easing('cubic-bezier(0.47,0,0.745,0.715)');
+        rootTransition.duration(opts.duration || 300).easing('cubic-bezier(0.47,0,0.745,0.715)');
         /** @type {?} */
         const leavingPage = new AnimationC();
         leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('opacity', 1, 0);
         rootTransition.add(leavingPage);
     }
+    return Promise.resolve(rootTransition);
+}
+/**
+ * @param {?} AnimationC
+ * @param {?} _
+ * @param {?} opts
+ * @return {?}
+ */
+function safePushAnimation(AnimationC, _, opts) {
+    /** @type {?} */
+    const getIonPageElement = function (element) {
+        if (element.classList.contains('ion-page')) {
+            return element;
+        }
+        /** @type {?} */
+        const page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+        return page || element;
+    };
+    /** @type {?} */
+    const enteringEl = opts.enteringEl;
+    /** @type {?} */
+    const leavingEl = opts.leavingEl;
+    /** @type {?} */
+    const ionPageElement = getIonPageElement(enteringEl);
+    /** @type {?} */
+    const rootTransition = new AnimationC();
+    rootTransition.addElement(ionPageElement).beforeRemoveClass('ion-page-invisible');
+    rootTransition.duration(opts.duration || 500).easing('cubic-bezier(0.36,0.66,0.04,1)');
+    /** @type {?} */
+    const leavingPage = new AnimationC();
+    /** @type {?} */
+    const enteringPage = new AnimationC();
+    if (opts.direction === 'back') {
+        leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('translateX', '0', '100%');
+        enteringPage.addElement(getIonPageElement(enteringEl)).fromTo('translateX', '-100%', '0');
+    }
+    else {
+        leavingPage.addElement(getIonPageElement(leavingEl)).fromTo('translateX', '0', '-100%');
+        enteringPage.addElement(getIonPageElement(enteringEl)).fromTo('translateX', '100%', '0');
+    }
+    rootTransition.add(leavingPage);
+    rootTransition.add(enteringPage);
     return Promise.resolve(rootTransition);
 }
 
@@ -512,6 +562,6 @@ function moduleInitializer(environment, hardwareBackButton) {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { Environment, fadeAnimation, Navigator, HardwareBackButton, moduleInitializer, OkodeNgxCommonModule };
+export { Environment, fadeAnimation, safePushAnimation, Navigator, HardwareBackButton, moduleInitializer, OkodeNgxCommonModule };
 
 //# sourceMappingURL=okode-ngx-common.js.map

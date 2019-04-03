@@ -73,7 +73,7 @@ Ionic NavController wrapper with custom transitions
 
 ##### Functions
 ```typescript
-push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' = 'default'): Promise<boolean>
+push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default'): Promise<boolean>
 pop(url?: string, params?: {}): Promise<boolean>
 popToRoot(): Promise<boolean>
 setRoot(url: string, params?: {}): Promise<boolean>
