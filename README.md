@@ -39,7 +39,7 @@ import { IonicStorageModule } from '@ionic/storage';
 ```
 
 
-## Services
+# Services
 
 ### Environment
 This service allows the selection of environment config before starting the app.
@@ -80,8 +80,9 @@ setRoot(url: string, params?: {}): Promise<boolean>
 getParams(): any
 getViews(): RouteView[] // RouteView: @ionic/angular interface
 ```
-> Animation `default` in iOS performs `push`, and `modal` in Android (default native behavior)
+> `default` animation in iOS performs `push`, and `modal` in Android (default native behavior)
 
+> `safepush` is a simple `push` animation alternative for custom designs where the original can give bugs 
 
 ##### Usage
 ```typescript
@@ -119,6 +120,6 @@ this.hardwareBackButton.disable();
 ```typescript
 import { OnHardwareBackButton } from '@okode/ngx-common';
 export class MyPage implements OnHardwareBackButton {
-kdOnHardwareBackButton() { /* overwrite back button behavior on this page */ }
+kdOnHardwareBackButton() { /* overwrite back button behavior () on this page */ }
 ```
 
