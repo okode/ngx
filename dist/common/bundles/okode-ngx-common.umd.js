@@ -651,6 +651,7 @@
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
+                                    console.log('HardwareBackButton: back button action');
                                     // check ionic overlays (dismiss if is presented and backdropDismiss == true)
                                     overlaySelector = 'ion-alert-controller, ion-action-sheet, ion-loading-controller';
                                     overlay = document.querySelector(overlaySelector);

@@ -8,13 +8,13 @@ Okode Common for Ionic 4+ projects.
 
 #### Build and publish
 
-- Bump version `projects/common/package.json`
 - Make sure you're logged in as `okode`:
    - `npm whoami` / `npm logout`
    - `npm adduser` (username: okode, email: developers@okode.com)
+- Bump version `projects/common/package.json`
 - Build and publish
 ```
-npm run build -- common && cd dist/common && npm publish --access=public
+npm run build -- common && cd dist/common && npm publish --access=public && cd ../..
 ```
 - Commit changes
 

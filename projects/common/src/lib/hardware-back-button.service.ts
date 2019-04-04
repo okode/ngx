@@ -37,6 +37,7 @@ export class HardwareBackButton {
       throttleTime(500),
       filter(this.filterCondition),
     ).subscribe(async () => {
+      console.log('HardwareBackButton: back button action');
       // check ionic overlays (dismiss if is presented and backdropDismiss == true)
       const overlaySelector = 'ion-alert-controller, ion-action-sheet, ion-loading-controller';
       let overlay: any = document.querySelector(overlaySelector);

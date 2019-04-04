@@ -454,6 +454,7 @@ class HardwareBackButton {
         /** @type {?} */
         const hwBackSubject = new Subject();
         hwBackSubject.pipe(throttleTime(500), filter(this.filterCondition)).subscribe(() => __awaiter(this, void 0, void 0, function* () {
+            console.log('HardwareBackButton: back button action');
             // check ionic overlays (dismiss if is presented and backdropDismiss == true)
             /** @type {?} */
             const overlaySelector = 'ion-alert-controller, ion-action-sheet, ion-loading-controller';
