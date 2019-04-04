@@ -481,9 +481,9 @@ function safePushAnimation(AnimationC, _, opts) {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var HardwareBackButton = /** @class */ (function () {
-    function HardwareBackButton(nav, navController, platform) {
+    function HardwareBackButton(navCtrl, nav, platform) {
+        this.navCtrl = navCtrl;
         this.nav = nav;
-        this.navController = navController;
         this.platform = platform;
         this.filterCondition = function () { return true; };
         this.intialized = false;
@@ -527,7 +527,7 @@ var HardwareBackButton = /** @class */ (function () {
         this.intialized = true;
         /** @type {?} */
         var hwBackSubject = new Subject();
-        hwBackSubject.pipe(throttleTime(500), filter(this.filterCondition)).subscribe(function () { return __awaiter(_this, void 0, void 0, function () {
+        hwBackSubject.pipe(throttleTime(500), filter(function () { return _this.filterCondition(); })).subscribe(function () { return __awaiter(_this, void 0, void 0, function () {
             var overlaySelector, overlay, view;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -575,7 +575,7 @@ var HardwareBackButton = /** @class */ (function () {
      */
     function () {
         /** @type {?} */
-        var nav = __assign({}, this.navController);
+        var nav = __assign({}, this.navCtrl);
         if (nav && nav.topOutlet && nav.topOutlet.stackCtrl && nav.topOutlet.stackCtrl.activeView &&
             nav.topOutlet.stackCtrl.activeView && nav.topOutlet.stackCtrl.activeView.ref) {
             return nav.topOutlet.stackCtrl.activeView.ref.instance;
@@ -587,8 +587,8 @@ var HardwareBackButton = /** @class */ (function () {
     ];
     /** @nocollapse */
     HardwareBackButton.ctorParameters = function () { return [
-        { type: Navigator },
         { type: NavController },
+        { type: Navigator },
         { type: Platform }
     ]; };
     return HardwareBackButton;
@@ -618,7 +618,7 @@ var OkodeNgxCommonModule = /** @class */ (function () {
                 {
                     provide: APP_INITIALIZER,
                     useFactory: moduleInitializer,
-                    deps: [Environment, HardwareBackButton],
+                    deps: [Environment],
                     multi: true
                 },
             ]
@@ -635,10 +635,9 @@ var OkodeNgxCommonModule = /** @class */ (function () {
 }());
 /**
  * @param {?} environment
- * @param {?} hardwareBackButton
  * @return {?}
  */
-function moduleInitializer(environment, hardwareBackButton) {
+function moduleInitializer(environment) {
     var _this = this;
     return function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -646,7 +645,6 @@ function moduleInitializer(environment, hardwareBackButton) {
                 case 0: return [4 /*yield*/, environment.ready()];
                 case 1:
                     _a.sent();
-                    hardwareBackButton.enable();
                     return [2 /*return*/];
             }
         });

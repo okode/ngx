@@ -97,8 +97,7 @@ navToDetail(id: number) {
 ```
 
 ### HardwareBackButton
-This service allows you to control the behavior of the Android physical button. By default, this service
-is enabled and try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading).
+This service allows you to control the behavior of the Android physical button. If is enabled will try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading).
 
 ##### Functions
 ```typescript

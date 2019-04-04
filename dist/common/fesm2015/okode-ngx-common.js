@@ -415,13 +415,13 @@ function safePushAnimation(AnimationC, _, opts) {
  */
 class HardwareBackButton {
     /**
+     * @param {?} navCtrl
      * @param {?} nav
-     * @param {?} navController
      * @param {?} platform
      */
-    constructor(nav, navController, platform) {
+    constructor(navCtrl, nav, platform) {
+        this.navCtrl = navCtrl;
         this.nav = nav;
-        this.navController = navController;
         this.platform = platform;
         this.filterCondition = () => true;
         this.intialized = false;
@@ -453,7 +453,7 @@ class HardwareBackButton {
         this.intialized = true;
         /** @type {?} */
         const hwBackSubject = new Subject();
-        hwBackSubject.pipe(throttleTime(500), filter(this.filterCondition)).subscribe(() => __awaiter(this, void 0, void 0, function* () {
+        hwBackSubject.pipe(throttleTime(500), filter(() => this.filterCondition())).subscribe(() => __awaiter(this, void 0, void 0, function* () {
             console.log('HardwareBackButton: back button action');
             // check ionic overlays (dismiss if is presented and backdropDismiss == true)
             /** @type {?} */
@@ -490,7 +490,7 @@ class HardwareBackButton {
      */
     getActiveViewRefInstance() {
         /** @type {?} */
-        const nav = Object.assign({}, this.navController);
+        const nav = Object.assign({}, this.navCtrl);
         if (nav && nav.topOutlet && nav.topOutlet.stackCtrl && nav.topOutlet.stackCtrl.activeView &&
             nav.topOutlet.stackCtrl.activeView && nav.topOutlet.stackCtrl.activeView.ref) {
             return nav.topOutlet.stackCtrl.activeView.ref.instance;
@@ -503,8 +503,8 @@ HardwareBackButton.decorators = [
 ];
 /** @nocollapse */
 HardwareBackButton.ctorParameters = () => [
-    { type: Navigator },
     { type: NavController },
+    { type: Navigator },
     { type: Platform }
 ];
 
@@ -527,7 +527,7 @@ class OkodeNgxCommonModule {
                 {
                     provide: APP_INITIALIZER,
                     useFactory: moduleInitializer,
-                    deps: [Environment, HardwareBackButton],
+                    deps: [Environment],
                     multi: true
                 },
             ]
@@ -543,13 +543,11 @@ OkodeNgxCommonModule.decorators = [
 ];
 /**
  * @param {?} environment
- * @param {?} hardwareBackButton
  * @return {?}
  */
-function moduleInitializer(environment, hardwareBackButton) {
+function moduleInitializer(environment) {
     return () => __awaiter(this, void 0, void 0, function* () {
         yield environment.ready();
-        hardwareBackButton.enable();
     });
 }
 

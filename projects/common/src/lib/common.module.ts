@@ -21,7 +21,7 @@ export class OkodeNgxCommonModule {
         {
           provide: APP_INITIALIZER,
           useFactory: moduleInitializer,
-          deps: [Environment, HardwareBackButton],
+          deps: [Environment],
           multi: true
         },
       ]
@@ -29,12 +29,8 @@ export class OkodeNgxCommonModule {
   }
 }
 
-export function moduleInitializer(
-  environment: Environment,
-  hardwareBackButton: HardwareBackButton
-) {
+export function moduleInitializer(environment: Environment) {
   return async () => {
     await environment.ready();
-    hardwareBackButton.enable();
   };
 }

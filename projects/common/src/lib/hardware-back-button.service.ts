@@ -15,8 +15,8 @@ export class HardwareBackButton {
   private intialized = false;
 
   constructor(
+    private navCtrl: NavController,
     private nav: Navigator,
-    private navController: NavController,
     private platform: Platform
   ) {}
 
@@ -35,7 +35,7 @@ export class HardwareBackButton {
     const hwBackSubject = new Subject();
     hwBackSubject.pipe(
       throttleTime(500),
-      filter(this.filterCondition),
+      filter(() => this.filterCondition()),
     ).subscribe(async () => {
       console.log('HardwareBackButton: back button action');
       // check ionic overlays (dismiss if is presented and backdropDismiss == true)
@@ -61,7 +61,7 @@ export class HardwareBackButton {
   }
 
   private getActiveViewRefInstance() {
-    const nav: any = { ...this.navController };
+    const nav: any = { ...this.navCtrl };
     if (nav && nav.topOutlet && nav.topOutlet.stackCtrl && nav.topOutlet.stackCtrl.activeView &&
         nav.topOutlet.stackCtrl.activeView && nav.topOutlet.stackCtrl.activeView.ref) {
       return nav.topOutlet.stackCtrl.activeView.ref.instance;

@@ -4,12 +4,12 @@ export interface OnHardwareBackButton {
     kdOnHardwareBackButton(): any;
 }
 export declare class HardwareBackButton {
+    private navCtrl;
     private nav;
-    private navController;
     private platform;
     private filterCondition;
     private intialized;
-    constructor(nav: Navigator, navController: NavController, platform: Platform);
+    constructor(navCtrl: NavController, nav: Navigator, platform: Platform);
     enable(condition?: () => boolean): void;
     disable(): void;
     private init;

@@ -599,9 +599,9 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var HardwareBackButton = /** @class */ (function () {
-        function HardwareBackButton(nav, navController, platform) {
+        function HardwareBackButton(navCtrl, nav, platform) {
+            this.navCtrl = navCtrl;
             this.nav = nav;
-            this.navController = navController;
             this.platform = platform;
             this.filterCondition = function () { return true; };
             this.intialized = false;
@@ -645,7 +645,7 @@
                 this.intialized = true;
                 /** @type {?} */
                 var hwBackSubject = new rxjs.Subject();
-                hwBackSubject.pipe(operators.throttleTime(500), operators.filter(this.filterCondition)).subscribe(function () {
+                hwBackSubject.pipe(operators.throttleTime(500), operators.filter(function () { return _this.filterCondition(); })).subscribe(function () {
                     return __awaiter(_this, void 0, void 0, function () {
                         var overlaySelector, overlay, view;
                         return __generator(this, function (_a) {
@@ -696,7 +696,7 @@
          */
             function () {
                 /** @type {?} */
-                var nav = __assign({}, this.navController);
+                var nav = __assign({}, this.navCtrl);
                 if (nav && nav.topOutlet && nav.topOutlet.stackCtrl && nav.topOutlet.stackCtrl.activeView &&
                     nav.topOutlet.stackCtrl.activeView && nav.topOutlet.stackCtrl.activeView.ref) {
                     return nav.topOutlet.stackCtrl.activeView.ref.instance;
@@ -709,8 +709,8 @@
         /** @nocollapse */
         HardwareBackButton.ctorParameters = function () {
             return [
-                { type: Navigator },
                 { type: angular.NavController },
+                { type: Navigator },
                 { type: angular.Platform }
             ];
         };
@@ -741,7 +741,7 @@
                         {
                             provide: core.APP_INITIALIZER,
                             useFactory: moduleInitializer,
-                            deps: [Environment, HardwareBackButton],
+                            deps: [Environment],
                             multi: true
                         },
                     ]
@@ -758,10 +758,9 @@
     }());
     /**
      * @param {?} environment
-     * @param {?} hardwareBackButton
      * @return {?}
      */
-    function moduleInitializer(environment, hardwareBackButton) {
+    function moduleInitializer(environment) {
         var _this = this;
         return function () {
             return __awaiter(_this, void 0, void 0, function () {
@@ -770,7 +769,6 @@
                         case 0: return [4 /*yield*/, environment.ready()];
                         case 1:
                             _a.sent();
-                            hardwareBackButton.enable();
                             return [2 /*return*/];
                     }
                 });
