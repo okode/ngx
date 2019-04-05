@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/common'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@angular/common', '@angular/core'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.ng.common,global.ng.core));
-}(this, (function (exports,common,core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) :
+    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@angular/core', '@angular/common'], factory) :
+    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.ng.core,global.ng.common));
+}(this, (function (exports,core,common) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -90,12 +90,12 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    // @dynamic
     /** @type {?} */
     var DECLARATIONS = [
         // Directives
         IonItemDirective,
     ];
+    // @dynamic
     var OkodeNgxCustomPaletteModule = /** @class */ (function () {
         function OkodeNgxCustomPaletteModule() {
         }
@@ -132,8 +132,8 @@
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
-    exports.OkodeNgxCustomPaletteModule = OkodeNgxCustomPaletteModule;
     exports.IonItemDirective = IonItemDirective;
+    exports.OkodeNgxCustomPaletteModule = OkodeNgxCustomPaletteModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

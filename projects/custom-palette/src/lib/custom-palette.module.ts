@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { CommonModule } from '@angular/common';
-import { IonItemDirective } from './directives/ion-item.directive';
+import { IonItemDirective } from './ion-item.directive';
 
-// @dynamic
 const DECLARATIONS = [
   // Directives
   IonItemDirective,
 ];
 
+// @dynamic
 @NgModule({
   declarations: DECLARATIONS,
   exports: DECLARATIONS,

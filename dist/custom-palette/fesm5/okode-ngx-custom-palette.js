@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Directive, ElementRef, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
@@ -85,12 +85,12 @@ var IonItemDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-// @dynamic
 /** @type {?} */
 var DECLARATIONS = [
     // Directives
     IonItemDirective,
 ];
+// @dynamic
 var OkodeNgxCustomPaletteModule = /** @class */ (function () {
     function OkodeNgxCustomPaletteModule() {
     }
@@ -127,6 +127,6 @@ var OkodeNgxCustomPaletteModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonItemDirective };
+export { IonItemDirective, OkodeNgxCustomPaletteModule };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map
