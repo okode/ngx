@@ -1,5 +1,4 @@
 import { Directive, ElementRef, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 /**
  * @fileoverview added by tsickle
@@ -71,7 +70,7 @@ var IonItemDirective = /** @class */ (function () {
     };
     IonItemDirective.decorators = [
         { type: Directive, args: [{
-                    selector: "ion-item[custom-palette]"
+                    selector: "[custom-palette]"
                 },] }
     ];
     /** @nocollapse */
@@ -85,33 +84,14 @@ var IonItemDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-/** @type {?} */
-var DECLARATIONS = [
-    // Directives
-    IonItemDirective,
-];
-// @dynamic
 var OkodeNgxCustomPaletteModule = /** @class */ (function () {
     function OkodeNgxCustomPaletteModule() {
     }
-    /**
-     * @return {?}
-     */
-    OkodeNgxCustomPaletteModule.forRoot = /**
-     * @return {?}
-     */
-    function () {
-        return {
-            ngModule: OkodeNgxCustomPaletteModule,
-            providers: []
-        };
-    };
     OkodeNgxCustomPaletteModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: DECLARATIONS,
-                    exports: DECLARATIONS,
-                    providers: [],
-                    imports: [CommonModule]
+                    declarations: [IonItemDirective],
+                    exports: [IonItemDirective],
+                    providers: []
                 },] }
     ];
     return OkodeNgxCustomPaletteModule;

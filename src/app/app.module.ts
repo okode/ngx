@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-import { OkodeNgxCommonModule } from 'common';
+import { OkodeNgxCommonModule } from 'common'; // from local
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +19,7 @@ import { OkodeNgxCommonModule } from 'common';
     HttpClientModule,
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-    OkodeNgxCommonModule.forRoot()
+    OkodeNgxCommonModule.forRoot(),
   ],
   providers: [
     StatusBar,

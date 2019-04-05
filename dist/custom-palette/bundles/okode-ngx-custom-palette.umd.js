@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common')) :
-    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@angular/core', '@angular/common'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.ng.core,global.ng.common));
-}(this, (function (exports,core,common) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@angular/core'], factory) :
+    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.ng.core));
+}(this, (function (exports,core) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -74,7 +74,7 @@
             };
         IonItemDirective.decorators = [
             { type: core.Directive, args: [{
-                        selector: "ion-item[custom-palette]"
+                        selector: "[custom-palette]"
                     },] }
         ];
         /** @nocollapse */
@@ -90,33 +90,14 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    /** @type {?} */
-    var DECLARATIONS = [
-        // Directives
-        IonItemDirective,
-    ];
-    // @dynamic
     var OkodeNgxCustomPaletteModule = /** @class */ (function () {
         function OkodeNgxCustomPaletteModule() {
         }
-        /**
-         * @return {?}
-         */
-        OkodeNgxCustomPaletteModule.forRoot = /**
-         * @return {?}
-         */
-            function () {
-                return {
-                    ngModule: OkodeNgxCustomPaletteModule,
-                    providers: []
-                };
-            };
         OkodeNgxCustomPaletteModule.decorators = [
             { type: core.NgModule, args: [{
-                        declarations: DECLARATIONS,
-                        exports: DECLARATIONS,
-                        providers: [],
-                        imports: [common.CommonModule]
+                        declarations: [IonItemDirective],
+                        exports: [IonItemDirective],
+                        providers: []
                     },] }
         ];
         return OkodeNgxCustomPaletteModule;

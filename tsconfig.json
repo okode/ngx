@@ -24,6 +24,12 @@
       ],
       "common/*": [
         "dist/common/*"
+      ],
+      "custom-palette": [
+        "dist/custom-palette"
+      ],
+      "custom-palette/*": [
+        "dist/custom-palette/*"
       ]
     }
   }

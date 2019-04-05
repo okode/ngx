@@ -1,7 +1,7 @@
 import { Directive, OnInit, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: `ion-item[custom-palette]`
+  selector: `[custom-palette]`
 })
 export class IonItemDirective implements OnInit {
 
