@@ -6,12 +6,14 @@ export declare class Navigator {
     private params;
     private animation;
     private animationConfigReady;
+    private startNavFlow;
     constructor(navCtrl: NavController, config: Config);
     getParams(): any;
-    push(url: string, params?: {}, animation?: 'default' | 'push' | 'modal' | 'fade' | 'safepush'): Promise<boolean>;
+    push(url: string, params?: {}, animation?: 'default' | 'push' | 'modal' | 'fade' | 'safepush', startNavFlow?: boolean): Promise<boolean>;
     pop(url?: string, params?: {}): Promise<boolean>;
     popToRoot(): Promise<boolean>;
     setRoot(url: string, params?: {}): Promise<boolean>;
+    closeCurrentNavFlow(params?: {}): Promise<boolean>;
     getViews(): any[];
     private getPreviousPageUrl;
     private getRootPageUrl;

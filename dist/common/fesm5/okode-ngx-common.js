@@ -197,6 +197,7 @@ var Navigator = /** @class */ (function () {
         this.config = config;
         this.animation = 'default';
         this.animationConfigReady = false;
+        this.startNavFlow = false;
     }
     /**
      * @return {?}
@@ -211,21 +212,25 @@ var Navigator = /** @class */ (function () {
      * @param {?} url
      * @param {?=} params
      * @param {?=} animation
+     * @param {?=} startNavFlow
      * @return {?}
      */
     Navigator.prototype.push = /**
      * @param {?} url
      * @param {?=} params
      * @param {?=} animation
+     * @param {?=} startNavFlow
      * @return {?}
      */
-    function (url, params, animation) {
+    function (url, params, animation, startNavFlow) {
         if (animation === void 0) { animation = 'default'; }
+        if (startNavFlow === void 0) { startNavFlow = false; }
         if (!this.animationConfigReady) {
             this.setAnimationConfig();
         }
         this.params = params;
         this.animation = animation;
+        this.startNavFlow = startNavFlow;
         return this.navCtrl.navigateForward(url);
     };
     /**
@@ -264,6 +269,23 @@ var Navigator = /** @class */ (function () {
     function (url, params) {
         this.params = params;
         return this.navCtrl.navigateRoot(url);
+    };
+    /**
+     * @param {?=} params
+     * @return {?}
+     */
+    Navigator.prototype.closeCurrentNavFlow = /**
+     * @param {?=} params
+     * @return {?}
+     */
+    function (params) {
+        /** @type {?} */
+        var views = this.getViews().reverse();
+        /** @type {?} */
+        var currentNavFlow = views.findIndex(function (v) { return v.element.getAttribute('new-nav-flow'); });
+        /** @type {?} */
+        var targetPage = currentNavFlow >= 0 && views.length > 1 ? views[currentNavFlow + 1] : null;
+        return targetPage ? this.pop(targetPage.url, params) : this.popToRoot();
     };
     /**
      * @return {?}
@@ -323,6 +345,10 @@ var Navigator = /** @class */ (function () {
             var anim = _this.animation;
             if (opts.direction === 'back') {
                 anim = opts.enteringEl.getAttribute('animation-leave');
+            }
+            else if (opts.direction === 'forward' && _this.startNavFlow) {
+                opts.enteringEl.setAttribute('new-nav-flow', true);
+                _this.startNavFlow = false;
             }
             opts.enteringEl.setAttribute('animation-enter', _this.animation);
             opts.leavingEl.setAttribute('animation-leave', _this.animation);

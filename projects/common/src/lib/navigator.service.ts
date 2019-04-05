@@ -10,6 +10,7 @@ export class Navigator {
   private params;
   private animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default';
   private animationConfigReady = false;
+  private startNavFlow = false;
 
   constructor(
     private navCtrl: NavController,
@@ -20,10 +21,16 @@ export class Navigator {
     return this.params;
   }
 
-  push(url: string, params?: {}, animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default') {
+  push(
+    url: string,
+    params?: {},
+    animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default',
+    startNavFlow = false
+  ) {
     if (!this.animationConfigReady) { this.setAnimationConfig(); }
     this.params = params;
     this.animation = animation;
+    this.startNavFlow = startNavFlow;
     return this.navCtrl.navigateForward(url);
   }
 
@@ -39,6 +46,13 @@ export class Navigator {
   setRoot(url: string, params?: {}) {
     this.params = params;
     return this.navCtrl.navigateRoot(url);
+  }
+
+  closeCurrentNavFlow(params?: {}) {
+    const views = this.getViews().reverse();
+    const currentNavFlow = views.findIndex(v => v.element.getAttribute('new-nav-flow'));
+    const targetPage = currentNavFlow >= 0 && views.length > 1 ? views[currentNavFlow + 1] : null;
+    return targetPage ? this.pop(targetPage.url, params) : this.popToRoot();
   }
 
   getViews() {
@@ -63,7 +77,12 @@ export class Navigator {
     this.config.set('navAnimation',
       (AnimationC: Animation, baseEl: HTMLElement, opts: any): Promise<Animation> => {
         let anim = this.animation;
-        if (opts.direction === 'back') { anim = opts.enteringEl.getAttribute('animation-leave'); }
+        if (opts.direction === 'back') {
+          anim = opts.enteringEl.getAttribute('animation-leave');
+        } else if (opts.direction === 'forward' && this.startNavFlow) {
+          opts.enteringEl.setAttribute('new-nav-flow', true);
+          this.startNavFlow = false;
+        }
         opts.enteringEl.setAttribute('animation-enter', this.animation);
         opts.leavingEl.setAttribute('animation-leave', this.animation);
         const ios = (opts && opts.mode === 'ios');

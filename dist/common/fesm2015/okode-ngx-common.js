@@ -170,6 +170,7 @@ class Navigator {
         this.config = config;
         this.animation = 'default';
         this.animationConfigReady = false;
+        this.startNavFlow = false;
     }
     /**
      * @return {?}
@@ -181,14 +182,16 @@ class Navigator {
      * @param {?} url
      * @param {?=} params
      * @param {?=} animation
+     * @param {?=} startNavFlow
      * @return {?}
      */
-    push(url, params, animation = 'default') {
+    push(url, params, animation = 'default', startNavFlow = false) {
         if (!this.animationConfigReady) {
             this.setAnimationConfig();
         }
         this.params = params;
         this.animation = animation;
+        this.startNavFlow = startNavFlow;
         return this.navCtrl.navigateForward(url);
     }
     /**
@@ -214,6 +217,19 @@ class Navigator {
     setRoot(url, params) {
         this.params = params;
         return this.navCtrl.navigateRoot(url);
+    }
+    /**
+     * @param {?=} params
+     * @return {?}
+     */
+    closeCurrentNavFlow(params) {
+        /** @type {?} */
+        const views = this.getViews().reverse();
+        /** @type {?} */
+        const currentNavFlow = views.findIndex(v => v.element.getAttribute('new-nav-flow'));
+        /** @type {?} */
+        const targetPage = currentNavFlow >= 0 && views.length > 1 ? views[currentNavFlow + 1] : null;
+        return targetPage ? this.pop(targetPage.url, params) : this.popToRoot();
     }
     /**
      * @return {?}
@@ -257,6 +273,10 @@ class Navigator {
             let anim = this.animation;
             if (opts.direction === 'back') {
                 anim = opts.enteringEl.getAttribute('animation-leave');
+            }
+            else if (opts.direction === 'forward' && this.startNavFlow) {
+                opts.enteringEl.setAttribute('new-nav-flow', true);
+                this.startNavFlow = false;
             }
             opts.enteringEl.setAttribute('animation-enter', this.animation);
             opts.leavingEl.setAttribute('animation-leave', this.animation);
