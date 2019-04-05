@@ -224,7 +224,7 @@ class Navigator {
      */
     closeCurrentNavFlow(params) {
         /** @type {?} */
-        const views = this.getViews().reverse();
+        const views = [...this.getViews()].reverse();
         /** @type {?} */
         const currentNavFlow = views.findIndex(v => v.element.getAttribute('new-nav-flow'));
         /** @type {?} */

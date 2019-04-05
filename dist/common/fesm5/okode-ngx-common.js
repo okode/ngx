@@ -5,7 +5,7 @@ import { mdTransitionAnimation } from '@ionic/core/dist/collection/utils/transit
 import { Subject } from 'rxjs';
 import { throttleTime, filter } from 'rxjs/operators';
 import { ActionSheetController, Platform, NavController, Config } from '@ionic/angular';
-import { __awaiter, __generator, __assign } from 'tslib';
+import { __awaiter, __generator, __assign, __spread } from 'tslib';
 import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
 
 /**
@@ -280,7 +280,7 @@ var Navigator = /** @class */ (function () {
      */
     function (params) {
         /** @type {?} */
-        var views = this.getViews().reverse();
+        var views = __spread(this.getViews()).reverse();
         /** @type {?} */
         var currentNavFlow = views.findIndex(function (v) { return v.element.getAttribute('new-nav-flow'); });
         /** @type {?} */
