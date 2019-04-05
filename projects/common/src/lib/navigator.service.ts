@@ -49,7 +49,7 @@ export class Navigator {
   }
 
   closeCurrentNavFlow(params?: {}) {
-    const views = this.getViews().reverse();
+    const views = [...this.getViews()].reverse();
     const currentNavFlow = views.findIndex(v => v.element.getAttribute('new-nav-flow'));
     const targetPage = currentNavFlow >= 0 && views.length > 1 ? views[currentNavFlow + 1] : null;
     return targetPage ? this.pop(targetPage.url, params) : this.popToRoot();
