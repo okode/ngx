@@ -27,10 +27,12 @@ In app/core module:
 import { NgModule } from '@angular/core';
 import { OkodeNgxCommonModule } from '@okode/ngx-common';
 import { IonicStorageModule } from '@ionic/storage';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     IonicStorageModule.forRoot(), // Required
+    HttpClientModule, // Required
     OkodeNgxCommonModule.forRoot(),
 ```
 
