@@ -1,8 +1,5 @@
 /*
- * Public API Surface of ngx-okode-common
+ * Public API Surface of ngx-custom-palette
  */
 
-export * from './lib/environment.service';
-export * from './lib/navigator.service';
-export * from './lib/hardware-back-button.service';
-export * from './lib/common.module';
+export * from './lib/custom-palette.module';
