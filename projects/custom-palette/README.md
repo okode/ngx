@@ -2,6 +2,10 @@
 
 Okode custom Ionic 4+ components
 
+#### Local build
+
+npm run build -- custom-palette && cp -R projects/custom-palette/theme dist/custom-palette/
+
 #### Build and publish
 
 - Make sure you're logged in as `okode`:
@@ -10,7 +14,7 @@ Okode custom Ionic 4+ components
 - Bump version `projects/custom-palette/package.json`
 - Build and publish
 ```
-npm run build -- custom-palette && cd dist/custom-palette && npm publish --access=public && cd ../..
+npm run build -- custom-palette && cp -R projects/custom-palette/theme dist/custom-palette/ && cd dist/custom-palette && npm publish --access=public && cd ../..
 ```
 - Commit changes
 
@@ -20,3 +24,25 @@ npm run build -- custom-palette && cd dist/custom-palette && npm publish --acces
 npm i @okode/ngx-custom-palette
 ```
 
+
+#### Usage
+
+In all Components/Pages (or SharedModule):
+```typescript
+import { OkodeNgxCustomPaletteModule } from '@okode/ngx-custom-palette';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule, FormsModule, IonicModule, // Required
+    OkodeNgxCustomPaletteModule
+  ],
+  exports: [
+    CommonModule, FormsModule, IonicModule,, // Required
+    OkodeNgxCustomPaletteModule
+  ]
+```
+Import main style in `src/global.scss`
+```typescript
+@import '../node_modules/@okode/ngx-custom-palette/theme/styles.scss';
+```

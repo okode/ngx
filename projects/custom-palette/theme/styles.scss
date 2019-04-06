@@ -1,0 +1,31 @@
+ion-item[custom-palette] {
+  ion-label {
+    z-index: 9999;
+    padding-left: 10px;
+    margin-left: 6px;
+    pointer-events: none;
+    color: gray !important;
+  }
+  ion-label::first-line {
+    content: ' ';
+    position: absolute;
+    background: white;
+    box-shadow: 0px 0px 0px 10px white;
+  }
+  .item-has-value ion-label,
+  .item-has-focus ion-label {
+    transform: translateZ(0) translateY(2px) translateX(2px) scale(.8) !important;
+  }
+  ion-input input {
+    margin-left: 16px;
+    margin-top: -2px;
+  }
+  ion-select {
+    padding-left: 16px;
+    margin-top: -2px;
+  }
+}
+html.md ion-item[custom-palette].item-label-floating ion-label {
+  margin-left: 6px;
+  margin-bottom: 3px;
+}
