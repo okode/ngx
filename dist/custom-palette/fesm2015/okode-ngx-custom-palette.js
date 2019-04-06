@@ -18,6 +18,7 @@ class IonItemDirective {
     .item-native .item-inner {
       border: 0px;
       padding: 0px;
+      min-height: 68px;
     }
     .item-highlight {
       display: none !important;
@@ -33,9 +34,10 @@ class IonItemDirective {
         /** @type {?} */
         const input = this.el.nativeElement.querySelector(inputSelector);
         if (input && this.el.nativeElement.querySelector('ion-label')) {
+            this.el.nativeElement.setAttribute('custom-palette', 'floating-label');
             this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
+            this.setShadowStyle(this.getShadow());
         }
-        this.setShadowStyle(this.getShadow());
     }
     /**
      * @private
@@ -100,12 +102,15 @@ class IonSelectDirective {
         this.el = el;
         this.shadowCustomCss = `
     .select-icon-inner {
-      left: -5px;
-      margin-top: -5px;
-      border-top: 5px solid;
+      left: -7px;
+      margin-top: -2px;
+      border-top: 6px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
       opacity: .33;
+    }
+    .select-text {
+      min-height: 30px;
     }
   `;
     }
@@ -147,11 +152,63 @@ IonSelectDirective.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class IonDateTimeDirective {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+        this.shadowCustomCss = `
+    .datetime-text {
+      margin-top: -28px;
+      position: absolute;
+    }
+  `;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.setShadowStyle(this.getShadow());
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    getShadow() {
+        return this.el.nativeElement.shadowRoot || this.el.nativeElement.attachShadow({ mode: 'open' });
+    }
+    /**
+     * @private
+     * @param {?} shadow
+     * @return {?}
+     */
+    setShadowStyle(shadow) {
+        if (shadow) {
+            shadow.innerHTML += `<style>${this.shadowCustomCss}</style>`;
+        }
+    }
+}
+IonDateTimeDirective.decorators = [
+    { type: Directive, args: [{
+                selector: `ion-datetime`
+            },] }
+];
+/** @nocollapse */
+IonDateTimeDirective.ctorParameters = () => [
+    { type: ElementRef }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
 const DECLARATIONS = [
     IonItemDirective,
     IonInputDirective,
-    IonSelectDirective
+    IonSelectDirective,
+    IonDateTimeDirective
 ];
 class OkodeNgxCustomPaletteModule {
 }
@@ -173,6 +230,6 @@ OkodeNgxCustomPaletteModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonInputDirective as ɵb, IonItemDirective as ɵa, IonSelectDirective as ɵc };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵd, IonInputDirective as ɵb, IonItemDirective as ɵa, IonSelectDirective as ɵc };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

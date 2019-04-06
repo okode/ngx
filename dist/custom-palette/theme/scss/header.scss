@@ -1,0 +1,18 @@
+// Remove bottom shadow in Android
+.header-md:after {
+  background-image: none !important;
+}
+
+// Toolbar progress bar
+ion-header ion-toolbar ion-progress-bar {
+  margin: 10px;
+  height: 25px;
+  border-radius: 5px;
+}
+ion-header ion-toolbar ion-progress-bar + .progress-bar-label {
+  position: absolute;
+  margin-left: 20px;
+  font-size: 13px;
+  color: var(--ion-color-medium-contrast);
+  line-height: 25px;
+}  

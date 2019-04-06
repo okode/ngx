@@ -1,25 +1,30 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+    </ion-buttons>
+    <ion-title>Form inputs</ion-title>
   </ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-buttons>
+      <ion-progress-bar color="medium" value="0.25"></ion-progress-bar>
+    </ion-buttons>
+  </ion-toolbar>  
 </ion-header>
 
 <ion-content padding>
 
   <ion-item>
-    <ion-label>Floating Label</ion-label>
+    <ion-label>Name</ion-label>
+    <ion-input value="Alex"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Lastname</ion-label>
     <ion-input></ion-input>
   </ion-item>
   
   <ion-item>
-    <ion-label>Floating Label</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label>Users</ion-label>
+    <ion-label>Option</ion-label>
     <ion-select>
       <ion-select-option>Option 1</ion-select-option>
       <ion-select-option>Option 2</ion-select-option>
@@ -29,7 +34,7 @@
   <ion-item>
     <ion-label>Date</ion-label>
     <ion-datetime display-format="MM/YYYY" picker-format="MMMM YYYY"></ion-datetime>
-  </ion-item>  
+  </ion-item>
   
   <ion-item>
     <ion-label>Description</ion-label>
@@ -37,13 +42,13 @@
   </ion-item>  
 
   <ion-item>
-    <ion-label>Floating Label</ion-label>
-    <ion-input></ion-input>
+    <ion-label>Disabled input</ion-label>
+    <ion-input value="Disabled" disabled></ion-input>
   </ion-item>
   
   <ion-item>
-    <ion-label>Floating Label</ion-label>
-    <ion-input></ion-input>
+    <ion-label>Readonly input</ion-label>
+    <ion-input value="Readonly" readonly></ion-input>
   </ion-item>
 
   <ion-item>
@@ -59,6 +64,17 @@
   <ion-item>
     <ion-label>Floating Label</ion-label>
     <ion-input></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Summary</ion-label>
+    <ion-textarea disabled readonly value="Ionic enables developers to build performant, high-quality mobile apps.">
+    </ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Notes</ion-label>
+    <ion-textarea rows="9" cols="20"></ion-textarea>
   </ion-item>
   
 </ion-content>
