@@ -1,7 +1,7 @@
 import { Directive, OnInit, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: `[custom-palette]`
+  selector: `ion-item`
 })
 export class IonItemDirective implements OnInit {
 
@@ -10,22 +10,9 @@ export class IonItemDirective implements OnInit {
       border: none;
       padding: 0px;
     }
-    .item-native:after {
-      content: ' ';
-      position: absolute;
-      z-index: 1;
-      left: 0px;
-      bottom: -10px;
-      height: 54px;
-      width: calc(100% - 2px);
-      border: 1px solid #ddd;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      border-radius: 3px;
-    }
     .item-native .item-inner {
-      margin-bottom: 8px;
       border: 0px;
+      padding: 0px;
     }
     .item-highlight {
       display: none !important;
@@ -35,7 +22,11 @@ export class IonItemDirective implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
+    const inputSelector = 'ion-input, ion-select, ion-textarea, ion-datetime';
+    const input = this.el.nativeElement.querySelector(inputSelector);
+    if (input && this.el.nativeElement.querySelector('ion-label')) {
+      this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
+    }
     this.setShadowStyle(this.getShadow());
   }
 

@@ -24,3 +24,25 @@ npm run build -- custom-palette && cp -R projects/custom-palette/theme dist/cust
 npm i @okode/ngx-custom-palette
 ```
 
+
+#### Usage
+
+In all Components/Pages (or SharedModule):
+```typescript
+import { OkodeNgxCustomPaletteModule } from '@okode/ngx-custom-palette';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule, FormsModule, IonicModule, // Required
+    OkodeNgxCustomPaletteModule
+  ],
+  exports: [
+    CommonModule, FormsModule, IonicModule,, // Required
+    OkodeNgxCustomPaletteModule
+  ]
+```
+Import main style in `src/global.scss`
+```typescript
+@import '../node_modules/@okode/ngx-custom-palette/theme/styles.scss';
+```
