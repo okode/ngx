@@ -1,0 +1,12 @@
+:root {
+  --custom-primary-color: #de240b;
+  --custom-dark-color: #222428;
+  --custom-medium-dark-color: #3d3d3d;
+  --custom-medium-light-color: #c5c5c5;
+  --custom-light-color: #fff;
+}
+
+@import 'scss/ionic-variables.scss';
+@import 'scss/header.scss';
+@import 'scss/forms.scss';
+@import 'scss/footer.scss';

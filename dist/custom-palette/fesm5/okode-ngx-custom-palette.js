@@ -17,12 +17,20 @@ var IonItemDirective = /** @class */ (function () {
      */
     function () {
         /** @type {?} */
-        var inputSelector = 'ion-input, ion-select, ion-textarea, ion-datetime';
+        var inputsFloatingLabel = this.el.nativeElement.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
         /** @type {?} */
-        var input = this.el.nativeElement.querySelector(inputSelector);
-        if (input && this.el.nativeElement.querySelector('ion-label')) {
-            this.el.nativeElement.setAttribute('custom-palette', 'floating-label');
-            this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
+        var inputsStaticLabel = this.el.nativeElement.querySelector('ion-checkbox, ion-toggle');
+        if (inputsFloatingLabel) {
+            if (this.el.nativeElement.querySelector('ion-label')) {
+                this.el.nativeElement.setAttribute('custom-palette', 'floating-label');
+                this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
+            }
+            this.setShadowStyle(this.getShadow());
+        }
+        else if (inputsStaticLabel) {
+            if (this.el.nativeElement.querySelector('ion-label')) {
+                this.el.nativeElement.setAttribute('custom-palette', 'static-label');
+            }
             this.setShadowStyle(this.getShadow());
         }
     };

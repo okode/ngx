@@ -14,7 +14,7 @@ npm run build -- custom-palette && cp -R projects/custom-palette/theme dist/cust
 - Bump version `projects/custom-palette/package.json`
 - Build and publish
 ```
-npm run build -- custom-palette && cp -R projects/custom-palette/theme dist/custom-palette/ && cd dist/custom-palette && npm publish --access=public && cd ../..
+npm run build -- custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/ && cd dist/custom-palette && npm publish --access=public && cd ../..
 ```
 - Commit changes
 
@@ -44,5 +44,5 @@ import { OkodeNgxCustomPaletteModule } from '@okode/ngx-custom-palette';
 ```
 Import main style in `src/global.scss`
 ```typescript
-@import '../node_modules/@okode/ngx-custom-palette/theme/styles.scss';
+@import '../node_modules/@okode/ngx-custom-palette/styles/style.scss';
 ```

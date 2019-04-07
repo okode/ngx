@@ -1,12 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-    </ion-buttons>
     <ion-title>Form inputs</ion-title>
   </ion-toolbar>
   <ion-toolbar color="light">
     <ion-buttons>
-      <ion-progress-bar color="medium" value="0.25"></ion-progress-bar>
+      <ion-progress-bar color="medium" value="0.5"></ion-progress-bar>
+      <ion-label>50% completed</ion-label>
     </ion-buttons>
   </ion-toolbar>  
 </ion-header>
@@ -45,12 +44,22 @@
     <ion-label>Disabled input</ion-label>
     <ion-input value="Disabled" disabled></ion-input>
   </ion-item>
+
+  <ion-item>
+    <ion-label>Toggle</ion-label>
+    <ion-toggle></ion-toggle>
+  </ion-item>
   
   <ion-item>
     <ion-label>Readonly input</ion-label>
     <ion-input value="Readonly" readonly></ion-input>
   </ion-item>
 
+  <ion-item>
+    <ion-label>Check 1</ion-label>
+    <ion-checkbox slot="end"></ion-checkbox>
+  </ion-item>
+    
   <ion-item>
     <ion-label>Floating Label</ion-label>
     <ion-input></ion-input>
@@ -72,9 +81,39 @@
     </ion-textarea>
   </ion-item>
 
+  <ion-button expand="block" fill="outline" style="margin: 20px 20%;">
+    <ion-icon slot="end" name="attach"></ion-icon>Attach document
+  </ion-button>
+
   <ion-item>
     <ion-label>Notes</ion-label>
     <ion-textarea rows="9" cols="20"></ion-textarea>
   </ion-item>
-  
+
+  <ion-item>
+    <ion-label>Check 1</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 2</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 3</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 4</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button expand="full" fill="clear" color="light">Continue</ion-button>
+  </ion-toolbar>
+</ion-footer>
