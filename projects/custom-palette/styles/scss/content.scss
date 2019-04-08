@@ -1,0 +1,21 @@
+ion-content[custom-palette] {
+  --background: var(--content-bg);
+  ion-item {
+    --border-color: var(--input-color) !important;
+    --background: var(--content-bg);
+  }
+  &[padding] {
+    padding: 16px 26px;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+    color: var(--custom-medium-dark-color);
+    margin-block-start: 0.5em;
+    margin-block-end: 1em;
+  }
+  p {
+    font-weight: 400;
+    color: var(--custom-medium-dark-color);
+    line-height: 20px !important;
+  }
+}

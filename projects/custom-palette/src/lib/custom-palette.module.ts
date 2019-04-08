@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
-import { IonItemDirective } from './ion-item.directive';
-import { IonInputDirective } from './ion-input.directive';
-import { IonSelectDirective } from './ion-select.directive';
-import { IonDateTimeDirective } from './ion-datetime.directive';
+import { IonHeaderDirective } from './layout/ion-header.directive';
+import { IonContentDirective } from './layout/ion-content.directive';
+import { IonFooterDirective } from './layout/ion-footer.directive';
+import { IonItemDirective } from './form/ion-item.directive';
+import { IonInputDirective } from './form/ion-input.directive';
+import { IonSelectDirective } from './form/ion-select.directive';
+import { IonDateTimeDirective } from './form/ion-datetime.directive';
+import { IonRadioGroupDirective } from './form/ion-radio-group.directive';
 
 const DECLARATIONS = [
+  IonHeaderDirective,
+  IonContentDirective,
+  IonFooterDirective,
   IonItemDirective,
   IonInputDirective,
   IonSelectDirective,
-  IonDateTimeDirective
+  IonDateTimeDirective,
+  IonRadioGroupDirective
 ];
 
 @NgModule({

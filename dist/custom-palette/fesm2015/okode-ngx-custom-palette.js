@@ -4,6 +4,90 @@ import { Directive, ElementRef, NgModule } from '@angular/core';
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class IonHeaderDirective {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.el.nativeElement.setAttribute('custom-palette', true);
+    }
+}
+IonHeaderDirective.decorators = [
+    { type: Directive, args: [{
+                selector: `ion-header`
+            },] }
+];
+/** @nocollapse */
+IonHeaderDirective.ctorParameters = () => [
+    { type: ElementRef }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class IonContentDirective {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.el.nativeElement.setAttribute('custom-palette', true);
+    }
+}
+IonContentDirective.decorators = [
+    { type: Directive, args: [{
+                selector: `ion-content`
+            },] }
+];
+/** @nocollapse */
+IonContentDirective.ctorParameters = () => [
+    { type: ElementRef }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class IonFooterDirective {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.el.nativeElement.setAttribute('custom-palette', true);
+    }
+}
+IonFooterDirective.decorators = [
+    { type: Directive, args: [{
+                selector: `ion-footer`
+            },] }
+];
+/** @nocollapse */
+IonFooterDirective.ctorParameters = () => [
+    { type: ElementRef }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class IonItemDirective {
     /**
      * @param {?} el
@@ -33,16 +117,16 @@ class IonItemDirective {
         const inputsFloatingLabel = this.el.nativeElement.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
         /** @type {?} */
         const inputsStaticLabel = this.el.nativeElement.querySelector('ion-checkbox, ion-toggle');
-        if (inputsFloatingLabel) {
-            if (this.el.nativeElement.querySelector('ion-label')) {
-                this.el.nativeElement.setAttribute('custom-palette', 'floating-label');
+        /** @type {?} */
+        const label = this.el.nativeElement.querySelector('ion-label');
+        if (label && (inputsFloatingLabel || inputsStaticLabel)) {
+            this.el.nativeElement.setAttribute('custom-palette', true);
+            if (inputsFloatingLabel) {
+                this.el.nativeElement.setAttribute('custom-palette-style', 'floating-label');
                 this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
             }
-            this.setShadowStyle(this.getShadow());
-        }
-        else if (inputsStaticLabel) {
-            if (this.el.nativeElement.querySelector('ion-label')) {
-                this.el.nativeElement.setAttribute('custom-palette', 'static-label');
+            else {
+                this.el.nativeElement.setAttribute('custom-palette-style', 'static-label');
             }
             this.setShadowStyle(this.getShadow());
         }
@@ -85,7 +169,6 @@ class IonInputDirective {
      */
     constructor(el) {
         this.el = el;
-        this.shadowCustomCss = ``;
     }
 }
 IonInputDirective.decorators = [
@@ -211,12 +294,45 @@ IonDateTimeDirective.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class IonRadioGroupDirective {
+    /**
+     * @param {?} el
+     */
+    constructor(el) {
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        this.el.nativeElement.setAttribute('custom-palette', true);
+        this.el.nativeElement.setAttribute('custom-palette-style', 'static-label');
+    }
+}
+IonRadioGroupDirective.decorators = [
+    { type: Directive, args: [{
+                selector: `ion-radio-group`
+            },] }
+];
+/** @nocollapse */
+IonRadioGroupDirective.ctorParameters = () => [
+    { type: ElementRef }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
 const DECLARATIONS = [
+    IonHeaderDirective,
+    IonContentDirective,
+    IonFooterDirective,
     IonItemDirective,
     IonInputDirective,
     IonSelectDirective,
-    IonDateTimeDirective
+    IonDateTimeDirective,
+    IonRadioGroupDirective
 ];
 class OkodeNgxCustomPaletteModule {
 }
@@ -238,6 +354,6 @@ OkodeNgxCustomPaletteModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵd, IonInputDirective as ɵb, IonItemDirective as ɵa, IonSelectDirective as ɵc };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵg, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵh, IonSelectDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

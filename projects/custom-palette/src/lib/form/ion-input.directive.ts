@@ -5,8 +5,6 @@ import { Directive, ElementRef } from '@angular/core';
 })
 export class IonInputDirective {
 
-  private shadowCustomCss = ``;
-
   constructor(private el: ElementRef) {}
 
 }

@@ -4,7 +4,7 @@ Okode custom Ionic 4+ components
 
 #### Local build
 
-npm run build -- custom-palette && cp -R projects/custom-palette/theme dist/custom-palette/
+npm run build -- custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
 
 #### Build and publish
 
