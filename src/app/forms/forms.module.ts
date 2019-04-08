@@ -1,23 +1,20 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { FormsPage } from './forms.page';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { OkodeNgxCustomPaletteModule } from 'custom-palette'; // from local
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OkodeNgxCustomPaletteModule
+    OkodeNgxCustomPaletteModule,
+    RouterModule.forChild([{ path: '', component: FormsPage }])
   ],
-  exports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    OkodeNgxCustomPaletteModule
-  ]
+  exports: [],
+  declarations: [FormsPage]
 })
-export class SharedModule { }
+export class FormsPageModule {}

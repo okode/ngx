@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Form inputs</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-buttons>
+      <ion-progress-bar color="medium" value="0.5"></ion-progress-bar>
+      <ion-label>50% completed</ion-label>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    
+
+  <h2>Form fields</h2>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in dui venenatis,
+  gravida urna ut, faucibus felis. </p>
+
+  <br>
+
+  <ion-item>
+    <ion-label>Name <span>*</span></ion-label>
+    <ion-input value="Alex"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Lastname <span>*</span></ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Option</ion-label>
+    <ion-select>
+      <ion-select-option>Option 1</ion-select-option>
+      <ion-select-option>Option 2</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <!--<ion-icon name="calendar"></ion-icon>-->
+    <ion-datetime display-format="MMM DD, YYYY" picker-format="DD MMMM YYYY"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Description</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>  
+
+  <ion-item>
+    <ion-label>Disabled input</ion-label>
+    <!--<ion-icon name="calendar"></ion-icon>-->
+    <ion-input value="Disabled" disabled></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Toggle</ion-label>
+    <ion-toggle></ion-toggle>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Readonly input</ion-label>
+    <ion-input value="Readonly" readonly></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 1</ion-label>
+    <ion-checkbox slot="end"></ion-checkbox>
+  </ion-item>
+    
+  <ion-item class="item-has-error">
+    <ion-label>Invalid input</ion-label>
+    <ion-input value="!34%$&"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Floating Label</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Floating Label</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Summary</ion-label>
+    <ion-textarea disabled readonly value="Ionic enables developers to build performant, high-quality mobile apps.">
+    </ion-textarea>
+  </ion-item>
+
+  <ion-button expand="block" fill="outline" style="margin: 30px 20%;">
+    <ion-icon slot="end" name="attach"></ion-icon>Attach document
+  </ion-button>
+
+  <ion-item>
+    <ion-label>Notes</ion-label>
+    <ion-textarea rows="9" cols="20"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 1</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 2</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 3</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Check 4</ion-label>
+    <ion-checkbox slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-radio-group>
+    <ion-label>Radio group</ion-label>
+    <ion-item>
+      <ion-label>Radio option 1</ion-label>
+      <ion-radio slot="start" value="radio1" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Radio option 2</ion-label>
+      <ion-radio slot="start" value="radio2"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Radio option 3</ion-label>
+      <ion-radio slot="start" value="radio3"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button expand="full" fill="clear" color="light">Continue</ion-button>
+  </ion-toolbar>
+</ion-footer>
