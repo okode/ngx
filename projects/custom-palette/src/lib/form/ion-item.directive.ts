@@ -6,6 +6,9 @@ import { Directive, OnInit, ElementRef } from '@angular/core';
 export class IonItemDirective implements OnInit {
 
   private shadowCustomCss = `
+    :host(.ion-focused) .item-native {
+      background: transparent;
+    }
     .item-native {
       border: none;
       padding: 0px;

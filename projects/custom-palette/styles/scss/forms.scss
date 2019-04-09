@@ -15,7 +15,6 @@ ion-content[custom-palette] {
       height: calc(100% - 22px);
       width: calc(100% - 2px);
       border: 1px solid var(--input-color);
-      // background: var(--input-bg-color);
       margin-top: 10px;
       margin-bottom: 10px;
       border-radius: 3px;
@@ -52,9 +51,9 @@ ion-content[custom-palette] {
     ion-input input {
       margin-left: 16px;
       margin-right: 16px;
-      margin-top: -2px;
-      padding: 0 0 10px 0 !important;
-      box-sizing: border-box !important;
+      position: absolute;
+      top: 6px;
+      padding: 0 0 12px 0 !important;
     }
     /*
      *  ION-SELECT
@@ -74,7 +73,7 @@ ion-content[custom-palette] {
      *  ION-TEXTAREA
      */
     ion-textarea {
-      margin-top: 5px;
+      margin-top: 6px;
       margin-bottom: 26px !important;
       textarea {
         padding: 0 16px !important;

@@ -8,15 +8,16 @@ export class IonSelectDirective implements OnInit {
   private shadowCustomCss = `
     .select-icon-inner {
       left: -15px;
-      margin-top: -2px;
-      border-top: 7px solid;
+      margin-top: -4px;
+      border-top: 8px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
       opacity: .33;
     }
     .select-text {
-      min-height: 30px;
+      min-height: 24px;
       padding-right: 20px;
+      margin-bottom: 7px;
     }
   `;
 

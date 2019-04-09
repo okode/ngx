@@ -11,7 +11,7 @@ export class IonDateTimeDirective implements OnInit, OnChanges, AfterContentChec
 
   private shadowCustomCss = `
     .datetime-text {
-      top: 28px;
+      top: 29px;
       left: 16px;
       position: absolute;
       width: calc(100% - 70px);
