@@ -15,8 +15,6 @@
 
 <ion-content padding>
 
-    
-
   <h2>Form fields</h2>
 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in dui venenatis,
@@ -32,6 +30,7 @@
   <ion-item>
     <ion-label>Lastname <span>*</span></ion-label>
     <ion-input></ion-input>
+    <ion-icon name="md-person"></ion-icon>
   </ion-item>
   
   <ion-item>
@@ -43,19 +42,19 @@
   </ion-item>
 
   <ion-item>
-    <ion-label>Date</ion-label>
-    <!--<ion-icon name="calendar"></ion-icon>-->
-    <ion-datetime display-format="MMM DD, YYYY" picker-format="DD MMMM YYYY"></ion-datetime>
+    <ion-label>Initial date</ion-label>
+    <ion-datetime [(ngModel)]="date" display-format="MMM DD, YYYY" picker-format="DD MMMM YYYY"></ion-datetime>
+    <ion-icon name="md-calendar"></ion-icon>
   </ion-item>
   
   <ion-item>
     <ion-label>Description</ion-label>
     <ion-textarea></ion-textarea>
-  </ion-item>  
+    <ion-icon name="md-create"></ion-icon>
+  </ion-item>
 
   <ion-item>
     <ion-label>Disabled input</ion-label>
-    <!--<ion-icon name="calendar"></ion-icon>-->
     <ion-input value="Disabled" disabled></ion-input>
   </ion-item>
 
@@ -77,6 +76,7 @@
   <ion-item class="item-has-error">
     <ion-label>Invalid input</ion-label>
     <ion-input value="!34%$&"></ion-input>
+    <ion-icon name="md-key"></ion-icon>
   </ion-item>
   
   <ion-item>

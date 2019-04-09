@@ -5,10 +5,16 @@
   --custom-medium-color: #838383;
   --custom-medium-light-color: #c5c5c5;
   --custom-light-color: #fff;
+  //
+  --content-bg: var(--custom-light-color);
+  --input-color: var(--custom-medium-light-color);
+  --input-bg-color: var(--content-bg);
+  --input-focus-color: var(--custom-medium-dark-color);
+  --input-error-color: var(--custom-primary-color);
 }
 
 @import 'scss/ionic-variables.scss';
-@import 'scss/basic.scss';
 @import 'scss/header.scss';
-@import 'scss/forms.scss';
 @import 'scss/footer.scss';
+@import 'scss/content.scss';
+@import 'scss/forms.scss';

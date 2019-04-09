@@ -44,5 +44,5 @@ import { OkodeNgxCustomPaletteModule } from '@okode/ngx-custom-palette';
 ```
 Import main style in `src/global.scss`
 ```typescript
-@import '../node_modules/@okode/ngx-custom-palette/styles/style.scss';
+@import '~@okode/ngx-custom-palette/styles/style.scss';
 ```

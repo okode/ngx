@@ -7,30 +7,31 @@ export class IonSelectDirective implements OnInit {
 
   private shadowCustomCss = `
     .select-icon-inner {
-      left: -7px;
+      left: -15px;
       margin-top: -2px;
-      border-top: 6px solid;
+      border-top: 7px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
       opacity: .33;
     }
     .select-text {
       min-height: 30px;
+      padding-right: 20px;
     }
   `;
 
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    this.setShadowStyle(this.getShadow());
+    this.setShadowStyle();
   }
 
   private getShadow() {
     return this.el.nativeElement.shadowRoot || this.el.nativeElement.attachShadow({ mode: 'open' });
   }
 
-  private setShadowStyle(shadow) {
-    if (shadow) { shadow.innerHTML += `<style>${this.shadowCustomCss}</style>`; }
+  private setShadowStyle() {
+    this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
   }
 
 }

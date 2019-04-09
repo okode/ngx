@@ -15,7 +15,7 @@ ion-content[custom-palette] {
       height: calc(100% - 22px);
       width: calc(100% - 2px);
       border: 1px solid var(--input-color);
-      background: var(--input-bg-color);
+      // background: var(--input-bg-color);
       margin-top: 10px;
       margin-bottom: 10px;
       border-radius: 3px;
@@ -143,12 +143,30 @@ ion-content[custom-palette] {
    * INPUT ICONS
    */
   ion-item[custom-palette-style] {
-    ion-input, ion-select, ion-textarea, ion-datetime {
-      & + ion-icon {
-        position: absolute;
-        top: 0px !important;
-        background: red;
+    &.item-has-icon {
+      ion-input, ion-textarea, ion-datetime {
+        padding-right: 34px !important;
       }
+    }
+    ion-icon {
+      display: none !important;
+    }
+    ion-input, ion-textarea, ion-datetime {
+      & + ion-icon {
+        display: block !important;
+        position: absolute;
+        top: 26px;
+        right: 16px;
+        font-size: 26px;
+        color: var(--custom-medium-color);
+        opacity: 0.7;  
+      }
+    }
+    &.item-has-focus ion-icon {
+      color: var(--input-focus-color);
+    }
+    &.item-has-error ion-icon {
+      color: var(--custom-error-color);
     }
   }
 }

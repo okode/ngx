@@ -23,21 +23,21 @@ export class IonItemDirective implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    const inputsFloatingLabel =
-      this.el.nativeElement.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
-    const inputsStaticLabel =
-      this.el.nativeElement.querySelector('ion-checkbox, ion-toggle');
-    const label =
-      this.el.nativeElement.querySelector('ion-label');
-    if (label && (inputsFloatingLabel || inputsStaticLabel)) {
-      this.el.nativeElement.setAttribute('custom-palette', true);
-      if (inputsFloatingLabel) {
-        this.el.nativeElement.setAttribute('custom-palette-style', 'floating-label');
-        this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
+    const e = this.el.nativeElement;
+    const inputFloatingLabel = e.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
+    const inputStaticLabel = e.querySelector('ion-checkbox, ion-toggle');
+    const label = e.querySelector('ion-label');
+    if (label && (inputFloatingLabel || inputStaticLabel)) {
+      e.setAttribute('custom-palette', true);
+      if (inputFloatingLabel) {
+        e.setAttribute('custom-palette-style', 'floating-label');
+        e.querySelector('ion-label').setAttribute('position', 'floating');
       } else {
-        this.el.nativeElement.setAttribute('custom-palette-style', 'static-label');
+        e.setAttribute('custom-palette-style', 'static-label');
       }
-      this.setShadowStyle(this.getShadow());
+      // has icon?
+      if (e.querySelector('ion-icon')) { e.classList.add('item-has-icon'); }
+      this.setShadowStyle();
     }
   }
 
@@ -45,8 +45,8 @@ export class IonItemDirective implements OnInit {
     return this.el.nativeElement.shadowRoot || this.el.nativeElement.attachShadow({ mode: 'open' });
   }
 
-  private setShadowStyle(shadow) {
-    if (shadow) { shadow.innerHTML += `<style>${this.shadowCustomCss}</style>`; }
+  private setShadowStyle() {
+    this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
   }
 
 }

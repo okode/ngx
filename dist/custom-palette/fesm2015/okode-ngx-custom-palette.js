@@ -1,8 +1,8 @@
-import { Directive, ElementRef, NgModule } from '@angular/core';
+import { Directive, ElementRef, Input, NgModule } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonHeaderDirective {
     /**
@@ -30,7 +30,7 @@ IonHeaderDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonContentDirective {
     /**
@@ -58,7 +58,7 @@ IonContentDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonFooterDirective {
     /**
@@ -86,7 +86,7 @@ IonFooterDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonItemDirective {
     /**
@@ -114,21 +114,27 @@ class IonItemDirective {
      */
     ngOnInit() {
         /** @type {?} */
-        const inputsFloatingLabel = this.el.nativeElement.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
+        const e = this.el.nativeElement;
         /** @type {?} */
-        const inputsStaticLabel = this.el.nativeElement.querySelector('ion-checkbox, ion-toggle');
+        const inputFloatingLabel = e.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
         /** @type {?} */
-        const label = this.el.nativeElement.querySelector('ion-label');
-        if (label && (inputsFloatingLabel || inputsStaticLabel)) {
-            this.el.nativeElement.setAttribute('custom-palette', true);
-            if (inputsFloatingLabel) {
-                this.el.nativeElement.setAttribute('custom-palette-style', 'floating-label');
-                this.el.nativeElement.querySelector('ion-label').setAttribute('position', 'floating');
+        const inputStaticLabel = e.querySelector('ion-checkbox, ion-toggle');
+        /** @type {?} */
+        const label = e.querySelector('ion-label');
+        if (label && (inputFloatingLabel || inputStaticLabel)) {
+            e.setAttribute('custom-palette', true);
+            if (inputFloatingLabel) {
+                e.setAttribute('custom-palette-style', 'floating-label');
+                e.querySelector('ion-label').setAttribute('position', 'floating');
             }
             else {
-                this.el.nativeElement.setAttribute('custom-palette-style', 'static-label');
+                e.setAttribute('custom-palette-style', 'static-label');
             }
-            this.setShadowStyle(this.getShadow());
+            // has icon?
+            if (e.querySelector('ion-icon')) {
+                e.classList.add('item-has-icon');
+            }
+            this.setShadowStyle();
         }
     }
     /**
@@ -140,13 +146,10 @@ class IonItemDirective {
     }
     /**
      * @private
-     * @param {?} shadow
      * @return {?}
      */
-    setShadowStyle(shadow) {
-        if (shadow) {
-            shadow.innerHTML += `<style>${this.shadowCustomCss}</style>`;
-        }
+    setShadowStyle() {
+        this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
     }
 }
 IonItemDirective.decorators = [
@@ -161,7 +164,7 @@ IonItemDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonInputDirective {
     /**
@@ -183,7 +186,7 @@ IonInputDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonSelectDirective {
     /**
@@ -193,15 +196,16 @@ class IonSelectDirective {
         this.el = el;
         this.shadowCustomCss = `
     .select-icon-inner {
-      left: -7px;
+      left: -15px;
       margin-top: -2px;
-      border-top: 6px solid;
+      border-top: 7px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
       opacity: .33;
     }
     .select-text {
       min-height: 30px;
+      padding-right: 20px;
     }
   `;
     }
@@ -209,7 +213,7 @@ class IonSelectDirective {
      * @return {?}
      */
     ngOnInit() {
-        this.setShadowStyle(this.getShadow());
+        this.setShadowStyle();
     }
     /**
      * @private
@@ -220,13 +224,10 @@ class IonSelectDirective {
     }
     /**
      * @private
-     * @param {?} shadow
      * @return {?}
      */
-    setShadowStyle(shadow) {
-        if (shadow) {
-            shadow.innerHTML += `<style>${this.shadowCustomCss}</style>`;
-        }
+    setShadowStyle() {
+        this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
     }
 }
 IonSelectDirective.decorators = [
@@ -241,7 +242,7 @@ IonSelectDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonDateTimeDirective {
     /**
@@ -251,8 +252,10 @@ class IonDateTimeDirective {
         this.el = el;
         this.shadowCustomCss = `
     .datetime-text {
-      margin-top: -28px;
+      top: 28px;
+      left: 16px;
       position: absolute;
+      width: calc(100% - 70px);
     }
   `;
     }
@@ -260,7 +263,21 @@ class IonDateTimeDirective {
      * @return {?}
      */
     ngOnInit() {
-        this.setShadowStyle(this.getShadow());
+        this.setShadowStyle();
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ngOnChanges(changes) {
+        this.currentValue = changes.ngModel.currentValue;
+        this.fixIonItemHasValueFloatingLabel();
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterContentChecked() {
+        this.fixIonItemHasValueFloatingLabel();
     }
     /**
      * @private
@@ -271,12 +288,21 @@ class IonDateTimeDirective {
     }
     /**
      * @private
-     * @param {?} shadow
      * @return {?}
      */
-    setShadowStyle(shadow) {
-        if (shadow) {
-            shadow.innerHTML += `<style>${this.shadowCustomCss}</style>`;
+    setShadowStyle() {
+        this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    fixIonItemHasValueFloatingLabel() {
+        if (this.currentValue) {
+            this.el.nativeElement.parentNode.classList.add('item-has-value');
+        }
+        else {
+            this.el.nativeElement.parentNode.classList.remove('item-has-value');
         }
     }
 }
@@ -289,10 +315,13 @@ IonDateTimeDirective.decorators = [
 IonDateTimeDirective.ctorParameters = () => [
     { type: ElementRef }
 ];
+IonDateTimeDirective.propDecorators = {
+    ngModel: [{ type: Input }]
+};
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class IonRadioGroupDirective {
     /**
@@ -321,7 +350,7 @@ IonRadioGroupDirective.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
 const DECLARATIONS = [
@@ -346,12 +375,12 @@ OkodeNgxCustomPaletteModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵg, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵh, IonSelectDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
