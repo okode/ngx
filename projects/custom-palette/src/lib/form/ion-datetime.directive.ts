@@ -1,13 +1,13 @@
-import { Directive, OnInit, ElementRef, Input, OnChanges, SimpleChanges, AfterContentChecked } from '@angular/core';
+import { Directive, OnInit, ElementRef, Input, AfterContentChecked } from '@angular/core';
 
 @Directive({
   selector: `ion-datetime`
 })
-export class IonDateTimeDirective implements OnInit, OnChanges, AfterContentChecked {
+export class IonDateTimeDirective implements OnInit, AfterContentChecked {
 
   @Input() ngModel: string;
 
-  private currentValue: string;
+  private stringValue: string;
 
   private shadowCustomCss = `
     .datetime-text {
@@ -24,12 +24,9 @@ export class IonDateTimeDirective implements OnInit, OnChanges, AfterContentChec
     this.setShadowStyle();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.currentValue = changes.ngModel.currentValue;
-    this.fixIonItemHasValueFloatingLabel();
-  }
-
   ngAfterContentChecked() {
+    const div = this.el.nativeElement.shadowRoot.querySelector('.datetime-text');
+    if (div) { this.stringValue = div.innerHTML; }
     this.fixIonItemHasValueFloatingLabel();
   }
 
@@ -42,7 +39,7 @@ export class IonDateTimeDirective implements OnInit, OnChanges, AfterContentChec
   }
 
   private fixIonItemHasValueFloatingLabel() {
-    if (this.currentValue) {
+    if (this.stringValue && this.stringValue.length) {
       this.el.nativeElement.parentNode.classList.add('item-has-value');
     } else {
       this.el.nativeElement.parentNode.classList.remove('item-has-value');

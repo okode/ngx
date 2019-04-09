@@ -1,12 +1,11 @@
-import { OnInit, ElementRef, OnChanges, SimpleChanges, AfterContentChecked } from '@angular/core';
-export declare class IonDateTimeDirective implements OnInit, OnChanges, AfterContentChecked {
+import { OnInit, ElementRef, AfterContentChecked } from '@angular/core';
+export declare class IonDateTimeDirective implements OnInit, AfterContentChecked {
     private el;
     ngModel: string;
-    private currentValue;
+    private stringValue;
     private shadowCustomCss;
     constructor(el: ElementRef);
     ngOnInit(): void;
-    ngOnChanges(changes: SimpleChanges): void;
     ngAfterContentChecked(): void;
     private getShadow;
     private setShadowStyle;

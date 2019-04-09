@@ -252,24 +252,17 @@ var IonDateTimeDirective = /** @class */ (function () {
         this.setShadowStyle();
     };
     /**
-     * @param {?} changes
-     * @return {?}
-     */
-    IonDateTimeDirective.prototype.ngOnChanges = /**
-     * @param {?} changes
-     * @return {?}
-     */
-    function (changes) {
-        this.currentValue = changes.ngModel.currentValue;
-        this.fixIonItemHasValueFloatingLabel();
-    };
-    /**
      * @return {?}
      */
     IonDateTimeDirective.prototype.ngAfterContentChecked = /**
      * @return {?}
      */
     function () {
+        /** @type {?} */
+        var div = this.el.nativeElement.shadowRoot.querySelector('.datetime-text');
+        if (div) {
+            this.stringValue = div.innerHTML;
+        }
         this.fixIonItemHasValueFloatingLabel();
     };
     /**
@@ -303,7 +296,7 @@ var IonDateTimeDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        if (this.currentValue) {
+        if (this.stringValue && this.stringValue.length) {
             this.el.nativeElement.parentNode.classList.add('item-has-value');
         }
         else {

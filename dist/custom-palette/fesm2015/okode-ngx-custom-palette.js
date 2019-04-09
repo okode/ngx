@@ -270,17 +270,14 @@ class IonDateTimeDirective {
         this.setShadowStyle();
     }
     /**
-     * @param {?} changes
-     * @return {?}
-     */
-    ngOnChanges(changes) {
-        this.currentValue = changes.ngModel.currentValue;
-        this.fixIonItemHasValueFloatingLabel();
-    }
-    /**
      * @return {?}
      */
     ngAfterContentChecked() {
+        /** @type {?} */
+        const div = this.el.nativeElement.shadowRoot.querySelector('.datetime-text');
+        if (div) {
+            this.stringValue = div.innerHTML;
+        }
         this.fixIonItemHasValueFloatingLabel();
     }
     /**
@@ -302,7 +299,7 @@ class IonDateTimeDirective {
      * @return {?}
      */
     fixIonItemHasValueFloatingLabel() {
-        if (this.currentValue) {
+        if (this.stringValue && this.stringValue.length) {
             this.el.nativeElement.parentNode.classList.add('item-has-value');
         }
         else {
