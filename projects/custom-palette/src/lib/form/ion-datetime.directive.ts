@@ -1,15 +1,13 @@
-import { Directive, OnInit, ElementRef, Input, AfterContentChecked } from '@angular/core';
+import { Directive, OnInit, ElementRef, AfterContentChecked } from '@angular/core';
 
 @Directive({
   selector: `ion-datetime`
 })
 export class IonDateTimeDirective implements OnInit, AfterContentChecked {
 
-  @Input() ngModel: string;
-
   private stringValue: string;
 
-  private shadowCustomCss = `
+  private shadowCss = `
     .datetime-text {
       top: 29px;
       left: 16px;
@@ -35,7 +33,7 @@ export class IonDateTimeDirective implements OnInit, AfterContentChecked {
   }
 
   private setShadowStyle() {
-    this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
+    this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
   }
 
   private fixIonItemHasValueFloatingLabel() {

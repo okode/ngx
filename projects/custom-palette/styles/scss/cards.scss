@@ -1,0 +1,31 @@
+ion-content[custom-palette] {
+  /* Main */
+  ion-card {
+    margin: 16px 8px 22px 8px !important;
+    ion-item {
+      --border-color: rgba(0, 0, 0, .1) !important;
+      &:last-child {
+        --border-color: transparent !important;
+      }
+      &[no-ellipsis] {
+        text-overflow: inherit;
+        white-space: inherit;
+      }
+    }
+  }
+  /* flat, flat-light, flat-dark */
+  ion-card[flat] {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  /* Basic content with icon */
+  ion-card > ion-icon {
+    position: absolute;
+    font-size: 30px;
+    top: 20px;
+    left: 15px;
+    & + ion-card-content {
+      padding-left: 60px;
+    }
+  }
+}

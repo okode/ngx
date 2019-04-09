@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, NgModule } from '@angular/core';
+import { Directive, ElementRef, NgModule } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -94,13 +94,14 @@ class IonItemDirective {
      */
     constructor(el) {
         this.el = el;
-        this.shadowCustomCss = `
+        this.shadowCss = `
     :host(.ion-focused) .item-native {
       background: transparent;
     }
     .item-native {
       border: none;
       padding: 0px;
+      background: transparent;
     }
     .item-native .item-inner {
       border: 0px;
@@ -152,7 +153,7 @@ class IonItemDirective {
      * @return {?}
      */
     setShadowStyle() {
-        this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
+        this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
     }
 }
 IonItemDirective.decorators = [
@@ -197,7 +198,7 @@ class IonSelectDirective {
      */
     constructor(el) {
         this.el = el;
-        this.shadowCustomCss = `
+        this.shadowCss = `
     .select-icon-inner {
       left: -15px;
       margin-top: -4px;
@@ -231,7 +232,7 @@ class IonSelectDirective {
      * @return {?}
      */
     setShadowStyle() {
-        this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
+        this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
     }
 }
 IonSelectDirective.decorators = [
@@ -254,7 +255,7 @@ class IonDateTimeDirective {
      */
     constructor(el) {
         this.el = el;
-        this.shadowCustomCss = `
+        this.shadowCss = `
     .datetime-text {
       top: 29px;
       left: 16px;
@@ -292,7 +293,7 @@ class IonDateTimeDirective {
      * @return {?}
      */
     setShadowStyle() {
-        this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
+        this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
     }
     /**
      * @private
@@ -316,9 +317,6 @@ IonDateTimeDirective.decorators = [
 IonDateTimeDirective.ctorParameters = () => [
     { type: ElementRef }
 ];
-IonDateTimeDirective.propDecorators = {
-    ngModel: [{ type: Input }]
-};
 
 /**
  * @fileoverview added by tsickle

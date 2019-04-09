@@ -15,10 +15,14 @@
 
 <ion-content padding>
 
-  <h2>Form fields</h2>
+  <ion-text color="dark">
+    <h2>Form fields</h2>
+  </ion-text>
 
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in dui venenatis,
-  gravida urna ut, faucibus felis. </p>
+  <ion-text color="medium">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in dui venenatis,
+    gravida urna ut, faucibus felis. </p>
+  </ion-text>
 
   <br>
 
@@ -46,6 +50,7 @@
     <ion-datetime display-format="MMM DD, YYYY" picker-format="DD MMMM YYYY"></ion-datetime>
     <ion-icon name="md-calendar"></ion-icon>
   </ion-item>
+  <div class="item-error-message">Invalid date</div>
   
   <ion-item>
     <ion-label>Description</ion-label>
@@ -78,6 +83,7 @@
     <ion-input value="!34%$&"></ion-input>
     <ion-icon name="md-key"></ion-icon>
   </ion-item>
+  <div class="item-error-message">Format not supported</div>
   
   <ion-item>
     <ion-label>Floating Label</ion-label>

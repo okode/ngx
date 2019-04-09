@@ -21,5 +21,6 @@ ion-header[custom-palette] ion-toolbar ion-progress-bar {
     color: var(--custom-light-color);
     line-height: 28px;
     font-weight: 700;
+    z-index: 9;
   }
 }

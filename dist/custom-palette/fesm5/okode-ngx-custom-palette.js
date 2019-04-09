@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, NgModule } from '@angular/core';
+import { Directive, ElementRef, NgModule } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -94,7 +94,7 @@ var IonFooterDirective = /** @class */ (function () {
 var IonItemDirective = /** @class */ (function () {
     function IonItemDirective(el) {
         this.el = el;
-        this.shadowCustomCss = "\n    :host(.ion-focused) .item-native {\n      background: transparent;\n    }\n    .item-native {\n      border: none;\n      padding: 0px;\n    }\n    .item-native .item-inner {\n      border: 0px;\n      padding: 0px;\n      min-height: 68px;\n    }\n    .item-highlight {\n      display: none !important;\n    }\n  ";
+        this.shadowCss = "\n    :host(.ion-focused) .item-native {\n      background: transparent;\n    }\n    .item-native {\n      border: none;\n      padding: 0px;\n      background: transparent;\n    }\n    .item-native .item-inner {\n      border: 0px;\n      padding: 0px;\n      min-height: 68px;\n    }\n    .item-highlight {\n      display: none !important;\n    }\n  ";
     }
     /**
      * @return {?}
@@ -147,7 +147,7 @@ var IonItemDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.getShadow().innerHTML += "<style>" + this.shadowCustomCss + "</style>";
+        this.getShadow().innerHTML += "<style>" + this.shadowCss + "</style>";
     };
     IonItemDirective.decorators = [
         { type: Directive, args: [{
@@ -188,7 +188,7 @@ var IonInputDirective = /** @class */ (function () {
 var IonSelectDirective = /** @class */ (function () {
     function IonSelectDirective(el) {
         this.el = el;
-        this.shadowCustomCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .33;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 20px;\n      margin-bottom: 7px;\n    }\n  ";
+        this.shadowCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .33;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 20px;\n      margin-bottom: 7px;\n    }\n  ";
     }
     /**
      * @return {?}
@@ -219,7 +219,7 @@ var IonSelectDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.getShadow().innerHTML += "<style>" + this.shadowCustomCss + "</style>";
+        this.getShadow().innerHTML += "<style>" + this.shadowCss + "</style>";
     };
     IonSelectDirective.decorators = [
         { type: Directive, args: [{
@@ -240,7 +240,7 @@ var IonSelectDirective = /** @class */ (function () {
 var IonDateTimeDirective = /** @class */ (function () {
     function IonDateTimeDirective(el) {
         this.el = el;
-        this.shadowCustomCss = "\n    .datetime-text {\n      top: 29px;\n      left: 16px;\n      position: absolute;\n      width: calc(100% - 70px);\n    }\n  ";
+        this.shadowCss = "\n    .datetime-text {\n      top: 29px;\n      left: 16px;\n      position: absolute;\n      width: calc(100% - 70px);\n    }\n  ";
     }
     /**
      * @return {?}
@@ -285,7 +285,7 @@ var IonDateTimeDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        this.getShadow().innerHTML += "<style>" + this.shadowCustomCss + "</style>";
+        this.getShadow().innerHTML += "<style>" + this.shadowCss + "</style>";
     };
     /**
      * @private
@@ -312,9 +312,6 @@ var IonDateTimeDirective = /** @class */ (function () {
     IonDateTimeDirective.ctorParameters = function () { return [
         { type: ElementRef }
     ]; };
-    IonDateTimeDirective.propDecorators = {
-        ngModel: [{ type: Input }]
-    };
     return IonDateTimeDirective;
 }());
 

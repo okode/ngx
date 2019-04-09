@@ -5,13 +5,14 @@ import { Directive, OnInit, ElementRef } from '@angular/core';
 })
 export class IonItemDirective implements OnInit {
 
-  private shadowCustomCss = `
+  private shadowCss = `
     :host(.ion-focused) .item-native {
       background: transparent;
     }
     .item-native {
       border: none;
       padding: 0px;
+      background: transparent;
     }
     .item-native .item-inner {
       border: 0px;
@@ -49,7 +50,7 @@ export class IonItemDirective implements OnInit {
   }
 
   private setShadowStyle() {
-    this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
+    this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
   }
 
 }

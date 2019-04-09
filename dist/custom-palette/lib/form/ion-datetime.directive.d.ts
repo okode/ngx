@@ -1,9 +1,8 @@
 import { OnInit, ElementRef, AfterContentChecked } from '@angular/core';
 export declare class IonDateTimeDirective implements OnInit, AfterContentChecked {
     private el;
-    ngModel: string;
     private stringValue;
-    private shadowCustomCss;
+    private shadowCss;
     constructor(el: ElementRef);
     ngOnInit(): void;
     ngAfterContentChecked(): void;

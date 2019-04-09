@@ -5,7 +5,7 @@ import { Directive, OnInit, ElementRef } from '@angular/core';
 })
 export class IonSelectDirective implements OnInit {
 
-  private shadowCustomCss = `
+  private shadowCss = `
     .select-icon-inner {
       left: -15px;
       margin-top: -4px;
@@ -32,7 +32,7 @@ export class IonSelectDirective implements OnInit {
   }
 
   private setShadowStyle() {
-    this.getShadow().innerHTML += `<style>${this.shadowCustomCss}</style>`;
+    this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
   }
 
 }
