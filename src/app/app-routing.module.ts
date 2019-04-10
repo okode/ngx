@@ -6,6 +6,9 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'forms', loadChildren: './forms/forms.module#FormsPageModule' },
   { path: 'cards', loadChildren: './cards/cards.module#CardsPageModule' },
+  { path: 'grids', loadChildren: './grids/grids.module#GridsPageModule' },
+  { path: 'toolbars', loadChildren: './toolbars/toolbars.module#ToolbarsPageModule' },
+  { path: 'dialogs', loadChildren: './dialogs/dialogs.module#DialogsPageModule' },
 ];
 
 @NgModule({
@@ -14,4 +17,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

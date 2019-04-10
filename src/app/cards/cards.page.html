@@ -13,7 +13,7 @@
 <ion-content padding>
 
   <ion-card>
-   <ion-img src="https://via.placeholder.com/350x250"></ion-img>
+   <ion-img src="https://via.placeholder.com/350x150.png/3399CC/000/?text=Cards"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
       <ion-card-title>Card Title</ion-card-title>
@@ -126,6 +126,22 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card flat color="light" bordered>
+    <ion-icon name="md-information-circle-outline" slot="start"></ion-icon>
+    <ion-card-content>
+      This is content, without any paragraph or header tags,
+      within an ion-card-content element.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card flat color="medium" bordered>
+    <ion-icon name="md-information-circle-outline" slot="start"></ion-icon>
+    <ion-card-content>
+      This is content, without any paragraph or header tags,
+      within an ion-card-content element.
+    </ion-card-content>
+  </ion-card>
+
   <ion-card flat color="secondary">
     <ion-icon name="md-information-circle-outline" slot="start"></ion-icon>
     <ion-card-content>
@@ -155,6 +171,32 @@
     <ion-card-content>
       This is content, without any paragraph or header tags,
       within an ion-card-content element.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card flat bordered color="light">
+    <ion-card-header>
+      <ion-card-title>Form</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      This is content, without any paragraph or header tags,
+      within an ion-card-content element.
+      <ion-item>
+        <ion-label>Name <span>*</span></ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Lastname <span>*</span></ion-label>
+        <ion-input></ion-input>
+        <ion-icon name="md-person"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label>Option</ion-label>
+        <ion-select>
+          <ion-select-option>Option 1</ion-select-option>
+          <ion-select-option>Option 2</ion-select-option>
+        </ion-select>
+      </ion-item>
     </ion-card-content>
   </ion-card>
   
