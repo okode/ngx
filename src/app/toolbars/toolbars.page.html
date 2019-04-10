@@ -4,13 +4,89 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Toolbars</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button>
+        Cancel
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="white">
+    <ion-title>White</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="primary">
+        Cancel
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="medium">
+    <ion-title>Medium</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="contact"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="light">
-    <ion-title>Examples</ion-title>
+    <ion-title>Light</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
+  <h1>Lorem ipsum dolor sit amet (h1)</h1>
+  <h2>Lorem ipsum dolor sit amet (h2)</h2>
+  <h3>Lorem ipsum dolor sit amet (h3)</h3>
+  <h4>Lorem ipsum dolor sit amet (h4)</h4>
+  <h5>Lorem ipsum dolor sit amet (h5)</h5>
+  <h6>Lorem ipsum dolor sit amet (h6)</h6>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at urna auctor, pellentesque urna nec, pretium ex. Vestibulum maximus gravida facilisis. Proin pulvinar ipsum vel augue feugiat, a congue tortor dapibus. Vivamus tincidunt et quam at pharetra. Sed imperdiet lacus bibendum egestas facilisis. Nulla aliquam, neque at posuere iaculis, massa felis gravida nulla, pretium dignissim est odio nec ipsum. Sed lacinia arcu nec nisl pharetra, sed rutrum massa efficitur. Aliquam non arcu tincidunt, efficitur elit vulputate, ultricies risus. Mauris ultricies enim vel neque vulputate dignissim.</p>
+
+  <ion-text color="dark">
+    <p>Donec rutrum dui risus. Suspendisse potenti. Donec quis quam rutrum, viverra nisl et, aliquam purus. Etiam nunc mi, pharetra vitae sollicitudin non, posuere vel augue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam vehicula sapien nisi, sit amet fermentum lectus malesuada a. Quisque odio nisi, lobortis non aliquam sit amet, faucibus sed augue. Etiam porttitor purus nec viverra volutpat. Aliquam placerat enim id vulputate rutrum. Vivamus pharetra ante nec quam consequat, sed eleifend dui ullamcorper. In pellentesque, felis in suscipit malesuada, tellus nulla maximus tortor, et pretium ante dui congue turpis.</p>
+  </ion-text>
   
+  <ion-text color="medium">
+    <p>Phasellus pellentesque mauris non ante eleifend, consequat eleifend mauris dapibus. Morbi sed blandit lorem. Quisque condimentum maximus purus a pulvinar. Sed dictum velit eget sollicitudin lobortis. Nunc id volutpat enim. Nullam sit amet fermentum lectus, in rhoncus est. Fusce quis odio nec felis viverra iaculis. Aenean eu arcu nibh. Maecenas ipsum ligula, molestie nec odio ac, fringilla molestie tellus. Cras ut metus posuere, eleifend quam vitae, pellentesque felis. Integer eu blandit orci. Curabitur eros ex, maximus ut aliquam nec, blandit et arcu. Pellentesque porta nunc vitae lectus ultrices venenatis. Ut consequat tempus nisl. Nam molestie gravida ante non sollicitudin. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+  </ion-text>
+  
+  <ion-text color="primary">
+    <p>Nunc volutpat blandit tortor, a porta dui eleifend in. Quisque mollis risus id enim eleifend semper sit amet et dolor. Etiam orci magna, aliquet in condimentum sit amet, laoreet non mauris. In cursus lectus vel commodo lobortis. Nulla hendrerit egestas faucibus. Aenean iaculis turpis eu ipsum consectetur porta. Quisque volutpat enim quis fermentum convallis. Nulla facilisi. Maecenas leo lorem, interdum vel rhoncus ac, finibus in tellus. Nunc a velit mollis, ornare nunc a, luctus est. Quisque luctus, ante nec imperdiet pellentesque, ex est tincidunt massa, eu elementum magna diam eget tellus. Sed porta placerat sodales. Cras viverra sapien ac eros egestas ultrices.</p>
+  </ion-text>
+
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button expand="full" fill="clear" color="light">Full toolbar button</ion-button>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar color="medium">
+        <ion-tab-button><ion-label>Schedule</ion-label></ion-tab-button>
+        <ion-tab-button><ion-label>Speakers</ion-label></ion-tab-button>
+        <ion-tab-button><ion-label>Map</ion-label></ion-tab-button>
+        <ion-tab-button><ion-label>About</ion-label></ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar color="dark">
+        <ion-tab-button><ion-icon name="calendar"></ion-icon><ion-label>Schedule</ion-label></ion-tab-button>
+        <ion-tab-button><ion-icon name="contacts"></ion-icon><ion-label>Speakers</ion-label></ion-tab-button>
+        <ion-tab-button><ion-icon name="map"></ion-icon><ion-label>Map</ion-label></ion-tab-button>
+        <ion-tab-button><ion-icon name="information-circle"></ion-icon><ion-label>About</ion-label></ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

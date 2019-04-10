@@ -5,12 +5,69 @@
     </ion-buttons>
     <ion-title>Grids</ion-title>
   </ion-toolbar>
-  <ion-toolbar color="light">
-    <ion-title>Examples</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content color="light">
   
+  <ion-img src="https://via.placeholder.com/350x100.png/17B123/000/?text=Image"></ion-img>
+
+  <ion-grid margin>
+    <ion-row>
+      <ion-col>r1 c1</ion-col>
+      <ion-col>r1 c2</ion-col>
+      <ion-col>r1 c3</ion-col>
+      <ion-col>r1 c4</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>r2 c1</ion-col>
+      <ion-col>r2 c2</ion-col>
+      <ion-col>r2 c3</ion-col>
+      <ion-col>r2 c4</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>r3 c1</ion-col>
+      <ion-col>r3 c2</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>r4 c1</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card flat bordered margin color="white">
+    <ion-grid color="white" padding>
+      <ion-row>
+        <ion-col>
+          <h1>Form</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Name <span>*</span></ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Lastname <span>*</span></ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Option</ion-label>
+            <ion-select>
+              <ion-select-option>Option 1</ion-select-option>
+              <ion-select-option>Option 2</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+
 </ion-content>
