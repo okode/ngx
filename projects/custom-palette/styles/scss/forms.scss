@@ -178,3 +178,38 @@ ion-content[custom-palette] {
     }
   }
 }
+
+ion-content[custom-palette] {
+  /*
+   *  custom-radio-group
+   */
+  ion-radio-group[custom-palette-radio-group] {
+    padding: 0px;
+    &[padding] {
+      padding: var(--content-padding);
+    }  
+    ion-item {
+      &.item-radio-checked {
+        background: var(--ion-color-light-tint);
+      }
+      .icon {
+        margin: 16px 0;
+        width: 80px;
+        min-width: 80px !important;
+        height: 80px;
+      }
+      .text {
+        margin: 16px 0;
+        .title {
+          font-weight: 600;
+          padding: 5px 10px;
+          font-size: 1.1em;
+        }
+        .desc {
+          padding: 5px 10px;
+          font-size: .9em;
+        }
+      }
+    }
+  }
+}

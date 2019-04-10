@@ -1,6 +1,8 @@
 ion-content[custom-palette] {
   --background: var(--content-bg);
-  padding: var(--content-padding);
+  &[padding] {
+    padding: var(--content-padding);
+  }
   ion-item {
     --border-color: var(--input-color) !important;
     --background: transparent;

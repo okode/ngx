@@ -18,6 +18,9 @@ ion-content[custom-palette] {
     -webkit-box-shadow: none;
     box-shadow: none;
   }
+  ion-card[rect] {
+    border-radius: 0px;
+  }
   /* Basic content with icon */
   ion-card > ion-icon {
     position: absolute;
@@ -32,4 +35,11 @@ ion-content[custom-palette] {
   ion-card[bordered] {
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
+  ion-card[bordered-top] {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  ion-card[bordered-bottom] {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
 }
