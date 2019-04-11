@@ -1,12 +1,11 @@
 ion-content[custom-palette] {
   --background: var(--content-bg);
-  padding: 18px !important;
+  &[padding] {
+    padding: var(--content-padding);
+  }
   ion-item {
     --border-color: var(--input-color) !important;
     --background: transparent;
-  }
-  &[padding] {
-    padding: 16px 26px;
   }
   h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
@@ -16,5 +15,11 @@ ion-content[custom-palette] {
   p {
     font-weight: 400;
     line-height: 20px !important;
+  }
+  [margin] {
+    margin: var(--content-padding) !important;
+  }
+  [bordered] {
+    border: 1px solid rgba(0, 0, 0, .1);
   }
 }

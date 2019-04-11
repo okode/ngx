@@ -1,0 +1,93 @@
+.ios {
+  ion-alert .alert-button {
+    color: #3880ff !important;
+  }
+  ion-action-sheet .sc-ion-action-sheet-ios {
+    color: #3880ff !important;
+  }
+}
+/*
+ *  ALERT
+ */
+ion-alert.custom-alert-message {
+  .alert-button {
+    color: var(--ion-color-primary, #3880ff) !important;
+  }
+  .alert-wrapper {
+    max-height: 80% !important;
+  }
+  .alert-head {
+    padding: 0px !important;
+  }
+  .alert-message {
+    max-height: 100% !important;
+    padding: 16px 16px 6px 16px !important;
+    text-align: center;
+    .title {
+      font-size: 20px;
+      line-height: 21px;
+      font-weight: 600;
+      margin: 16px 0;
+      color: var(--ion-color-dark);
+    }
+    .desc {
+      font-size: 16px;
+      line-height: 18px;
+      margin: 16px 0;
+      color: var(--ion-color-medium);
+    }
+    .image {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  .alert-button-group.sc-ion-alert-md {
+    flex-direction: column;
+    .alert-button {
+      margin: 0px;
+      margin: 0 8px 16px 8px;
+      &:not(.secondary) {
+        color: var(--ion-color-light) !important;
+        background: var(--ion-color-primary);
+      }
+      &.secondary {
+        border: 1px solid var(--ion-color-medium);
+        color: var(--ion-color-medium) !important;
+      }
+      .alert-button-inner {
+        justify-content: center;
+      }
+    }
+  }
+}
+ion-alert.custom-alert-modal-full-screen {
+  .alert-button {
+    color: var(--ion-color-primary, #3880ff) !important;
+  }
+  .alert-wrapper {
+    max-height: calc(100% - 30px - var(--ion-safe-area-top) - var(--ion-safe-area-bottom)) !important;
+    max-width: calc(100% - 30px) !important;
+  }
+  .alert-head {
+    padding: 0px !important;
+    .alert-title {
+      margin: 0 20px;
+      padding: 20px 0 15px 0;
+      font-size: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, .2);
+    }
+  }
+  .alert-message {
+    max-height: 100% !important;
+    max-width: 100% !important;
+    padding: 20px;
+    font-size: 15px;
+  }
+  .alert-button-group, .alert-button-group.sc-ion-alert-md {
+    height: 60px !important;
+    min-height: 60px !important;
+    button {
+      height: 40px !important;
+    }
+  }
+}

@@ -209,7 +209,7 @@ class IonSelectDirective {
     }
     .select-text {
       min-height: 24px;
-      padding-right: 20px;
+      padding-right: 30px;
       margin-bottom: 7px;
     }
   `;

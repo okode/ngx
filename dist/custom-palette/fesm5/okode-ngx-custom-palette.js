@@ -188,7 +188,7 @@ var IonInputDirective = /** @class */ (function () {
 var IonSelectDirective = /** @class */ (function () {
     function IonSelectDirective(el) {
         this.el = el;
-        this.shadowCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .33;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 20px;\n      margin-bottom: 7px;\n    }\n  ";
+        this.shadowCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .33;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 30px;\n      margin-bottom: 7px;\n    }\n  ";
     }
     /**
      * @return {?}
