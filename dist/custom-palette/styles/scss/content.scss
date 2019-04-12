@@ -11,6 +11,12 @@ ion-content[custom-palette] {
     font-weight: 300;
     margin-block-start: 0.5em;
     margin-block-end: 1em;
+    ion-icon {
+      margin-right: .25em;
+      margin-left: .25em;
+      margin-bottom: -.2em;
+      font-size: 1.25em;
+    }
   }
   p {
     font-weight: 400;
