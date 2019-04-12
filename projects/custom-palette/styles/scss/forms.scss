@@ -121,6 +121,7 @@ ion-content[custom-palette] {
     padding: 0px 16px 10px 16px;
     ion-label {
       color: var(--custom-medium-dark-color) !important;
+      white-space: normal;
     }
     ion-toggle {
       z-index: 9999;
