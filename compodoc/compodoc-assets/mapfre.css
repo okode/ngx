@@ -5,7 +5,7 @@
 
 .container-fluid.main::before{
   background-position-x: 16px !important;
-  background: #D81E05 url('./../compodoc-assets/logo.png') center no-repeat;
+  background: #D81E05 url('./../compodoc/compodoc-assets/logo.png') center no-repeat;
   height: 70px;
   width: 100%;
 }
