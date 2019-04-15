@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "doc": "rm -rf documentation; npx compodoc -d documentation -p tsconfig.json -a compodoc-assets/ --includes additional-doc --theme compodoc -n 'Ionic components documentation' --hideGenerator --disableCoverage; cp documentation/compodoc-assets/mapfre.css documentation/styles/mapfre.css; find documentation -type f -name '*.html' -exec sed -i '' s/compodoc.css/mapfre.css/ {} +"
+    "doc": "rm -rf documentation; npx compodoc -d documentation -p tsconfig.json -a compodoc-assets/ --includes additional-doc --theme compodoc -n 'Ionic components documentation' --hideGenerator --disableCoverage; cp documentation/compodoc-assets/mapfre.css documentation/styles/mapfre.css; find documentation -type f -name '*.html' -exec sed -i '' s/compodoc.css/mapfre.css/ {} +;  find documentation/additional-documentation -name '*.html' -type f -exec bash -c 'mv \"$1\" \"${1// /-}\"' -- {} \\;"
   },
   "private": true,
   "dependencies": {
