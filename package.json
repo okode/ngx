@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "doc": "rm -rf www/documentation; ionic build; npx compodoc -d www/documentation -p tsconfig.json -a assets/ --theme compodoc -n 'Ionic components documentation' --hideGenerator --disableCoverage; cp www/documentation/assets/mapfre.css www/documentation/styles/mapfre.css; find www/documentation -type f -name '*.html' -exec sed -i '' s/compodoc.css/mapfre.css/ {} +"
   },
   "private": true,
   "dependencies": {
@@ -57,7 +58,8 @@
     "typescript": "~3.1.6",
     "ng-packagr": "^4.2.0",
     "tsickle": ">=0.29.0",
-    "tslib": "^1.9.0"
+    "tslib": "^1.9.0",
+    "@compodoc/compodoc": "1.0.0-beta.13"
   },
   "description": "An Ionic project with Angular Libraries"
 }
