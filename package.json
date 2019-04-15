@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "doc": "rm -rf www/documentation; ionic build; npx compodoc -d www/documentation -p tsconfig.json -a assets/ --theme compodoc -n 'Ionic components documentation' --hideGenerator --disableCoverage; cp www/documentation/assets/mapfre.css www/documentation/styles/mapfre.css; find www/documentation -type f -name '*.html' -exec sed -i '' s/compodoc.css/mapfre.css/ {} +"
+    "doc": "rm -rf documentation; ionic build; npx compodoc -d documentation -p tsconfig.json -a compodoc-assets/ --includes additional-doc --theme compodoc -n 'Ionic components documentation' --hideGenerator --disableCoverage; cp documentation/assets/mapfre.css documentation/styles/mapfre.css; find documentation -type f -name '*.html' -exec sed -i '' s/compodoc.css/mapfre.css/ {} +"
   },
   "private": true,
   "dependencies": {
