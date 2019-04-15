@@ -1,3 +1,4 @@
+import { Platform } from '@ionic/angular';
 import { Directive, ElementRef, NgModule } from '@angular/core';
 
 /**
@@ -173,9 +174,38 @@ IonItemDirective.ctorParameters = () => [
 class IonInputDirective {
     /**
      * @param {?} el
+     * @param {?} platform
      */
-    constructor(el) {
+    constructor(el, platform) {
         this.el = el;
+        this.platform = platform;
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewChecked() {
+        if (!this.input) {
+            this.input = this.el.nativeElement.querySelector('input');
+            if (this.input) {
+                this.input.addEventListener('focus', (/**
+                 * @return {?}
+                 */
+                () => this.fixScrollAndCaret()));
+            }
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    fixScrollAndCaret() {
+        // workaroud to flix floating caret
+        if (this.platform.is('ios')) {
+            /** @type {?} */
+            const val = this.el.nativeElement.value;
+            this.el.nativeElement.value = val + '.';
+            this.el.nativeElement.value = val;
+        }
     }
 }
 IonInputDirective.decorators = [
@@ -185,7 +215,60 @@ IonInputDirective.decorators = [
 ];
 /** @nocollapse */
 IonInputDirective.ctorParameters = () => [
-    { type: ElementRef }
+    { type: ElementRef },
+    { type: Platform }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class IonTextAreaDirective {
+    /**
+     * @param {?} el
+     * @param {?} platform
+     */
+    constructor(el, platform) {
+        this.el = el;
+        this.platform = platform;
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewChecked() {
+        if (!this.input) {
+            this.input = this.el.nativeElement.querySelector('textarea');
+            if (this.input) {
+                this.input.addEventListener('focus', (/**
+                 * @return {?}
+                 */
+                () => this.fixScrollAndCaret()));
+            }
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    fixScrollAndCaret() {
+        // workaroud to flix floating caret
+        if (this.platform.is('ios')) {
+            /** @type {?} */
+            const val = this.el.nativeElement.value;
+            this.el.nativeElement.value = val + '.';
+            this.el.nativeElement.value = val;
+        }
+    }
+}
+IonTextAreaDirective.decorators = [
+    { type: Directive, args: [{
+                selector: `ion-textarea`
+            },] }
+];
+/** @nocollapse */
+IonTextAreaDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Platform }
 ];
 
 /**
@@ -358,6 +441,7 @@ const DECLARATIONS = [
     IonFooterDirective,
     IonItemDirective,
     IonInputDirective,
+    IonTextAreaDirective,
     IonSelectDirective,
     IonDateTimeDirective,
     IonRadioGroupDirective
@@ -382,6 +466,6 @@ OkodeNgxCustomPaletteModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵg, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵh, IonSelectDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

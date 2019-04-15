@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@angular/core'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.ng.core));
-}(this, (function (exports,core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ionic/angular'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@ionic/angular', '@angular/core'], factory) :
+    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.angular,global.ng.core));
+}(this, (function (exports,angular,core) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -178,9 +178,44 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var IonInputDirective = /** @class */ (function () {
-        function IonInputDirective(el) {
+        function IonInputDirective(el, platform) {
             this.el = el;
+            this.platform = platform;
         }
+        /**
+         * @return {?}
+         */
+        IonInputDirective.prototype.ngAfterViewChecked = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (!this.input) {
+                    this.input = this.el.nativeElement.querySelector('input');
+                    if (this.input) {
+                        this.input.addEventListener('focus', ( /**
+                         * @return {?}
+                         */function () { return _this.fixScrollAndCaret(); }));
+                    }
+                }
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        IonInputDirective.prototype.fixScrollAndCaret = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                // workaroud to flix floating caret
+                if (this.platform.is('ios')) {
+                    /** @type {?} */
+                    var val = this.el.nativeElement.value;
+                    this.el.nativeElement.value = val + '.';
+                    this.el.nativeElement.value = val;
+                }
+            };
         IonInputDirective.decorators = [
             { type: core.Directive, args: [{
                         selector: "ion-input"
@@ -189,10 +224,69 @@
         /** @nocollapse */
         IonInputDirective.ctorParameters = function () {
             return [
-                { type: core.ElementRef }
+                { type: core.ElementRef },
+                { type: angular.Platform }
             ];
         };
         return IonInputDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var IonTextAreaDirective = /** @class */ (function () {
+        function IonTextAreaDirective(el, platform) {
+            this.el = el;
+            this.platform = platform;
+        }
+        /**
+         * @return {?}
+         */
+        IonTextAreaDirective.prototype.ngAfterViewChecked = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (!this.input) {
+                    this.input = this.el.nativeElement.querySelector('textarea');
+                    if (this.input) {
+                        this.input.addEventListener('focus', ( /**
+                         * @return {?}
+                         */function () { return _this.fixScrollAndCaret(); }));
+                    }
+                }
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        IonTextAreaDirective.prototype.fixScrollAndCaret = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                // workaroud to flix floating caret
+                if (this.platform.is('ios')) {
+                    /** @type {?} */
+                    var val = this.el.nativeElement.value;
+                    this.el.nativeElement.value = val + '.';
+                    this.el.nativeElement.value = val;
+                }
+            };
+        IonTextAreaDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: "ion-textarea"
+                    },] }
+        ];
+        /** @nocollapse */
+        IonTextAreaDirective.ctorParameters = function () {
+            return [
+                { type: core.ElementRef },
+                { type: angular.Platform }
+            ];
+        };
+        return IonTextAreaDirective;
     }());
 
     /**
@@ -376,6 +470,7 @@
         IonFooterDirective,
         IonItemDirective,
         IonInputDirective,
+        IonTextAreaDirective,
         IonSelectDirective,
         IonDateTimeDirective,
         IonRadioGroupDirective
@@ -404,11 +499,12 @@
      */
 
     exports.OkodeNgxCustomPaletteModule = OkodeNgxCustomPaletteModule;
-    exports.ɵg = IonDateTimeDirective;
+    exports.ɵh = IonDateTimeDirective;
     exports.ɵe = IonInputDirective;
     exports.ɵd = IonItemDirective;
-    exports.ɵh = IonRadioGroupDirective;
-    exports.ɵf = IonSelectDirective;
+    exports.ɵi = IonRadioGroupDirective;
+    exports.ɵg = IonSelectDirective;
+    exports.ɵf = IonTextAreaDirective;
     exports.ɵb = IonContentDirective;
     exports.ɵc = IonFooterDirective;
     exports.ɵa = IonHeaderDirective;
