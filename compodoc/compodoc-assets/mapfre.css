@@ -95,23 +95,3 @@ pre {
 .content.additional-page {
 
 }
-
-.tab-content>.tab-pane.fade.active.in#example {
-  width: 750px;
-  height: 750px;
-  background-image: url("../compodoc/compodoc-assets/iphone-x-frame.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: relative;
-}
-
-.tab-content>.tab-pane.fade.active.in#example>iframe {
-  position: absolute;
-  width: 325px !important;
-  height: 703px !important;
-  top: 23px;
-  left: 25px;
-  z-index: 500;
-  overflow: hidden;
-  border-radius: 30px;
-}

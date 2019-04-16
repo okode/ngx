@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AlertController, ActionSheetController, LoadingController, ToastController } from '@ionic/angular';
 
+/**
+ * @ignore <example-url>http://localhost:8080/assets/playground?componentPath=dialogs</example-url>
+ */
 @Component({
   selector: 'dialogs-page',
   templateUrl: 'dialogs.page.html',

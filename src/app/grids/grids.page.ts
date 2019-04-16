@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+/**
+ * @ignore <example-url>http://localhost:8080/assets/playground?componentPath=grids</example-url>
+ */
 @Component({
   selector: 'grids-page',
   templateUrl: 'grids.page.html',
