@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
 
 /**
  * @ignore <example-url>http://localhost:8080/assets/playground?componentPath=calendar</example-url>
@@ -10,7 +9,5 @@ import dayGridPlugin from '@fullcalendar/daygrid';
   styleUrls: ['./calendar.page.scss'],
 })
 export class CalendarPage {
-
-  calendarPlugins = [ dayGridPlugin ];
 
 }
