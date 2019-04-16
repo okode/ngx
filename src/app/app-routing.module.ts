@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'toolbars', loadChildren: './toolbars/toolbars.module#ToolbarsPageModule' },
   { path: 'dialogs', loadChildren: './dialogs/dialogs.module#DialogsPageModule' },
   { path: 'maps', loadChildren: './maps/maps.module#MapsPageModule' },
-  { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarPageModule' }
+  { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarPageModule' },
+  { path: 'pdf', loadChildren: './pdf/pdf.module#PdfPageModule' }
 ];
 
 @NgModule({

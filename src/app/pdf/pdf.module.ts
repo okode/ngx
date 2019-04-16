@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { MapsPage } from './maps.page';
-import { AgmCoreModule } from '@agm/core';
+import { PdfPage } from './pdf.page';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 const routes: Routes = [
   {
     path: '',
-    component: MapsPage
+    component: PdfPage
   }
 ];
 
@@ -19,10 +19,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyB4OIcxcJ-iaclDhydYiyC3T4WUD-yC8Xg'
-    })
+    PdfViewerModule
   ],
-  declarations: [MapsPage]
+  declarations: [PdfPage]
 })
-export class MapsPageModule {}
+export class PdfPageModule {}
