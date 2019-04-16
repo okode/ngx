@@ -80,12 +80,11 @@
 </head>
 
 <body>
-
   <div class="frame">
     <h2><i class="icon ion-social-apple"></i>iOS</h2>
     <div class="frame-container">
       <div class="statusbar ios"></div>
-      <iframe src="../?ionic%3Amode=ios&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true" allow="geolocation; microphone; camera; midi; encrypted-media"></iframe>
+      <iframe id="iframe-ios" allow="geolocation; microphone; camera; midi; encrypted-media"></iframe>
     </div>
   </div>
 
@@ -93,10 +92,24 @@
     <h2><i class="icon ion-social-apple"></i>Android</h2>
     <div class="frame-container">
       <div class="statusbar android"></div>
-      <iframe src="../?ionic%3Amode=md&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true" allow="geolocation; microphone; camera; midi; encrypted-media"></iframe>
+      <iframe id="iframe-md" allow="geolocation; microphone; camera; midi; encrypted-media"></iframe>
     </div>
   </div>
 
+  <script>
+      let iosBaseUrl = "../?ionic%3Amode=ios&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true";
+      let mdBaseUrl = "../?ionic%3Amode=md&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true";
+      const urlParams = new URLSearchParams(window.location.search);
+      const componentPath = urlParams.get('componentPath');
+      if (componentPath != null) {
+        iosBaseUrl = "../" + componentPath + "/?ionic%3Amode=ios&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true";
+        mdBaseUrl = "../" + componentPath + "/?ionic%3Amode=md&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true";
+      }
+      console.log(iosBaseUrl);
+      document.getElementById("iframe-ios").src = iosBaseUrl;
+      document.getElementById("iframe-md").src = mdBaseUrl;
+  </script>
+  
 </body>
 
 </html>
