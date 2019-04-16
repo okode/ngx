@@ -99,9 +99,9 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const componentPath = urlParams.get('componentPath');
-    const baseUrl = '../' + (componentPath ? componentPath : '');
-    document.getElementById("iframe-ios").src = baseUrl + '/?ionic%3Amode=ios&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true';
-    document.getElementById("iframe-md").src = baseUrl + '/?ionic%3Amode=md&amp;ionic%3ApersistConfig=true&amp;ionic%3A_forceStatusbarPadding=true';
+    const baseUrl = '../' + (componentPath ? componentPath + '/' : '');
+    document.getElementById("iframe-ios").src = baseUrl + '?ionic:mode=ios&ionic:_forceStatusbarPadding=true';
+    document.getElementById("iframe-md").src = baseUrl + '?ionic:mode=md&ionic:_forceStatusbarPadding=true';
   </script>
   
 </body>
