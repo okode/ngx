@@ -283,7 +283,7 @@ var IonTextAreaDirective = /** @class */ (function () {
 var IonSelectDirective = /** @class */ (function () {
     function IonSelectDirective(el) {
         this.el = el;
-        this.shadowCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .33;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 30px;\n      margin-bottom: 7px;\n    }\n  ";
+        this.shadowCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .5;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 30px;\n      margin-bottom: 5px;\n    }\n  ";
     }
     /**
      * @return {?}
@@ -335,7 +335,7 @@ var IonSelectDirective = /** @class */ (function () {
 var IonDateTimeDirective = /** @class */ (function () {
     function IonDateTimeDirective(el) {
         this.el = el;
-        this.shadowCss = "\n    .datetime-text {\n      top: 29px;\n      left: 16px;\n      position: absolute;\n      width: calc(100% - 70px);\n    }\n  ";
+        this.shadowCss = "\n    .datetime-text {\n      top: 30px;\n      left: 16px;\n      position: absolute;\n      width: calc(100% - 70px);\n      height: 20px;\n      line-height: 20px;\n    }\n  ";
     }
     /**
      * @return {?}

@@ -25,6 +25,7 @@ ion-content[custom-palette] {
     ion-label {
       z-index: 9;
       padding-left: 10px;
+      height: 18px;
       margin-top: 2px !important;
       margin-left: 6px !important;
       pointer-events: none;
@@ -47,13 +48,20 @@ ion-content[custom-palette] {
     /*
      *  ION-INPUT
      */
+    ion-input {
+      height: 48px;
+    }
     ion-input input {
       margin-left: 16px;
       margin-right: 16px;
       position: absolute;
       top: 6px;
-      padding: 0 0 12px 0 !important;
+      padding: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
       width: calc(100% - 32px);
+      height: 20px;
+      line-height: 20px;
     }
     /*
      *  ION-SELECT

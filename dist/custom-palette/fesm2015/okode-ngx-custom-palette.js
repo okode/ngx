@@ -288,12 +288,12 @@ class IonSelectDirective {
       border-top: 8px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
-      opacity: .33;
+      opacity: .5;
     }
     .select-text {
       min-height: 24px;
       padding-right: 30px;
-      margin-bottom: 7px;
+      margin-bottom: 5px;
     }
   `;
     }
@@ -340,10 +340,12 @@ class IonDateTimeDirective {
         this.el = el;
         this.shadowCss = `
     .datetime-text {
-      top: 29px;
+      top: 30px;
       left: 16px;
       position: absolute;
       width: calc(100% - 70px);
+      height: 20px;
+      line-height: 20px;
     }
   `;
     }
