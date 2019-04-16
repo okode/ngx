@@ -3,19 +3,24 @@
   font-size: 16px;
 }
 
-.container-fluid.main::before{
+.container-fluid.main::before {
   background-position-x: 16px !important;
-  background: #D81E05 url('./../compodoc/compodoc-assets/logo.png') center no-repeat;
+  background: #d81e05 url("./../compodoc/compodoc-assets/logo.png") center no-repeat;
   height: 70px;
   width: 100%;
 }
 
-.menu ul.list li a[data-type="chapter-link"], .menu ul.list li.chapter .simple {
+.menu ul.list li a[data-type="chapter-link"],
+.menu ul.list li.chapter .simple {
   color: #525252;
-  border-bottom: 1px dashed rgba(0,0,0,.1);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
 }
 
-.content h1, .content h2, .content h3, .content h4, .content h5 {
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5 {
   color: #292e31;
   font-weight: normal;
 }
@@ -27,10 +32,10 @@
 }
 
 a {
-  color: #D81E05;
+  color: #d81e05;
 }
 a:hover {
-  color: #D81E05;
+  color: #d81e05;
 }
 
 .menu ul.list li:nth-child(2) {
@@ -38,7 +43,7 @@ a:hover {
 }
 
 .menu ul.list li.title a {
-  color: #D81E05;
+  color: #d81e05;
   text-decoration: none;
   font-size: 16px;
 }
@@ -47,7 +52,7 @@ a:hover {
   text-decoration: none;
 }
 .menu ul.list li a.active {
-  color: #D81E05;
+  color: #d81e05;
   font-weight: bold;
 }
 
@@ -60,22 +65,22 @@ code {
   color: #b93d6a;
   font-size: 13px;
   line-height: 20px;
-  box-shadow: 0 1px 1px rgba(0,0,0,.125);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
 }
 
 pre {
   margin: 0;
   padding: 12px 12px;
-  background: rgba(238,238,238,.35);
+  background: rgba(238, 238, 238, 0.35);
   border-radius: 3px;
   font-size: 13px;
   line-height: 1.5em;
   font-weight: 500;
-  box-shadow: 0 1px 1px rgba(0,0,0,.125);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
 }
 
-.modifier-icon{
-  color: #D81E05 !important;
+.modifier-icon {
+  color: #d81e05 !important;
 }
 
 .modifier-icon.method {
@@ -85,4 +90,28 @@ pre {
 
 .modifier-icon.method::before {
   content: "\f023";
+}
+
+.content.additional-page {
+
+}
+
+.tab-content>.tab-pane.fade.active.in#example {
+  width: 750px;
+  height: 750px;
+  background-image: url("../compodoc/compodoc-assets/iphone-x-frame.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+}
+
+.tab-content>.tab-pane.fade.active.in#example>iframe {
+  position: absolute;
+  width: 325px !important;
+  height: 703px !important;
+  top: 23px;
+  left: 25px;
+  z-index: 500;
+  overflow: hidden;
+  border-radius: 30px;
 }
