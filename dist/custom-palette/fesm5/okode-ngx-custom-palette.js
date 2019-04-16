@@ -1,3 +1,4 @@
+import { Platform } from '@ionic/angular';
 import { Directive, ElementRef, NgModule } from '@angular/core';
 
 /**
@@ -166,9 +167,45 @@ var IonItemDirective = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var IonInputDirective = /** @class */ (function () {
-    function IonInputDirective(el) {
+    function IonInputDirective(el, platform) {
         this.el = el;
+        this.platform = platform;
     }
+    /**
+     * @return {?}
+     */
+    IonInputDirective.prototype.ngAfterViewChecked = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (!this.input) {
+            this.input = this.el.nativeElement.querySelector('input');
+            if (this.input) {
+                this.input.addEventListener('focus', (/**
+                 * @return {?}
+                 */
+                function () { return _this.fixScrollAndCaret(); }));
+            }
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    IonInputDirective.prototype.fixScrollAndCaret = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        // workaroud to flix floating caret
+        if (this.platform.is('ios')) {
+            /** @type {?} */
+            var val = this.el.nativeElement.value;
+            this.el.nativeElement.value = val + '.';
+            this.el.nativeElement.value = val;
+        }
+    };
     IonInputDirective.decorators = [
         { type: Directive, args: [{
                     selector: "ion-input"
@@ -176,9 +213,67 @@ var IonInputDirective = /** @class */ (function () {
     ];
     /** @nocollapse */
     IonInputDirective.ctorParameters = function () { return [
-        { type: ElementRef }
+        { type: ElementRef },
+        { type: Platform }
     ]; };
     return IonInputDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IonTextAreaDirective = /** @class */ (function () {
+    function IonTextAreaDirective(el, platform) {
+        this.el = el;
+        this.platform = platform;
+    }
+    /**
+     * @return {?}
+     */
+    IonTextAreaDirective.prototype.ngAfterViewChecked = /**
+     * @return {?}
+     */
+    function () {
+        var _this = this;
+        if (!this.input) {
+            this.input = this.el.nativeElement.querySelector('textarea');
+            if (this.input) {
+                this.input.addEventListener('focus', (/**
+                 * @return {?}
+                 */
+                function () { return _this.fixScrollAndCaret(); }));
+            }
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    IonTextAreaDirective.prototype.fixScrollAndCaret = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        // workaroud to flix floating caret
+        if (this.platform.is('ios')) {
+            /** @type {?} */
+            var val = this.el.nativeElement.value;
+            this.el.nativeElement.value = val + '.';
+            this.el.nativeElement.value = val;
+        }
+    };
+    IonTextAreaDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: "ion-textarea"
+                },] }
+    ];
+    /** @nocollapse */
+    IonTextAreaDirective.ctorParameters = function () { return [
+        { type: ElementRef },
+        { type: Platform }
+    ]; };
+    return IonTextAreaDirective;
 }());
 
 /**
@@ -356,6 +451,7 @@ var DECLARATIONS = [
     IonFooterDirective,
     IonItemDirective,
     IonInputDirective,
+    IonTextAreaDirective,
     IonSelectDirective,
     IonDateTimeDirective,
     IonRadioGroupDirective
@@ -383,6 +479,6 @@ var OkodeNgxCustomPaletteModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵg, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵh, IonSelectDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

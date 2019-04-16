@@ -1,5 +1,10 @@
-import { ElementRef } from '@angular/core';
-export declare class IonInputDirective {
+import { ElementRef, AfterViewChecked } from '@angular/core';
+import { Platform } from '@ionic/angular';
+export declare class IonInputDirective implements AfterViewChecked {
     private el;
-    constructor(el: ElementRef);
+    private platform;
+    private input;
+    constructor(el: ElementRef, platform: Platform);
+    ngAfterViewChecked(): void;
+    private fixScrollAndCaret;
 }
