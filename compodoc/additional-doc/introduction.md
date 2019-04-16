@@ -4,4 +4,4 @@ This component palette implements the MAPFRE style for some of the most used Ang
 
 The result of applying this custom palette style is an unified UI without an extra effort or CSS copy/paste:  
 
-![Alt Text](../compodoc/compodoc-assets/custom-palette-form.gif)
+![Alt Text](../compodoc-assets/custom-palette-form.gif)
