@@ -162,7 +162,7 @@ export class DialogsPage {
   async presentLoading() {
     const loading = await this.loadingController.create({
       spinner: 'crescent',
-      duration: 5000,
+      duration: 2000,
       message: 'Loading...',
       translucent: true
     });

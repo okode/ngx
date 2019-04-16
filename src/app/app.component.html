@@ -4,20 +4,17 @@
     <ion-menu>
       <ion-header no-border>
         <ion-toolbar>
+          <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content padding>
         <ion-menu-toggle auto-hide="false">
           <ion-list lines="none">
-            <ion-item>
-              <ion-avatar slot="start">
-                <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
-              </ion-avatar>
-              <ion-label>John Mock</ion-label>
+            <ion-item [routerLink]="['/home']">
+              <ion-icon slot="start" color="medium" name="home"></ion-icon>
+              <ion-label>Home</ion-label>
             </ion-item>
-          </ion-list>
-          <br>
-          <ion-list lines="none">
+            <br>
             <ion-list-header>
               <ion-label>Examples</ion-label>
             </ion-list-header>
@@ -44,14 +41,6 @@
             <ion-item [routerLink]="['/calendar']">
               <ion-icon slot="start" color="medium" name="calendar"></ion-icon>
               <ion-label>Calendar</ion-label>
-            </ion-item>
-            <ion-item [routerLink]="['/maps']">
-              <ion-icon slot="start" color="medium" name="map"></ion-icon>
-              <ion-label>Maps</ion-label>
-            </ion-item>
-            <ion-item [routerLink]="['/pdf']">
-              <ion-icon slot="start" color="medium" name="document"></ion-icon>
-              <ion-label>PDF</ion-label>
             </ion-item>
           </ion-list>
         </ion-menu-toggle>
