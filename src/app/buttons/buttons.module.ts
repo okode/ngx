@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ButtonsPage } from './buttons.page';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { CalendarPage } from './calendar.page';
 import { OkodeNgxCustomPaletteModule } from 'custom-palette'; // from local
 
 @NgModule({
@@ -12,8 +12,9 @@ import { OkodeNgxCustomPaletteModule } from 'custom-palette'; // from local
     FormsModule,
     IonicModule,
     OkodeNgxCustomPaletteModule,
-    RouterModule.forChild([{ path: '', component: CalendarPage }])
+    RouterModule.forChild([{ path: '', component: ButtonsPage }])
   ],
-  declarations: [CalendarPage]
+  exports: [],
+  declarations: [ButtonsPage]
 })
-export class CalendarPageModule {}
+export class ButtonsPageModule {}

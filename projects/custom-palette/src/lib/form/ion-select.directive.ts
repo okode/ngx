@@ -12,12 +12,12 @@ export class IonSelectDirective implements OnInit {
       border-top: 8px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
-      opacity: .33;
+      opacity: .5;
     }
     .select-text {
       min-height: 24px;
       padding-right: 30px;
-      margin-bottom: 7px;
+      margin-bottom: 5px;
     }
   `;
 

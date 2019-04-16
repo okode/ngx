@@ -9,10 +9,12 @@ export class IonDateTimeDirective implements OnInit, AfterContentChecked {
 
   private shadowCss = `
     .datetime-text {
-      top: 29px;
+      top: 30px;
       left: 16px;
       position: absolute;
       width: calc(100% - 70px);
+      height: 20px;
+      line-height: 20px;
     }
   `;
 
