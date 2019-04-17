@@ -463,6 +463,35 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var IonButtonDirective = /** @class */ (function () {
+        function IonButtonDirective(el) {
+            this.el = el;
+        }
+        /**
+         * @return {?}
+         */
+        IonButtonDirective.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () { };
+        IonButtonDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: "ion-button"
+                    },] }
+        ];
+        /** @nocollapse */
+        IonButtonDirective.ctorParameters = function () {
+            return [
+                { type: core.ElementRef }
+            ];
+        };
+        return IonButtonDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     /** @type {?} */
     var DECLARATIONS = [
         IonHeaderDirective,
@@ -473,7 +502,8 @@
         IonTextAreaDirective,
         IonSelectDirective,
         IonDateTimeDirective,
-        IonRadioGroupDirective
+        IonRadioGroupDirective,
+        IonButtonDirective
     ];
     var OkodeNgxCustomPaletteModule = /** @class */ (function () {
         function OkodeNgxCustomPaletteModule() {
@@ -499,6 +529,7 @@
      */
 
     exports.OkodeNgxCustomPaletteModule = OkodeNgxCustomPaletteModule;
+    exports.ɵj = IonButtonDirective;
     exports.ɵh = IonDateTimeDirective;
     exports.ɵe = IonInputDirective;
     exports.ɵd = IonItemDirective;

@@ -444,6 +444,33 @@ var IonRadioGroupDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var IonButtonDirective = /** @class */ (function () {
+    function IonButtonDirective(el) {
+        this.el = el;
+    }
+    /**
+     * @return {?}
+     */
+    IonButtonDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () { };
+    IonButtonDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: "ion-button"
+                },] }
+    ];
+    /** @nocollapse */
+    IonButtonDirective.ctorParameters = function () { return [
+        { type: ElementRef }
+    ]; };
+    return IonButtonDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
 var DECLARATIONS = [
     IonHeaderDirective,
@@ -454,7 +481,8 @@ var DECLARATIONS = [
     IonTextAreaDirective,
     IonSelectDirective,
     IonDateTimeDirective,
-    IonRadioGroupDirective
+    IonRadioGroupDirective,
+    IonButtonDirective
 ];
 var OkodeNgxCustomPaletteModule = /** @class */ (function () {
     function OkodeNgxCustomPaletteModule() {
@@ -479,6 +507,6 @@ var OkodeNgxCustomPaletteModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
+export { OkodeNgxCustomPaletteModule, IonButtonDirective as ɵj, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

@@ -2,6 +2,9 @@ ion-content[custom-palette] {
   /*
    *  floating-label
    */
+  [disabled] {
+    pointer-events: none;
+  }
   ion-item[custom-palette-style="floating-label"] {
     min-height: 80px;
     margin: 5px 0;
@@ -227,4 +230,9 @@ ion-content[custom-palette] {
       }
     }
   }
+}
+.ios {
+  textarea {
+    text-indent: -3px;
+  }  
 }
