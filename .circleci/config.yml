@@ -7,7 +7,7 @@ orbs:
       package:
         executor: node
         steps:
-          - build:
+          - build
       deploy:
         parameters:
           bucket:
