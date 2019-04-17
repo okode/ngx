@@ -5,7 +5,7 @@
 
 .container-fluid.main::before {
   background-position-x: 16px !important;
-  background: #d81e05 url("./../compodoc/compodoc-assets/logo.png") center no-repeat;
+  background: #d81e05 url("./../compodoc-assets/logo.png") center no-repeat;
   height: 70px;
   width: 100%;
 }
@@ -92,6 +92,14 @@ pre {
   content: "\f023";
 }
 
-.content.additional-page {
+.content.additional-page .content-data{
+  font-size: 16px;
+}
 
+.menu .chapter .links a[href*="dependencies.html"] {
+  display: none;
+}
+
+.menu li.chapter>a[href*="coverage.html"] {
+  display: none;
 }

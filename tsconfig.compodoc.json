@@ -1,0 +1,6 @@
+{
+  "exclude": [
+    "**/*.module.ts",
+    "**/*.directive.ts"
+  ]
+}

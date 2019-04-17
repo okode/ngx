@@ -14,7 +14,7 @@ class CustomDateFormatter extends CalendarDateFormatter {
 }
 
 /**
- * @ignore <example-url>http://localhost:8080/assets/playground?componentPath=calendar</example-url>
+ * <example-url>../../assets/playground?componentPath=calendar</example-url>
  */
 @Component({
   selector: 'app-calendar',
