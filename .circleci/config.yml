@@ -1,89 +1,51 @@
 version: 2.1
-description: Ionic PWA
 
 orbs:
   aws-s3: circleci/aws-s3@1.0.7
-  pwa:
-    jobs:
-      package:
-        executor: node
-        steps:
-          - build
-      deploy:
-        parameters:
-          bucket:
-            type: string
-        executor: deploy
-        steps:
-          - deploy:
-              bucket: <<parameters.bucket>>
-    commands:
-      build:
-        steps:
-          - checkout
-          - restore_cache:
-              key: cache-01-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-          - run:
-              name: Installing NPM dependencies
-              command: if [ ! -d "node_modules" ]; then npm ci; fi
-          - run:
-              name: Building ngx
-              command: npm run build
-          - run:
-              name: Building docs
-              command: npm run doc
-          - run:
-              name: Copying docs
-              command: cp -R documentation www
-          - persist_to_workspace:
-              root: .
-              paths:
-                - www
-          - run:
-              name: Restoring package-lock.json
-              command: git checkout package-lock.json
-          - save_cache:
-              key: cache-01-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-              paths:
-                - node_modules
-      deploy:
-        parameters:
-          bucket:
-            type: string
-        steps:
-          - attach_workspace:
-              at: /tmp/workspace
-          - aws-s3/sync:
-                from: /tmp/workspace/www
-                to: "s3://<<parameters.bucket>>"
-                arguments: |
-                  --acl public-read
-                overwrite: true
-    executors:
-      node:
-        docker:
-          - image: circleci/node:11
-      deploy:
-        docker:
-          - image: circleci/python:3
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:11
+    steps:
+      - checkout
+      - restore_cache:
+          key: cache-01-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Installing NPM dependencies
+          command: if [ ! -d "node_modules" ]; then npm ci; fi
+      - run:
+          name: Building ngx
+          command: npm run build
+      - run:
+          name: Building docs
+          command: npm run doc
+      - run:
+          name: Copying docs
+          command: cp -R documentation www
+      - persist_to_workspace:
+          root: .
+          paths:
+            - www
+      - run:
+          name: Restoring package-lock.json
+          command: git checkout package-lock.json
+      - save_cache:
+          key: cache-01-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - aws-s3/sync:
+          from: /tmp/workspace/www
+          to: s3://ngx-doc
+          arguments: --acl public-read
+          overwrite: true
 
 workflows:
-  workflow:
+  default:
     jobs:
-      - pwa/package:
-          name: package
+      - build:
           context: org-global
           filters:
             branches:
               ignore:
                 - master
-      - pwa/deploy:
-          name: deploy
-          bucket: ngx-doc
-          context: org-global
-          filters:
-            branches:
-              ignore:
-                - master
-          requires:
-            - package
