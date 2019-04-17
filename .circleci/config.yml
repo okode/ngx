@@ -76,9 +76,17 @@ workflows:
       - pwa/package:
           name: package
           context: org-global
+          filters:
+            branches:
+              ignore:
+                - master
       - pwa/deploy:
           name: deploy
           bucket: ngx-doc
           context: org-global
+          filters:
+            branches:
+              ignore:
+                - master
           requires:
             - package
