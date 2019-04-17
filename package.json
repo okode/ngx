@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "doc": "rm -rf documentation; npx compodoc -d documentation -p tsconfig.compodoc.json -a compodoc/compodoc-assets/ --includes compodoc/additional-doc --navTabConfig '[{\"id\": \"example\", \"label\": \"Live demo\"}, {\"id\" : \"templateData\", \"label\": \"Template\"}, {\"id\": \"info\", \"label\": \"Info\"}]' --theme compodoc -n 'Ionic components documentation' --hideGenerator --disableDomTree --disableSourceCode; cp documentation/compodoc-assets/mapfre.css documentation/styles/mapfre.css; cp documentation/compodoc-assets/portalfwmovilidadfavicon.ico documentation/images/favicon.ico; find documentation -type f -name '*.html' -exec sed -i '' s/compodoc.css/mapfre.css/ {} +;  find documentation/additional-documentation -name '*.html' -type f -exec bash -c 'mv \"$1\" \"${1// /-}\"' -- {} \\;"
+    "doc": "rm -rf documentation; npx compodoc -d documentation -p tsconfig.compodoc.json -a compodoc/compodoc-assets/ --includes compodoc/additional-doc --navTabConfig '[{\"id\": \"example\", \"label\": \"Live demo\"}, {\"id\" : \"templateData\", \"label\": \"Template\"}, {\"id\": \"info\", \"label\": \"Info\"}]' --theme compodoc -n 'Ionic components documentation' --hideGenerator --disableDomTree --disableSourceCode; cp documentation/compodoc-assets/mapfre.css documentation/styles/mapfre.css; cp documentation/compodoc-assets/portalfwmovilidadfavicon.ico documentation/images/favicon.ico; find documentation -type f -name '*.html' -exec sed -i s/compodoc.css/mapfre.css/ {} +;"
   },
   "private": true,
   "dependencies": {
