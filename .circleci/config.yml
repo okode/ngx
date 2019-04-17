@@ -26,9 +26,6 @@ orbs:
               name: Installing NPM dependencies
               command: if [ ! -d "node_modules" ]; then npm ci; fi
           - run:
-              name: Installing Angular
-              command: sudo npm install -g @angular/cli
-          - run:
               name: Building ngx
               command: npm run build
           - run:
