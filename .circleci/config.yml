@@ -2,6 +2,7 @@ version: 2.1
 description: Ionic PWA
 
 orbs:
+  aws-s3: circleci/aws-s3@1.0.7
   pwa:
     jobs:
       package:
@@ -52,13 +53,12 @@ orbs:
         steps:
           - attach_workspace:
               at: /tmp/workspace
-          - run:
-              name: Deploy to AWS
-              command: |
-                sudo pip install awscli
-                aws s3 rm s3://<<parameters.bucket>> --recursive
-                aws s3 sync /tmp/workspace/www s3://<<parameters.bucket>> --acl public-read
-
+          - aws-s3/sync:
+                from: /tmp/workspace/www
+                to: "s3://<<parameters.bucket>>"
+                arguments: |
+                  --acl public-read
+                overwrite: true
     executors:
       node:
         docker:
