@@ -8,4 +8,3 @@ Okode libraries for Ionic 4+ projects.
 
 ### [@okode/ngx-custom-palette](projects/custom-palette/README.md)
 
-
