@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, ActionSheetController, LoadingController, ToastController } from '@ionic/angular';
 
 /**
- * <example-url>../../assets/playground?componentPath=dialogs</example-url>
+ * <example-url>../../assets/playground.html?componentPath=dialogs</example-url>
  */
 @Component({
   selector: 'dialogs-page',

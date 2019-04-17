@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 /**
- * <example-url>../../assets/playground?componentPath=forms</example-url>
+ * <example-url>../../assets/playground.html?componentPath=forms</example-url>
  */
 @Component({
   selector: 'forms-page',
