@@ -174,11 +174,9 @@ IonItemDirective.ctorParameters = () => [
 class IonInputDirective {
     /**
      * @param {?} el
-     * @param {?} platform
      */
-    constructor(el, platform) {
+    constructor(el) {
         this.el = el;
-        this.platform = platform;
     }
     /**
      * @return {?}
@@ -190,21 +188,8 @@ class IonInputDirective {
                 this.input.addEventListener('focus', (/**
                  * @return {?}
                  */
-                () => this.fixScrollAndCaret()));
+                () => { }));
             }
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    fixScrollAndCaret() {
-        // workaroud to flix floating caret
-        if (this.platform.is('ios')) {
-            /** @type {?} */
-            const val = this.el.nativeElement.value;
-            this.el.nativeElement.value = val + '.';
-            this.el.nativeElement.value = val;
         }
     }
 }
@@ -215,8 +200,7 @@ IonInputDirective.decorators = [
 ];
 /** @nocollapse */
 IonInputDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Platform }
+    { type: ElementRef }
 ];
 
 /**

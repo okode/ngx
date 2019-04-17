@@ -167,9 +167,8 @@ var IonItemDirective = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var IonInputDirective = /** @class */ (function () {
-    function IonInputDirective(el, platform) {
+    function IonInputDirective(el) {
         this.el = el;
-        this.platform = platform;
     }
     /**
      * @return {?}
@@ -178,32 +177,14 @@ var IonInputDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var _this = this;
         if (!this.input) {
             this.input = this.el.nativeElement.querySelector('input');
             if (this.input) {
                 this.input.addEventListener('focus', (/**
                  * @return {?}
                  */
-                function () { return _this.fixScrollAndCaret(); }));
+                function () { }));
             }
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    IonInputDirective.prototype.fixScrollAndCaret = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        // workaroud to flix floating caret
-        if (this.platform.is('ios')) {
-            /** @type {?} */
-            var val = this.el.nativeElement.value;
-            this.el.nativeElement.value = val + '.';
-            this.el.nativeElement.value = val;
         }
     };
     IonInputDirective.decorators = [
@@ -213,8 +194,7 @@ var IonInputDirective = /** @class */ (function () {
     ];
     /** @nocollapse */
     IonInputDirective.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: Platform }
+        { type: ElementRef }
     ]; };
     return IonInputDirective;
 }());
