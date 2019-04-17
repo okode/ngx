@@ -36,7 +36,7 @@ jobs:
             - node_modules
   deploy:
     docker:
-      - image: circleci/python:2.7
+      - image: circleci/python:3
     steps:
       - attach_workspace:
           at: /tmp/workspace
