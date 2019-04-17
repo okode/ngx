@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           key: cache-01-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
       - run:
-          name: Installing NPM dependencies
+          name: Installing npm dependencies
           command: if [ ! -d "node_modules" ]; then npm ci; fi
       - run:
           name: Building ngx
@@ -39,7 +39,7 @@ jobs:
       - image: circleci/python:2.7
     steps:
       - attach_workspace:
-            at: /tmp/workspace
+          at: /tmp/workspace
       - aws-s3/sync:
           from: /tmp/workspace/www
           to: s3://ngx-doc
