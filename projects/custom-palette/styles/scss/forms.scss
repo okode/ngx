@@ -16,7 +16,7 @@ ion-content[custom-palette] {
       top: 0px;
       height: calc(100% - 22px);
       width: calc(100% - 2px);
-      border: 1px solid #e2e2e2;
+      border: 1px solid var(--item-border-color);
       margin-top: 10px;
       margin-bottom: 10px;
       border-radius: 2px;
@@ -33,7 +33,7 @@ ion-content[custom-palette] {
       margin-top: 2px;
       margin-left: 6px;
       pointer-events: none;
-      color: var(--custom-medium-color) !important;
+      color: var(--ion-color-medium) !important;
       opacity: 1 !important;
       & span {
         color: var(--input-error-color) !important;
@@ -100,9 +100,6 @@ ion-content[custom-palette] {
         border-color: var(--input-focus-color) !important;
         opacity: .7;
       }
-      ion-label {
-        color: var(--input-focus-color) !important;
-      }
     }
     /*
      *  item-has-error
@@ -132,7 +129,6 @@ ion-content[custom-palette] {
   ion-item[custom-palette-style="static-label"] {
     padding: 0px 16px 10px 16px;
     ion-label {
-      color: var(--custom-medium-dark-color) !important;
       white-space: normal;
     }
     ion-toggle {
@@ -149,9 +145,6 @@ ion-content[custom-palette] {
   }
   ion-radio-group[custom-palette-style="static-label"] {
     padding: 0px 16px 10px 16px;
-    ion-label {
-      color: var(--custom-medium-dark-color) !important;
-    }
     & > ion-label {
       padding: 20px 0 15px 0 !important;
       display: inline-block;
@@ -179,7 +172,7 @@ ion-content[custom-palette] {
         top: 26px;
         right: 16px;
         font-size: 26px;
-        color: var(--custom-medium-color);
+        color: var(--ion-color-medium);
         opacity: 0.7;  
       }
     }

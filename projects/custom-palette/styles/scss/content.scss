@@ -4,7 +4,7 @@ ion-content[custom-palette] {
     padding: var(--content-padding);
   }
   ion-item {
-    --border-color: var(--input-color) !important;
+    --border-color: var(--item-border-color) !important;
     --background: transparent;
   }
   h1, h2, h3, h4, h5, h6 {
