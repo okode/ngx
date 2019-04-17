@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /**
- * @ignore <example-url>http://localhost:8080/assets/playground?componentPath=cards</example-url>
+ * <example-url>http://localhost:8080/assets/playground?componentPath=cards</example-url>
  */
 @Component({
   selector: 'cards-page',
