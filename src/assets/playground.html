@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Playground</title>
+
+  <base href="/" />
+
+  <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
+    }
+    body {
+      font-family: "Roboto", "Helvetica Neue", sans-serif;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      max-width: 1000px;
+    }
+    .frame {
+      margin: 20px 20px 120px 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-flow: center;
+      align-items: center;
+      align-content: center;
+      flex-direction: column;
+    }
+    .frame h2 {
+      font-weight: 400;
+      opacity: 0.3;
+    }
+    .frame .frame-container {
+      position: relative;
+      width: 375px;
+      height: 667.25px;
+      border-radius: 3px;
+      -webkit-box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.1);
+      overflow: hidden;
+    }
+    .frame .frame-container .statusbar {
+      position: absolute;
+      top: 0;
+      width: 375px;
+      height: 20px;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: 50%;
+      border-radius: 3px 3px 0 0;
+    }
+    .frame .frame-container .statusbar.ios {
+      background-image: url('data:image/png;base64,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');
+    }
+    .frame .frame-container .statusbar.android {
+      background-image: url('data:image/png;base64,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');
+    }
+    .frame .frame-container iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="frame">
+    <h2><i class="icon ion-social-apple"></i>iOS</h2>
+    <div class="frame-container">
+      <div class="statusbar ios"></div>
+      <iframe id="iframe-ios" allow="geolocation; microphone; camera; midi; encrypted-media"></iframe>
+    </div>
+  </div>
+
+  <div class="frame">
+    <h2><i class="icon ion-social-apple"></i>Android</h2>
+    <div class="frame-container">
+      <div class="statusbar android"></div>
+      <iframe id="iframe-md" allow="geolocation; microphone; camera; midi; encrypted-media"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const componentPath = urlParams.get('componentPath');
+    const baseUrl = '../' + (componentPath ? componentPath + '/' : '');
+    document.getElementById("iframe-ios").src = baseUrl + '?ionic:mode=ios&ionic:_forceStatusbarPadding=true';
+    document.getElementById("iframe-md").src = baseUrl + '?ionic:mode=md&ionic:_forceStatusbarPadding=true';
+  </script>
+  
+</body>
+
+</html>

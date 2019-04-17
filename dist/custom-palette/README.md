@@ -36,10 +36,6 @@ import { OkodeNgxCustomPaletteModule } from '@okode/ngx-custom-palette';
   imports: [
     CommonModule, FormsModule, IonicModule, // Required
     OkodeNgxCustomPaletteModule
-  ],
-  exports: [
-    CommonModule, FormsModule, IonicModule,, // Required
-    OkodeNgxCustomPaletteModule
   ]
 ```
 Import main style in `src/global.scss`

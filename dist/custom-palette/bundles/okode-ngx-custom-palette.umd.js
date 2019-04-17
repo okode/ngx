@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@angular/core'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.ng.core));
-}(this, (function (exports,core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@ionic/angular'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('@okode/ngx-custom-palette', ['exports', '@ionic/angular', '@angular/core'], factory) :
+    (factory((global.okode = global.okode || {}, global.okode['ngx-custom-palette'] = {}),global.angular,global.ng.core));
+}(this, (function (exports,angular,core) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -181,6 +181,22 @@
         function IonInputDirective(el) {
             this.el = el;
         }
+        /**
+         * @return {?}
+         */
+        IonInputDirective.prototype.ngAfterViewChecked = /**
+         * @return {?}
+         */
+            function () {
+                if (!this.input) {
+                    this.input = this.el.nativeElement.querySelector('input');
+                    if (this.input) {
+                        this.input.addEventListener('focus', ( /**
+                         * @return {?}
+                         */function () { }));
+                    }
+                }
+            };
         IonInputDirective.decorators = [
             { type: core.Directive, args: [{
                         selector: "ion-input"
@@ -199,10 +215,68 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var IonTextAreaDirective = /** @class */ (function () {
+        function IonTextAreaDirective(el, platform) {
+            this.el = el;
+            this.platform = platform;
+        }
+        /**
+         * @return {?}
+         */
+        IonTextAreaDirective.prototype.ngAfterViewChecked = /**
+         * @return {?}
+         */
+            function () {
+                var _this = this;
+                if (!this.input) {
+                    this.input = this.el.nativeElement.querySelector('textarea');
+                    if (this.input) {
+                        this.input.addEventListener('focus', ( /**
+                         * @return {?}
+                         */function () { return _this.fixScrollAndCaret(); }));
+                    }
+                }
+            };
+        /**
+         * @private
+         * @return {?}
+         */
+        IonTextAreaDirective.prototype.fixScrollAndCaret = /**
+         * @private
+         * @return {?}
+         */
+            function () {
+                // workaroud to flix floating caret
+                if (this.platform.is('ios')) {
+                    /** @type {?} */
+                    var val = this.el.nativeElement.value;
+                    this.el.nativeElement.value = val + '.';
+                    this.el.nativeElement.value = val;
+                }
+            };
+        IonTextAreaDirective.decorators = [
+            { type: core.Directive, args: [{
+                        selector: "ion-textarea"
+                    },] }
+        ];
+        /** @nocollapse */
+        IonTextAreaDirective.ctorParameters = function () {
+            return [
+                { type: core.ElementRef },
+                { type: angular.Platform }
+            ];
+        };
+        return IonTextAreaDirective;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var IonSelectDirective = /** @class */ (function () {
         function IonSelectDirective(el) {
             this.el = el;
-            this.shadowCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .33;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 30px;\n      margin-bottom: 7px;\n    }\n  ";
+            this.shadowCss = "\n    .select-icon-inner {\n      left: -15px;\n      margin-top: -4px;\n      border-top: 8px solid;\n      border-right: 5px solid transparent;\n      border-left: 5px solid transparent;\n      opacity: .5;\n    }\n    .select-text {\n      min-height: 24px;\n      padding-right: 30px;\n      margin-bottom: 5px;\n    }\n  ";
         }
         /**
          * @return {?}
@@ -256,7 +330,7 @@
     var IonDateTimeDirective = /** @class */ (function () {
         function IonDateTimeDirective(el) {
             this.el = el;
-            this.shadowCss = "\n    .datetime-text {\n      top: 29px;\n      left: 16px;\n      position: absolute;\n      width: calc(100% - 70px);\n    }\n  ";
+            this.shadowCss = "\n    .datetime-text {\n      top: 30px;\n      left: 16px;\n      position: absolute;\n      width: calc(100% - 70px);\n      height: 20px;\n      line-height: 20px;\n    }\n  ";
         }
         /**
          * @return {?}
@@ -376,6 +450,7 @@
         IonFooterDirective,
         IonItemDirective,
         IonInputDirective,
+        IonTextAreaDirective,
         IonSelectDirective,
         IonDateTimeDirective,
         IonRadioGroupDirective
@@ -404,11 +479,12 @@
      */
 
     exports.OkodeNgxCustomPaletteModule = OkodeNgxCustomPaletteModule;
-    exports.ɵg = IonDateTimeDirective;
+    exports.ɵh = IonDateTimeDirective;
     exports.ɵe = IonInputDirective;
     exports.ɵd = IonItemDirective;
-    exports.ɵh = IonRadioGroupDirective;
-    exports.ɵf = IonSelectDirective;
+    exports.ɵi = IonRadioGroupDirective;
+    exports.ɵg = IonSelectDirective;
+    exports.ɵf = IonTextAreaDirective;
     exports.ɵb = IonContentDirective;
     exports.ɵc = IonFooterDirective;
     exports.ɵa = IonHeaderDirective;

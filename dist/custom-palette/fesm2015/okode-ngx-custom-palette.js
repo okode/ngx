@@ -1,3 +1,4 @@
+import { Platform } from '@ionic/angular';
 import { Directive, ElementRef, NgModule } from '@angular/core';
 
 /**
@@ -177,6 +178,20 @@ class IonInputDirective {
     constructor(el) {
         this.el = el;
     }
+    /**
+     * @return {?}
+     */
+    ngAfterViewChecked() {
+        if (!this.input) {
+            this.input = this.el.nativeElement.querySelector('input');
+            if (this.input) {
+                this.input.addEventListener('focus', (/**
+                 * @return {?}
+                 */
+                () => { }));
+            }
+        }
+    }
 }
 IonInputDirective.decorators = [
     { type: Directive, args: [{
@@ -186,6 +201,58 @@ IonInputDirective.decorators = [
 /** @nocollapse */
 IonInputDirective.ctorParameters = () => [
     { type: ElementRef }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class IonTextAreaDirective {
+    /**
+     * @param {?} el
+     * @param {?} platform
+     */
+    constructor(el, platform) {
+        this.el = el;
+        this.platform = platform;
+    }
+    /**
+     * @return {?}
+     */
+    ngAfterViewChecked() {
+        if (!this.input) {
+            this.input = this.el.nativeElement.querySelector('textarea');
+            if (this.input) {
+                this.input.addEventListener('focus', (/**
+                 * @return {?}
+                 */
+                () => this.fixScrollAndCaret()));
+            }
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    fixScrollAndCaret() {
+        // workaroud to flix floating caret
+        if (this.platform.is('ios')) {
+            /** @type {?} */
+            const val = this.el.nativeElement.value;
+            this.el.nativeElement.value = val + '.';
+            this.el.nativeElement.value = val;
+        }
+    }
+}
+IonTextAreaDirective.decorators = [
+    { type: Directive, args: [{
+                selector: `ion-textarea`
+            },] }
+];
+/** @nocollapse */
+IonTextAreaDirective.ctorParameters = () => [
+    { type: ElementRef },
+    { type: Platform }
 ];
 
 /**
@@ -205,12 +272,12 @@ class IonSelectDirective {
       border-top: 8px solid;
       border-right: 5px solid transparent;
       border-left: 5px solid transparent;
-      opacity: .33;
+      opacity: .5;
     }
     .select-text {
       min-height: 24px;
       padding-right: 30px;
-      margin-bottom: 7px;
+      margin-bottom: 5px;
     }
   `;
     }
@@ -257,10 +324,12 @@ class IonDateTimeDirective {
         this.el = el;
         this.shadowCss = `
     .datetime-text {
-      top: 29px;
+      top: 30px;
       left: 16px;
       position: absolute;
       width: calc(100% - 70px);
+      height: 20px;
+      line-height: 20px;
     }
   `;
     }
@@ -358,6 +427,7 @@ const DECLARATIONS = [
     IonFooterDirective,
     IonItemDirective,
     IonInputDirective,
+    IonTextAreaDirective,
     IonSelectDirective,
     IonDateTimeDirective,
     IonRadioGroupDirective
@@ -382,6 +452,6 @@ OkodeNgxCustomPaletteModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵg, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵh, IonSelectDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

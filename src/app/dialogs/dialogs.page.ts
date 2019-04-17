@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AlertController, ActionSheetController, LoadingController, ToastController } from '@ionic/angular';
 
+/**
+ * <example-url>../../assets/playground?componentPath=dialogs</example-url>
+ */
 @Component({
   selector: 'dialogs-page',
   templateUrl: 'dialogs.page.html',
@@ -162,7 +165,7 @@ export class DialogsPage {
   async presentLoading() {
     const loading = await this.loadingController.create({
       spinner: 'crescent',
-      duration: 5000,
+      duration: 2000,
       message: 'Loading...',
       translucent: true
     });

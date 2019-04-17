@@ -1,0 +1,16 @@
+[
+  {
+      "title": "Introduction",
+      "file": "introduction.md"
+  },
+  {
+      "title": "Usage",
+      "file": "usage.md",
+      "children": [
+          {
+              "title": "Palette usage",
+              "file": "usage/palette-usage.md"
+          }
+      ]
+  }
+]
