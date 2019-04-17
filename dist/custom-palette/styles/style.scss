@@ -1,10 +1,4 @@
 :root {
-  --custom-primary-color: #de240b;
-  --custom-dark-color: #222428;
-  --custom-medium-dark-color: #4e4e4e;
-  --custom-medium-color: #838383;
-  --custom-medium-light-color: #c5c5c5;
-  --custom-light-color: #fff;
   .ion-color-white {
     --ion-color-base: #ffffff;
     --ion-color-base-rgb: 255,255,255;
@@ -14,15 +8,14 @@
     --ion-color-tint: #c5c5c5;
   }
   //
-  --ion-color-base: var(--custom-light-color);
-  --ion-text-color: var(--custom-medium-dark-color);
+  --ion-color-base: #ffffff;
+  --ion-text-color: var(--ion-color-dark);
   // Custom
-  --content-bg: var(--custom-light-color);
+  --content-bg: #ffffff;
   --content-padding: 18px;
-  --input-color: var(--custom-medium-light-color);
-  --input-bg-color: var(--content-bg);
-  --input-focus-color: var(--custom-medium-dark-color);
-  --input-error-color: var(--custom-primary-color);
+  --input-focus-color: var(--ion-color-dark);
+  --input-error-color: var(--ion-color-primary);
+  --item-border-color: #e2e2e2;
 }
 
 @import 'scss/ionic-variables.scss';

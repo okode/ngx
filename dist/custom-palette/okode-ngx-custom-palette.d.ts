@@ -2,7 +2,6 @@
  * Generated bundle index. Do not edit.
  */
 export * from './public_api';
-export { IonButtonDirective as ɵj } from './lib/form/ion-button.directive';
 export { IonDateTimeDirective as ɵh } from './lib/form/ion-datetime.directive';
 export { IonInputDirective as ɵe } from './lib/form/ion-input.directive';
 export { IonItemDirective as ɵd } from './lib/form/ion-item.directive';

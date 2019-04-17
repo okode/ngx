@@ -167,9 +167,8 @@ var IonItemDirective = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var IonInputDirective = /** @class */ (function () {
-    function IonInputDirective(el, platform) {
+    function IonInputDirective(el) {
         this.el = el;
-        this.platform = platform;
     }
     /**
      * @return {?}
@@ -178,32 +177,14 @@ var IonInputDirective = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        var _this = this;
         if (!this.input) {
             this.input = this.el.nativeElement.querySelector('input');
             if (this.input) {
                 this.input.addEventListener('focus', (/**
                  * @return {?}
                  */
-                function () { return _this.fixScrollAndCaret(); }));
+                function () { }));
             }
-        }
-    };
-    /**
-     * @private
-     * @return {?}
-     */
-    IonInputDirective.prototype.fixScrollAndCaret = /**
-     * @private
-     * @return {?}
-     */
-    function () {
-        // workaroud to flix floating caret
-        if (this.platform.is('ios')) {
-            /** @type {?} */
-            var val = this.el.nativeElement.value;
-            this.el.nativeElement.value = val + '.';
-            this.el.nativeElement.value = val;
         }
     };
     IonInputDirective.decorators = [
@@ -213,8 +194,7 @@ var IonInputDirective = /** @class */ (function () {
     ];
     /** @nocollapse */
     IonInputDirective.ctorParameters = function () { return [
-        { type: ElementRef },
-        { type: Platform }
+        { type: ElementRef }
     ]; };
     return IonInputDirective;
 }());
@@ -444,33 +424,6 @@ var IonRadioGroupDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-var IonButtonDirective = /** @class */ (function () {
-    function IonButtonDirective(el) {
-        this.el = el;
-    }
-    /**
-     * @return {?}
-     */
-    IonButtonDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () { };
-    IonButtonDirective.decorators = [
-        { type: Directive, args: [{
-                    selector: "ion-button"
-                },] }
-    ];
-    /** @nocollapse */
-    IonButtonDirective.ctorParameters = function () { return [
-        { type: ElementRef }
-    ]; };
-    return IonButtonDirective;
-}());
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 var DECLARATIONS = [
     IonHeaderDirective,
@@ -481,8 +434,7 @@ var DECLARATIONS = [
     IonTextAreaDirective,
     IonSelectDirective,
     IonDateTimeDirective,
-    IonRadioGroupDirective,
-    IonButtonDirective
+    IonRadioGroupDirective
 ];
 var OkodeNgxCustomPaletteModule = /** @class */ (function () {
     function OkodeNgxCustomPaletteModule() {
@@ -507,6 +459,6 @@ var OkodeNgxCustomPaletteModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonButtonDirective as ɵj, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

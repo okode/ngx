@@ -174,11 +174,9 @@ IonItemDirective.ctorParameters = () => [
 class IonInputDirective {
     /**
      * @param {?} el
-     * @param {?} platform
      */
-    constructor(el, platform) {
+    constructor(el) {
         this.el = el;
-        this.platform = platform;
     }
     /**
      * @return {?}
@@ -190,21 +188,8 @@ class IonInputDirective {
                 this.input.addEventListener('focus', (/**
                  * @return {?}
                  */
-                () => this.fixScrollAndCaret()));
+                () => { }));
             }
-        }
-    }
-    /**
-     * @private
-     * @return {?}
-     */
-    fixScrollAndCaret() {
-        // workaroud to flix floating caret
-        if (this.platform.is('ios')) {
-            /** @type {?} */
-            const val = this.el.nativeElement.value;
-            this.el.nativeElement.value = val + '.';
-            this.el.nativeElement.value = val;
         }
     }
 }
@@ -215,8 +200,7 @@ IonInputDirective.decorators = [
 ];
 /** @nocollapse */
 IonInputDirective.ctorParameters = () => [
-    { type: ElementRef },
-    { type: Platform }
+    { type: ElementRef }
 ];
 
 /**
@@ -436,32 +420,6 @@ IonRadioGroupDirective.ctorParameters = () => [
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
-class IonButtonDirective {
-    /**
-     * @param {?} el
-     */
-    constructor(el) {
-        this.el = el;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() { }
-}
-IonButtonDirective.decorators = [
-    { type: Directive, args: [{
-                selector: `ion-button`
-            },] }
-];
-/** @nocollapse */
-IonButtonDirective.ctorParameters = () => [
-    { type: ElementRef }
-];
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 /** @type {?} */
 const DECLARATIONS = [
     IonHeaderDirective,
@@ -472,8 +430,7 @@ const DECLARATIONS = [
     IonTextAreaDirective,
     IonSelectDirective,
     IonDateTimeDirective,
-    IonRadioGroupDirective,
-    IonButtonDirective
+    IonRadioGroupDirective
 ];
 class OkodeNgxCustomPaletteModule {
 }
@@ -495,6 +452,6 @@ OkodeNgxCustomPaletteModule.decorators = [
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonButtonDirective as ɵj, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

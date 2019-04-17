@@ -178,9 +178,8 @@
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var IonInputDirective = /** @class */ (function () {
-        function IonInputDirective(el, platform) {
+        function IonInputDirective(el) {
             this.el = el;
-            this.platform = platform;
         }
         /**
          * @return {?}
@@ -189,31 +188,13 @@
          * @return {?}
          */
             function () {
-                var _this = this;
                 if (!this.input) {
                     this.input = this.el.nativeElement.querySelector('input');
                     if (this.input) {
                         this.input.addEventListener('focus', ( /**
                          * @return {?}
-                         */function () { return _this.fixScrollAndCaret(); }));
+                         */function () { }));
                     }
-                }
-            };
-        /**
-         * @private
-         * @return {?}
-         */
-        IonInputDirective.prototype.fixScrollAndCaret = /**
-         * @private
-         * @return {?}
-         */
-            function () {
-                // workaroud to flix floating caret
-                if (this.platform.is('ios')) {
-                    /** @type {?} */
-                    var val = this.el.nativeElement.value;
-                    this.el.nativeElement.value = val + '.';
-                    this.el.nativeElement.value = val;
                 }
             };
         IonInputDirective.decorators = [
@@ -224,8 +205,7 @@
         /** @nocollapse */
         IonInputDirective.ctorParameters = function () {
             return [
-                { type: core.ElementRef },
-                { type: angular.Platform }
+                { type: core.ElementRef }
             ];
         };
         return IonInputDirective;
@@ -463,35 +443,6 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    var IonButtonDirective = /** @class */ (function () {
-        function IonButtonDirective(el) {
-            this.el = el;
-        }
-        /**
-         * @return {?}
-         */
-        IonButtonDirective.prototype.ngOnInit = /**
-         * @return {?}
-         */
-            function () { };
-        IonButtonDirective.decorators = [
-            { type: core.Directive, args: [{
-                        selector: "ion-button"
-                    },] }
-        ];
-        /** @nocollapse */
-        IonButtonDirective.ctorParameters = function () {
-            return [
-                { type: core.ElementRef }
-            ];
-        };
-        return IonButtonDirective;
-    }());
-
-    /**
-     * @fileoverview added by tsickle
-     * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
-     */
     /** @type {?} */
     var DECLARATIONS = [
         IonHeaderDirective,
@@ -502,8 +453,7 @@
         IonTextAreaDirective,
         IonSelectDirective,
         IonDateTimeDirective,
-        IonRadioGroupDirective,
-        IonButtonDirective
+        IonRadioGroupDirective
     ];
     var OkodeNgxCustomPaletteModule = /** @class */ (function () {
         function OkodeNgxCustomPaletteModule() {
@@ -529,7 +479,6 @@
      */
 
     exports.OkodeNgxCustomPaletteModule = OkodeNgxCustomPaletteModule;
-    exports.ɵj = IonButtonDirective;
     exports.ɵh = IonDateTimeDirective;
     exports.ɵe = IonInputDirective;
     exports.ɵd = IonItemDirective;

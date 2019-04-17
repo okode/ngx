@@ -1,3 +1,8 @@
-ion-button.button-solid {
+ion-button {
+  --box-shadow: none !important;
+  --border-width: 1px;
+  --border-radius: 4px;
+}
+ion-fab-button {
   --box-shadow: none !important;
 }
