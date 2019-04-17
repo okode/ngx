@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /**
- * <example-url>http://localhost:8080/assets/playground?componentPath=grids</example-url>
+ * <example-url>../../assets/playground?componentPath=grids</example-url>
  */
 @Component({
   selector: 'grids-page',
