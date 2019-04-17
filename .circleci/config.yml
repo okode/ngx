@@ -77,13 +77,9 @@ workflows:
             branches:
               ignore:
                 - master
-      - aws-s3/sync:
+      - pwa/deploy:
           name: deploy
-          from: /tmp/workspace/www
-          to: "s3://ngx-doc"
-          arguments: |
-            --acl public-read
-          overwrite: true
+          bucket: ngx-doc
           context: org-global
           filters:
             branches:
