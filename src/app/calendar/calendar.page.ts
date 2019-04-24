@@ -3,7 +3,9 @@ import { startOfDay, subDays, addDays, endOfMonth, addHours } from 'date-fns';
 import { CalendarEvent, CalendarView, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
 import { DatePipe } from '@angular/common';
 import { ToastController } from '@ionic/angular';
-
+/**
+ * @ignore
+ */
 class CustomDateFormatter extends CalendarDateFormatter {
   public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
     return new DatePipe(locale).transform(date, 'EEE', locale);
