@@ -208,6 +208,12 @@ ion-content[custom-palette] {
         ion-icon {
           font-size: 50px;
         }
+        img {
+          width: 70px !important;
+          height: 70px !important;
+          margin: 5px 10px 5px 0;
+          object-fit: contain;
+        }
       }
       .text {
         margin: 16px 0;
