@@ -2,6 +2,10 @@
 
 Okode Common for Ionic 4+ projects.
 
+#### Local build
+
+npm run build -- common
+
 #### Build and publish
 
 - Make sure you're logged in as `okode`:

@@ -245,7 +245,12 @@ var Navigator = /** @class */ (function () {
      */
     function (url, params) {
         this.params = params;
-        return this.navCtrl.navigateBack(url || this.getPreviousPageUrl());
+        /** @type {?} */
+        var targetUrl = url || this.getPreviousPageUrl();
+        if (!targetUrl) {
+            return Promise.resolve(false);
+        }
+        return this.navCtrl.navigateBack(targetUrl);
     };
     /**
      * @return {?}
@@ -314,7 +319,7 @@ var Navigator = /** @class */ (function () {
     function () {
         /** @type {?} */
         var views = this.getViews();
-        return (views && views.length > 1) ? views[views.length - 2].url : '';
+        return (views && views.length > 1) ? views[views.length - 2].url : null;
     };
     /**
      * @private

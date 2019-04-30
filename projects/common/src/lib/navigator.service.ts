@@ -36,7 +36,11 @@ export class Navigator {
 
   pop(url?: string, params?: {}) {
     this.params = params;
-    return this.navCtrl.navigateBack(url || this.getPreviousPageUrl());
+    const targetUrl = url || this.getPreviousPageUrl();
+    if (!targetUrl) {
+      return Promise.resolve(false);
+    }
+    return this.navCtrl.navigateBack(targetUrl);
   }
 
   popToRoot() {
@@ -64,7 +68,7 @@ export class Navigator {
 
   private getPreviousPageUrl() {
     const views = this.getViews();
-    return (views && views.length > 1) ? views[views.length - 2].url : '';
+    return (views && views.length > 1) ? views[views.length - 2].url : null;
   }
 
   private getRootPageUrl() {

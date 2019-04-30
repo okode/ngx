@@ -201,7 +201,12 @@ class Navigator {
      */
     pop(url, params) {
         this.params = params;
-        return this.navCtrl.navigateBack(url || this.getPreviousPageUrl());
+        /** @type {?} */
+        const targetUrl = url || this.getPreviousPageUrl();
+        if (!targetUrl) {
+            return Promise.resolve(false);
+        }
+        return this.navCtrl.navigateBack(targetUrl);
     }
     /**
      * @return {?}
@@ -251,7 +256,7 @@ class Navigator {
     getPreviousPageUrl() {
         /** @type {?} */
         const views = this.getViews();
-        return (views && views.length > 1) ? views[views.length - 2].url : '';
+        return (views && views.length > 1) ? views[views.length - 2].url : null;
     }
     /**
      * @private
