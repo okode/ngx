@@ -8,6 +8,7 @@ import { IonTextAreaDirective } from './form/ion-textarea.directive';
 import { IonSelectDirective } from './form/ion-select.directive';
 import { IonDateTimeDirective } from './form/ion-datetime.directive';
 import { IonRadioGroupDirective } from './form/ion-radio-group.directive';
+import { IonToggleDirective } from './form/ion-toggle.directive';
 
 const DECLARATIONS = [
   IonHeaderDirective,
@@ -18,7 +19,8 @@ const DECLARATIONS = [
   IonTextAreaDirective,
   IonSelectDirective,
   IonDateTimeDirective,
-  IonRadioGroupDirective
+  IonRadioGroupDirective,
+  IonToggleDirective
 ];
 
 @NgModule({

@@ -67,6 +67,15 @@ ion-content[custom-palette] {
       height: 20px;
       line-height: 20px;
     }
+    ion-input input[type="date"] {
+      opacity: 0;
+      &::-webkit-clear-button { display: none; }
+      &::-webkit-inner-spin-button { display: none; }
+      &::-webkit-calendar-picker-indicator { color: #2c3e50; }
+    }
+    ion-input.has-value input[type="date"], ion-input.has-focus input[type="date"] {
+      opacity: 1;
+    }
     /*
      *  ION-SELECT
      */
@@ -189,6 +198,12 @@ ion-content[custom-palette] {
   /*
    *  custom-radio-group
    */
+  ion-toggle[custom-palette-toggle] {
+    color: red;
+  }
+  /*
+   *  custom-radio-group
+   */
   ion-radio-group[custom-palette-radio-group] {
     padding: 0px;
     &[padding] {
@@ -214,6 +229,10 @@ ion-content[custom-palette] {
           margin: 5px 10px 5px 0;
           object-fit: contain;
         }
+      }
+      ion-radio {
+        margin-right: 10px;
+        margin-left: 20px;
       }
       .text {
         margin: 16px 0;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 
 /**
@@ -10,5 +11,7 @@ import { Component } from '@angular/core';
   styleUrls: ['forms.page.scss'],
 })
 export class FormsPage {
+
+  constructor(public platform: Platform) {}
 
 }
