@@ -11,6 +11,7 @@ export class Navigator {
   private animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default';
   private animationConfigReady = false;
   private startNavFlow = false;
+  private defaultAnimation: 'default' | 'push' | 'modal' | 'fade' | 'safepush' = 'default';
 
   constructor(
     private navCtrl: NavController,
@@ -66,6 +67,10 @@ export class Navigator {
     return views;
   }
 
+  setDefaultAnimation(animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush') {
+    this.defaultAnimation = animation;
+  }
+
   private getPreviousPageUrl() {
     const views = this.getViews();
     return (views && views.length > 1) ? views[views.length - 2].url : null;
@@ -90,10 +95,11 @@ export class Navigator {
         opts.enteringEl.setAttribute('animation-enter', this.animation);
         opts.leavingEl.setAttribute('animation-leave', this.animation);
         const ios = (opts && opts.mode === 'ios');
+        if (anim === 'default') { anim = this.defaultAnimation; }
         switch (anim) {
           case 'default':
-            if (ios) {      return animationPush(AnimationC, baseEl, opts); }
-            else {          return animationModal(AnimationC, baseEl, opts); }
+            return ios ?           animationPush(AnimationC, baseEl, opts)
+                       :           animationModal(AnimationC, baseEl, opts);
           case 'push':      return animationPush(AnimationC, baseEl, opts);
           case 'modal':     return animationModal(AnimationC, baseEl, opts);
           case 'fade':      return animationFade(AnimationC, baseEl, opts);

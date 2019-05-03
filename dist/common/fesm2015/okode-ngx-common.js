@@ -10,7 +10,7 @@ import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class Environment {
     /**
@@ -50,30 +50,54 @@ class Environment {
             this.isInitializing = true;
             this.initEnvs();
         }
-        return new Promise((resolve, reject) => {
+        return new Promise((/**
+         * @param {?} resolve
+         * @param {?} reject
+         * @return {?}
+         */
+        (resolve, reject) => {
             this.readyPromiseResolve.push(resolve);
             this.readyPromiseReject.push(reject);
-        });
+        }));
     }
     /**
      * @private
      * @return {?}
      */
     initEnvs() {
-        this.http.get(this.JSON_PATH).subscribe(json => {
+        this.http.get(this.JSON_PATH).subscribe((/**
+         * @param {?} json
+         * @return {?}
+         */
+        json => {
             if (json == null || Object.keys(json).length === 0) {
-                this.readyPromiseReject.forEach((reject) => reject());
+                this.readyPromiseReject.forEach((/**
+                 * @param {?} reject
+                 * @return {?}
+                 */
+                (reject) => reject()));
                 console.error(`EnvironmentService fails: '${this.JSON_PATH}' is empty or invalid`);
                 return;
             }
             /** @type {?} */
-            const environments = Object.keys(json).filter(environment => environment !== 'default');
+            const environments = Object.keys(json).filter((/**
+             * @param {?} environment
+             * @return {?}
+             */
+            environment => environment !== 'default'));
             if (environments == null || environments.length === 0) {
                 this.setEnv(false, 'default', json['default']);
             }
             else {
-                this.storage.ready().then(() => {
-                    this.storage.get(this.SELECTED_ENVIRONMENT_KEY).then(storedEnvironment => {
+                this.storage.ready().then((/**
+                 * @return {?}
+                 */
+                () => {
+                    this.storage.get(this.SELECTED_ENVIRONMENT_KEY).then((/**
+                     * @param {?} storedEnvironment
+                     * @return {?}
+                     */
+                    storedEnvironment => {
                         if (storedEnvironment == null) {
                             if (environments.length > 1) {
                                 console.log('No saved environment detected, will prompt user for selection');
@@ -89,14 +113,22 @@ class Environment {
                             console.log(`Detected saved environment: ${storedEnvironment}`);
                             this.setEnv(false, storedEnvironment, json['default'], json[storedEnvironment]);
                         }
-                    });
-                });
+                    }));
+                }));
             }
-        }, err => {
+        }), (/**
+         * @param {?} err
+         * @return {?}
+         */
+        err => {
             console.log(err);
             console.error(`EnvironmentService fails: Not found '${this.JSON_PATH}'`);
-            this.readyPromiseReject.forEach((reject) => reject());
-        });
+            this.readyPromiseReject.forEach((/**
+             * @param {?} reject
+             * @return {?}
+             */
+            (reject) => reject()));
+        }));
     }
     /**
      * @private
@@ -117,7 +149,11 @@ class Environment {
             this.storage.set(this.SELECTED_ENVIRONMENT_KEY, environmentKey);
         }
         Environment.isReady = true;
-        this.readyPromiseResolve.forEach((resolve) => resolve());
+        this.readyPromiseResolve.forEach((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        (resolve) => resolve()));
     }
     /**
      * @private
@@ -132,12 +168,19 @@ class Environment {
             const actionSheet = yield this.actionSheetCtrl.create({
                 header: 'Select environment',
                 backdropDismiss: false,
-                buttons: environments.map(environment => ({
+                buttons: environments.map((/**
+                 * @param {?} environment
+                 * @return {?}
+                 */
+                environment => ({
                     text: environment,
-                    handler: () => {
+                    handler: (/**
+                     * @return {?}
+                     */
+                    () => {
                         this.setEnv(true, environment, configs['default'], configs[environment]);
-                    }
-                }))
+                    })
+                })))
             });
             actionSheet.present();
         });
@@ -158,7 +201,7 @@ Environment.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class Navigator {
     /**
@@ -171,6 +214,7 @@ class Navigator {
         this.animation = 'default';
         this.animationConfigReady = false;
         this.startNavFlow = false;
+        this.defaultAnimation = 'default';
     }
     /**
      * @return {?}
@@ -231,7 +275,11 @@ class Navigator {
         /** @type {?} */
         const views = [...this.getViews()].reverse();
         /** @type {?} */
-        const currentNavFlow = views.findIndex(v => v.element.getAttribute('new-nav-flow'));
+        const currentNavFlow = views.findIndex((/**
+         * @param {?} v
+         * @return {?}
+         */
+        v => v.element.getAttribute('new-nav-flow')));
         /** @type {?} */
         const targetPage = currentNavFlow >= 0 && views.length > 1 ? views[currentNavFlow + 1] : null;
         return targetPage ? this.pop(targetPage.url, params) : this.popToRoot();
@@ -248,6 +296,13 @@ class Navigator {
             views = c.topOutlet.stackCtrl.views;
         }
         return views;
+    }
+    /**
+     * @param {?} animation
+     * @return {?}
+     */
+    setDefaultAnimation(animation) {
+        this.defaultAnimation = animation;
     }
     /**
      * @private
@@ -273,7 +328,13 @@ class Navigator {
      */
     setAnimationConfig() {
         this.animationConfigReady = true;
-        this.config.set('navAnimation', (AnimationC, baseEl, opts) => {
+        this.config.set('navAnimation', (/**
+         * @param {?} AnimationC
+         * @param {?} baseEl
+         * @param {?} opts
+         * @return {?}
+         */
+        (AnimationC, baseEl, opts) => {
             /** @type {?} */
             let anim = this.animation;
             if (opts.direction === 'back') {
@@ -287,21 +348,20 @@ class Navigator {
             opts.leavingEl.setAttribute('animation-leave', this.animation);
             /** @type {?} */
             const ios = (opts && opts.mode === 'ios');
+            if (anim === 'default') {
+                anim = this.defaultAnimation;
+            }
             switch (anim) {
                 case 'default':
-                    if (ios) {
-                        return animationPush(AnimationC, baseEl, opts);
-                    }
-                    else {
-                        return animationModal(AnimationC, baseEl, opts);
-                    }
+                    return ios ? animationPush(AnimationC, baseEl, opts)
+                        : animationModal(AnimationC, baseEl, opts);
                 case 'push': return animationPush(AnimationC, baseEl, opts);
                 case 'modal': return animationModal(AnimationC, baseEl, opts);
                 case 'fade': return animationFade(AnimationC, baseEl, opts);
                 case 'safepush': return animationSafePush(AnimationC, baseEl, opts);
                 default: return animationModal(AnimationC, baseEl, opts);
             }
-        });
+        }));
     }
 }
 Navigator.decorators = [
@@ -348,14 +408,18 @@ function animationSafePush(a, b, o) { return safePushAnimation(a, b, o); }
  */
 function fadeAnimation(AnimationC, _, opts) {
     /** @type {?} */
-    const getIonPageElement = function (element) {
+    const getIonPageElement = (/**
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
         if (element.classList.contains('ion-page')) {
             return element;
         }
         /** @type {?} */
         const page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
         return page || element;
-    };
+    });
     /** @type {?} */
     const enteringEl = opts.enteringEl;
     /** @type {?} */
@@ -399,14 +463,18 @@ function fadeAnimation(AnimationC, _, opts) {
  */
 function safePushAnimation(AnimationC, _, opts) {
     /** @type {?} */
-    const getIonPageElement = function (element) {
+    const getIonPageElement = (/**
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
         if (element.classList.contains('ion-page')) {
             return element;
         }
         /** @type {?} */
         const page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
         return page || element;
-    };
+    });
     /** @type {?} */
     const enteringEl = opts.enteringEl;
     /** @type {?} */
@@ -436,7 +504,7 @@ function safePushAnimation(AnimationC, _, opts) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class HardwareBackButton {
     /**
@@ -448,7 +516,10 @@ class HardwareBackButton {
         this.navCtrl = navCtrl;
         this.nav = nav;
         this.platform = platform;
-        this.filterCondition = () => true;
+        this.filterCondition = (/**
+         * @return {?}
+         */
+        () => true);
         this.intialized = false;
     }
     /**
@@ -459,7 +530,10 @@ class HardwareBackButton {
         if (!this.intialized) {
             this.init();
         }
-        this.filterCondition = condition || (() => true);
+        this.filterCondition = condition || ((/**
+         * @return {?}
+         */
+        () => true));
     }
     /**
      * @return {?}
@@ -468,7 +542,10 @@ class HardwareBackButton {
         if (!this.intialized) {
             this.init();
         }
-        this.filterCondition = () => false;
+        this.filterCondition = (/**
+         * @return {?}
+         */
+        () => false);
     }
     /**
      * @private
@@ -478,7 +555,13 @@ class HardwareBackButton {
         this.intialized = true;
         /** @type {?} */
         const hwBackSubject = new Subject();
-        hwBackSubject.pipe(throttleTime(500), filter(() => this.filterCondition())).subscribe(() => __awaiter(this, void 0, void 0, function* () {
+        hwBackSubject.pipe(throttleTime(500), filter((/**
+         * @return {?}
+         */
+        () => this.filterCondition()))).subscribe((/**
+         * @return {?}
+         */
+        () => __awaiter(this, void 0, void 0, function* () {
             console.log('HardwareBackButton: back button action');
             // check ionic overlays (dismiss if is presented and backdropDismiss == true)
             /** @type {?} */
@@ -503,11 +586,17 @@ class HardwareBackButton {
             else {
                 this.nav.pop();
             }
-        }));
+        })));
         // Overring default hardware back button behaviour
-        this.platform.ready().then(() => {
-            this.platform.backButton.subscribeWithPriority(9999, () => { hwBackSubject.next(event); });
-        });
+        this.platform.ready().then((/**
+         * @return {?}
+         */
+        () => {
+            this.platform.backButton.subscribeWithPriority(9999, (/**
+             * @return {?}
+             */
+            () => { hwBackSubject.next(event); }));
+        }));
     }
     /**
      * @private
@@ -535,7 +624,7 @@ HardwareBackButton.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // @dynamic
 class OkodeNgxCommonModule {
@@ -571,19 +660,22 @@ OkodeNgxCommonModule.decorators = [
  * @return {?}
  */
 function moduleInitializer(environment) {
-    return () => __awaiter(this, void 0, void 0, function* () {
+    return (/**
+     * @return {?}
+     */
+    () => __awaiter(this, void 0, void 0, function* () {
         yield environment.ready();
-    });
+    }));
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { Environment, fadeAnimation, safePushAnimation, Navigator, HardwareBackButton, moduleInitializer, OkodeNgxCommonModule };

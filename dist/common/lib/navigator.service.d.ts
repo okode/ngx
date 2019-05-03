@@ -7,6 +7,7 @@ export declare class Navigator {
     private animation;
     private animationConfigReady;
     private startNavFlow;
+    private defaultAnimation;
     constructor(navCtrl: NavController, config: Config);
     getParams(): any;
     push(url: string, params?: {}, animation?: 'default' | 'push' | 'modal' | 'fade' | 'safepush', startNavFlow?: boolean): Promise<boolean>;
@@ -15,6 +16,7 @@ export declare class Navigator {
     setRoot(url: string, params?: {}): Promise<boolean>;
     closeCurrentNavFlow(params?: {}): Promise<boolean>;
     getViews(): any[];
+    setDefaultAnimation(animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush'): void;
     private getPreviousPageUrl;
     private getRootPageUrl;
     private setAnimationConfig;
