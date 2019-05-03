@@ -38,6 +38,9 @@ ion-content[custom-palette] {
       & span {
         color: var(--input-error-color) !important;
       }
+      &.label-floating {
+        transform: translate3d(0, 28px, 0) !important;
+      }
     }
     ion-label[position="floating"]::first-line {
       content: ' ';
