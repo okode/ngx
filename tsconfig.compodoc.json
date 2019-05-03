@@ -1,6 +1,8 @@
 {
   "exclude": [
     "**/*.module.ts",
-    "**/*.directive.ts"
+    "**/*.directive.ts",
+    "projects/components/**",
+    "projects/custom-palette/**"
   ]
 }
