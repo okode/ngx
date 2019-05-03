@@ -5,31 +5,8 @@
     </ion-buttons>
     <ion-title>Calendar</ion-title>
   </ion-toolbar>
-  <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-button mwlCalendarPreviousView [view]="CalendarView.Month" [(viewDate)]="viewDate">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>{{ viewDate | calendarDate:(CalendarView.Month + 'ViewTitle'): 'en' }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button mwlCalendarToday [(viewDate)]="viewDate">Today</ion-button>
-      <ion-button mwlCalendarNextView [view]="CalendarView.Month" [(viewDate)]="viewDate">
-        <ion-icon name="arrow-forward"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
-  <mwl-calendar-month-view
-    [viewDate]="viewDate"
-    [events]="events"
-    activeDayIsOpen="false"
-    weekStartsOn="1"
-    (dayClicked)="dayClicked($event.day)"
-    (eventClicked)="handleEvent('Clicked', $event.event)">
-  </mwl-calendar-month-view>
-
+  <mapfre-calendar></mapfre-calendar>
 </ion-content>
