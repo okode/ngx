@@ -82,6 +82,7 @@ setRoot(url: string, params?: {}): Promise<boolean>
 closeCurrentNavFlow(params?: {}) 
 getParams(): any
 getViews(): RouteView[] // RouteView: @ionic/angular interface
+setDefaultAnimation(animation: 'default' | 'push' | 'modal' | 'fade' | 'safepush')
 ```
 > `default` animation in iOS performs `push`, and `modal` in Android (default native behavior)
 
