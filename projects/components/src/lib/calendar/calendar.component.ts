@@ -1,4 +1,4 @@
-import { Component, ViewChild, TemplateRef,  ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarView, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
 import { DatePipe } from '@angular/common';
 
@@ -27,8 +27,6 @@ export class CustomDateFormatter extends CalendarDateFormatter {
 export class CalendarComponent {
 
   // Documentation: https://github.com/mattlewis92/angular-calendar
-
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   CalendarView = CalendarView;
   @Input() viewDate: Date = new Date();
