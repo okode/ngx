@@ -16,8 +16,8 @@
 <mwl-calendar-month-view
   [viewDate]="viewDate"
   [events]="events"
-  activeDayIsOpen="false"
-  weekStartsOn="1"
-  (dayClicked)="dayClicked($event.day)"
-  (eventClicked)="handleEvent('Clicked', $event.event)">
+  [activeDayIsOpen]="activeDayIsOpen"
+  [weekStartsOn]="weekStartsOn"
+  (dayClicked)="onDayClicked($event.day)"
+  (eventClicked)="onHandleEvent('Clicked', $event.event)">
 </mwl-calendar-month-view>

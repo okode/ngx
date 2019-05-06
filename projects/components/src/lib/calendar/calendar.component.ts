@@ -1,8 +1,6 @@
-import { Component, ViewChild, TemplateRef, OnInit, ViewEncapsulation } from '@angular/core';
-import { startOfDay, subDays, addDays, endOfMonth, addHours } from 'date-fns';
+import { Component, ViewChild, TemplateRef,  ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarView, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
 import { DatePipe } from '@angular/common';
-import { ToastController } from '@ionic/angular';
 
 export class CustomDateFormatter extends CalendarDateFormatter {
   public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
@@ -26,55 +24,29 @@ export class CustomDateFormatter extends CalendarDateFormatter {
     }
   ]
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent {
 
   // Documentation: https://github.com/mattlewis92/angular-calendar
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   CalendarView = CalendarView;
-  viewDate: Date = new Date();
-  events: CalendarEvent[] = [];
+  @Input() viewDate: Date = new Date();
+  @Input() events: CalendarEvent[] = [];
+  @Input() activeDayIsOpen = false;
+  @Input() weekStartsOn = 1;
 
-  constructor(
-    private toastController: ToastController
-  ) {}
+  @Output() dayClicked = new EventEmitter<{ date: Date; events: CalendarEvent[] }>();
+  @Output() handleEvent = new EventEmitter<{ action: string, event: CalendarEvent }>();
 
-  ngOnInit() {
-    this.addEvents();
+  constructor() { }
+
+  onDayClicked({ date, events }: { date: Date; events: CalendarEvent[] }) {
+    this.dayClicked.emit({ date, events });
   }
 
-  async dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }) {
-    const toast = await this.toastController.create({
-      message: 'Day selected: ' + new DatePipe('en').transform(date, 'yyyy-MM-dd', 'en'),
-      color: 'medium',
-      position: 'bottom',
-      duration: 2000
-    });
-    toast.present();
-    console.log(date, events);
-  }
-
-  addEvents() {
-    this.events = [{
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      allDay: true,
-    }, {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      allDay: true
-    }, {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-    }];
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-
+  onHandleEvent(action: string, event: CalendarEvent): void {
+    this.handleEvent.emit({ action, event });
   }
 
 }

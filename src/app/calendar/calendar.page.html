@@ -8,5 +8,14 @@
 </ion-header>
 
 <ion-content padding>
-  <mapfre-calendar></mapfre-calendar>
+
+  <mapfre-calendar
+    [viewDate]="viewDate"
+    [events]="events"
+    [activeDayIsOpen]="activeDayIsOpen"
+    [weekStartsOn]="weekStartsOn"
+    (dayClicked)="onDayClicked($event)"
+    (eventClicked)="onHandleEvent($event)">
+  </mapfre-calendar>
+
 </ion-content>
