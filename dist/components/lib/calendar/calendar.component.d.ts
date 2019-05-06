@@ -1,11 +1,10 @@
-import { TemplateRef, EventEmitter } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarView, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
 export declare class CustomDateFormatter extends CalendarDateFormatter {
     monthViewColumnHeader({ date, locale }: DateFormatterParams): string;
     monthViewTitle({ date, locale }: DateFormatterParams): string;
 }
 export declare class CalendarComponent {
-    modalContent: TemplateRef<any>;
     CalendarView: typeof CalendarView;
     viewDate: Date;
     events: CalendarEvent[];

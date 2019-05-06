@@ -1,11 +1,10 @@
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { __extends } from 'tslib';
-import { Component, ViewChild, ViewEncapsulation, Input, Output, EventEmitter, NgModule } from '@angular/core';
+import { Component, ViewEncapsulation, Input, Output, EventEmitter, NgModule } from '@angular/core';
 import { DatePipe, CommonModule } from '@angular/common';
 import { CalendarView, CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { OkodeNgxCustomPaletteModule } from 'custom-palette';
 
 /**
  * @fileoverview added by tsickle
@@ -44,6 +43,7 @@ var CustomDateFormatter = /** @class */ (function (_super) {
 }(CalendarDateFormatter));
 var CalendarComponent = /** @class */ (function () {
     function CalendarComponent() {
+        // Documentation: https://github.com/mattlewis92/angular-calendar
         this.CalendarView = CalendarView;
         this.viewDate = new Date();
         this.events = [];
@@ -96,7 +96,6 @@ var CalendarComponent = /** @class */ (function () {
     /** @nocollapse */
     CalendarComponent.ctorParameters = function () { return []; };
     CalendarComponent.propDecorators = {
-        modalContent: [{ type: ViewChild, args: ['modalContent',] }],
         viewDate: [{ type: Input }],
         events: [{ type: Input }],
         activeDayIsOpen: [{ type: Input }],
@@ -121,7 +120,6 @@ var MapfreCalendarModule = /** @class */ (function () {
                         CommonModule,
                         FormsModule,
                         IonicModule,
-                        OkodeNgxCustomPaletteModule,
                         CalendarModule.forRoot({
                             provide: DateAdapter,
                             useFactory: ɵ0

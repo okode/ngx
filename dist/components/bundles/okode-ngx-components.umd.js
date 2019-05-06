@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/forms'), require('@ionic/angular'), require('@angular/core'), require('@angular/common'), require('angular-calendar'), require('angular-calendar/date-adapters/date-fns'), require('custom-palette')) :
-    typeof define === 'function' && define.amd ? define('@okode/ngx-components', ['exports', '@angular/forms', '@ionic/angular', '@angular/core', '@angular/common', 'angular-calendar', 'angular-calendar/date-adapters/date-fns', 'custom-palette'], factory) :
-    (factory((global.okode = global.okode || {}, global.okode['ngx-components'] = {}),global.ng.forms,global.angular,global.ng.core,global.ng.common,global.angularCalendar,global.dateFns,global.customPalette));
-}(this, (function (exports,forms,angular,core,common,angularCalendar,dateFns,customPalette) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/forms'), require('@ionic/angular'), require('@angular/core'), require('@angular/common'), require('angular-calendar'), require('angular-calendar/date-adapters/date-fns')) :
+    typeof define === 'function' && define.amd ? define('@okode/ngx-components', ['exports', '@angular/forms', '@ionic/angular', '@angular/core', '@angular/common', 'angular-calendar', 'angular-calendar/date-adapters/date-fns'], factory) :
+    (factory((global.okode = global.okode || {}, global.okode['ngx-components'] = {}),global.ng.forms,global['@ionic/angular'],global.ng.core,global.ng.common,global['angular-calendar'],global['angular-calendar/date-adapters/date-fns']));
+}(this, (function (exports,forms,angular,core,common,angularCalendar,dateFns) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -70,6 +70,7 @@
     }(angularCalendar.CalendarDateFormatter));
     var CalendarComponent = /** @class */ (function () {
         function CalendarComponent() {
+            // Documentation: https://github.com/mattlewis92/angular-calendar
             this.CalendarView = angularCalendar.CalendarView;
             this.viewDate = new Date();
             this.events = [];
@@ -122,7 +123,6 @@
         /** @nocollapse */
         CalendarComponent.ctorParameters = function () { return []; };
         CalendarComponent.propDecorators = {
-            modalContent: [{ type: core.ViewChild, args: ['modalContent',] }],
             viewDate: [{ type: core.Input }],
             events: [{ type: core.Input }],
             activeDayIsOpen: [{ type: core.Input }],
@@ -147,7 +147,6 @@
                             common.CommonModule,
                             forms.FormsModule,
                             angular.IonicModule,
-                            customPalette.OkodeNgxCustomPaletteModule,
                             angularCalendar.CalendarModule.forRoot({
                                 provide: angularCalendar.DateAdapter,
                                 useFactory: ɵ0
