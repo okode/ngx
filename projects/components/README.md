@@ -1,24 +1,37 @@
-# Components
+# @okode/ngx-components
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.
+Okode custom functional components for Ionic 4+ projects.
 
-## Code scaffolding
+#### Local build
 
-Run `ng generate component component-name --project components` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project components`.
-> Note: Don't forget to add `--project components` or else it will be added to the default project in your `angular.json` file. 
+npm run build -- components
 
-## Build
+#### Build and publish
 
-Run `ng build components` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Make sure you're logged in as `okode`:
+   - `npm whoami` / `npm logout`
+   - `npm adduser` (username: okode, email: developers@okode.com)
+- Bump version `projects/components/package.json`
+- Build and publish
+```
+npm run build -- components && cd dist/components && npm publish --access=public && cd ../..
+```
+- Commit changes
 
-## Publishing
+#### Install package
 
-After building your library with `ng build components`, go to the dist folder `cd dist/components` and run `npm publish`.
+```
+npm i @okode/ngx-components
+```
 
-## Running unit tests
+#### Usage
 
-Run `ng test components` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In app/core module:
+```typescript
+import { NgModule } from '@angular/core';
+import { MapfreCalendarModule } from '@okode/ngx-components';
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@NgModule({
+  imports: [
+    MapfreCalendarModule,
+```
