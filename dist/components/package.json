@@ -1,20 +1,20 @@
 {
-  "name": "components",
+  "name": "@okode/ngx-components",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0",
     "angular-calendar": "^0.27.3"
   },
-  "main": "bundles/components.umd.js",
-  "module": "fesm5/components.js",
-  "es2015": "fesm2015/components.js",
-  "esm5": "esm5/components.js",
-  "esm2015": "esm2015/components.js",
-  "fesm5": "fesm5/components.js",
-  "fesm2015": "fesm2015/components.js",
-  "typings": "components.d.ts",
-  "metadata": "components.metadata.json",
+  "main": "bundles/okode-ngx-components.umd.js",
+  "module": "fesm5/okode-ngx-components.js",
+  "es2015": "fesm2015/okode-ngx-components.js",
+  "esm5": "esm5/okode-ngx-components.js",
+  "esm2015": "esm2015/okode-ngx-components.js",
+  "fesm5": "fesm5/okode-ngx-components.js",
+  "fesm2015": "fesm2015/okode-ngx-components.js",
+  "typings": "okode-ngx-components.d.ts",
+  "metadata": "okode-ngx-components.metadata.json",
   "sideEffects": false,
   "dependencies": {
     "tslib": "^1.9.0"

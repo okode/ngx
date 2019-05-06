@@ -1,0 +1,10 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { MapfreCalendarModule } from './public-api';
+export { CalendarComponent as ɵb, CustomDateFormatter as ɵa } from './lib/calendar/calendar.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2tvZGUtbmd4LWNvbXBvbmVudHMuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9Ab2tvZGUvbmd4LWNvbXBvbmVudHMvIiwic291cmNlcyI6WyJva29kZS1uZ3gtY29tcG9uZW50cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBSUEscUNBQWMsY0FBYyxDQUFDO0FBRTdCLE9BQU8sRUFBQyxpQkFBaUIsSUFBSSxFQUFFLEVBQUMsbUJBQW1CLElBQUksRUFBRSxFQUFDLE1BQU0sbUNBQW1DLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEdlbmVyYXRlZCBidW5kbGUgaW5kZXguIERvIG5vdCBlZGl0LlxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vcHVibGljLWFwaSc7XG5cbmV4cG9ydCB7Q2FsZW5kYXJDb21wb25lbnQgYXMgybViLEN1c3RvbURhdGVGb3JtYXR0ZXIgYXMgybVhfSBmcm9tICcuL2xpYi9jYWxlbmRhci9jYWxlbmRhci5jb21wb25lbnQnOyJdfQ==

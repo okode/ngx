@@ -1,22 +1,28 @@
-import { TemplateRef, OnInit } from '@angular/core';
+import { TemplateRef, EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarView, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
-import { ToastController } from '@ionic/angular';
 export declare class CustomDateFormatter extends CalendarDateFormatter {
     monthViewColumnHeader({ date, locale }: DateFormatterParams): string;
     monthViewTitle({ date, locale }: DateFormatterParams): string;
 }
-export declare class CalendarComponent implements OnInit {
-    private toastController;
+export declare class CalendarComponent {
     modalContent: TemplateRef<any>;
     CalendarView: typeof CalendarView;
     viewDate: Date;
     events: CalendarEvent[];
-    constructor(toastController: ToastController);
-    ngOnInit(): void;
-    dayClicked({ date, events }: {
+    activeDayIsOpen: boolean;
+    weekStartsOn: number;
+    dayClicked: EventEmitter<{
+        date: Date;
+        events: CalendarEvent<any>[];
+    }>;
+    handleEvent: EventEmitter<{
+        action: string;
+        event: CalendarEvent<any>;
+    }>;
+    constructor();
+    onDayClicked({ date, events }: {
         date: Date;
         events: CalendarEvent[];
-    }): Promise<void>;
-    addEvents(): void;
-    handleEvent(action: string, event: CalendarEvent): void;
+    }): void;
+    onHandleEvent(action: string, event: CalendarEvent): void;
 }

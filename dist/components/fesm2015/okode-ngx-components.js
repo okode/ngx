@@ -1,9 +1,7 @@
 import { FormsModule } from '@angular/forms';
-import { __awaiter } from 'tslib';
-import { Component, ViewChild, ViewEncapsulation, NgModule } from '@angular/core';
-import { startOfDay, subDays, addDays, endOfMonth, addHours } from 'date-fns';
+import { IonicModule } from '@ionic/angular';
+import { Component, ViewChild, ViewEncapsulation, Input, Output, EventEmitter, NgModule } from '@angular/core';
 import { DatePipe, CommonModule } from '@angular/common';
-import { ToastController, IonicModule } from '@ionic/angular';
 import { CalendarView, CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { OkodeNgxCustomPaletteModule } from 'custom-palette';
@@ -29,71 +27,36 @@ class CustomDateFormatter extends CalendarDateFormatter {
     }
 }
 class CalendarComponent {
-    /**
-     * @param {?} toastController
-     */
-    constructor(toastController) {
-        this.toastController = toastController;
+    constructor() {
         this.CalendarView = CalendarView;
         this.viewDate = new Date();
         this.events = [];
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        this.addEvents();
+        this.activeDayIsOpen = false;
+        this.weekStartsOn = 1;
+        this.dayClicked = new EventEmitter();
+        this.handleEvent = new EventEmitter();
     }
     /**
      * @param {?} __0
      * @return {?}
      */
-    dayClicked({ date, events }) {
-        return __awaiter(this, void 0, void 0, function* () {
-            /** @type {?} */
-            const toast = yield this.toastController.create({
-                message: 'Day selected: ' + new DatePipe('en').transform(date, 'yyyy-MM-dd', 'en'),
-                color: 'medium',
-                position: 'bottom',
-                duration: 2000
-            });
-            toast.present();
-            console.log(date, events);
-        });
-    }
-    /**
-     * @return {?}
-     */
-    addEvents() {
-        this.events = [{
-                start: subDays(startOfDay(new Date()), 1),
-                end: addDays(new Date(), 1),
-                title: 'A 3 day event',
-                allDay: true,
-            }, {
-                start: subDays(endOfMonth(new Date()), 3),
-                end: addDays(endOfMonth(new Date()), 3),
-                title: 'A long event that spans 2 months',
-                allDay: true
-            }, {
-                start: addHours(startOfDay(new Date()), 2),
-                end: new Date(),
-                title: 'A draggable and resizable event',
-            }];
+    onDayClicked({ date, events }) {
+        this.dayClicked.emit({ date, events });
     }
     /**
      * @param {?} action
      * @param {?} event
      * @return {?}
      */
-    handleEvent(action, event) {
+    onHandleEvent(action, event) {
+        this.handleEvent.emit({ action, event });
     }
 }
 CalendarComponent.decorators = [
     { type: Component, args: [{
                 // tslint:disable-next-line:component-selector
                 selector: 'mapfre-calendar',
-                template: "<ion-toolbar>\n  <ion-buttons slot=\"start\">\n    <ion-button mwlCalendarPreviousView [view]=\"CalendarView.Month\" [(viewDate)]=\"viewDate\">\n      <ion-icon name=\"arrow-back\"></ion-icon>\n    </ion-button>\n  </ion-buttons>\n  <ion-title>{{ viewDate | calendarDate:(CalendarView.Month + 'ViewTitle'): 'en' }}</ion-title>\n  <ion-buttons slot=\"end\">\n    <ion-button mwlCalendarToday [(viewDate)]=\"viewDate\">Today</ion-button>\n    <ion-button mwlCalendarNextView [view]=\"CalendarView.Month\" [(viewDate)]=\"viewDate\">\n      <ion-icon name=\"arrow-forward\"></ion-icon>\n    </ion-button>\n  </ion-buttons>\n</ion-toolbar>\n\n<mwl-calendar-month-view\n  [viewDate]=\"viewDate\"\n  [events]=\"events\"\n  activeDayIsOpen=\"false\"\n  weekStartsOn=\"1\"\n  (dayClicked)=\"dayClicked($event.day)\"\n  (eventClicked)=\"handleEvent('Clicked', $event.event)\">\n</mwl-calendar-month-view>\n",
+                template: "<ion-toolbar>\n  <ion-buttons slot=\"start\">\n    <ion-button mwlCalendarPreviousView [view]=\"CalendarView.Month\" [(viewDate)]=\"viewDate\">\n      <ion-icon name=\"arrow-back\"></ion-icon>\n    </ion-button>\n  </ion-buttons>\n  <ion-title>{{ viewDate | calendarDate:(CalendarView.Month + 'ViewTitle'): 'en' }}</ion-title>\n  <ion-buttons slot=\"end\">\n    <ion-button mwlCalendarToday [(viewDate)]=\"viewDate\">Today</ion-button>\n    <ion-button mwlCalendarNextView [view]=\"CalendarView.Month\" [(viewDate)]=\"viewDate\">\n      <ion-icon name=\"arrow-forward\"></ion-icon>\n    </ion-button>\n  </ion-buttons>\n</ion-toolbar>\n\n<mwl-calendar-month-view\n  [viewDate]=\"viewDate\"\n  [events]=\"events\"\n  [activeDayIsOpen]=\"activeDayIsOpen\"\n  [weekStartsOn]=\"weekStartsOn\"\n  (dayClicked)=\"onDayClicked($event.day)\"\n  (eventClicked)=\"onHandleEvent('Clicked', $event.event)\">\n</mwl-calendar-month-view>\n",
                 encapsulation: ViewEncapsulation.None,
                 // Important to import '~angular-calendar/css/angular-calendar.css' in calendar.component.scss
                 providers: [
@@ -106,11 +69,15 @@ CalendarComponent.decorators = [
             }] }
 ];
 /** @nocollapse */
-CalendarComponent.ctorParameters = () => [
-    { type: ToastController }
-];
+CalendarComponent.ctorParameters = () => [];
 CalendarComponent.propDecorators = {
-    modalContent: [{ type: ViewChild, args: ['modalContent',] }]
+    modalContent: [{ type: ViewChild, args: ['modalContent',] }],
+    viewDate: [{ type: Input }],
+    events: [{ type: Input }],
+    activeDayIsOpen: [{ type: Input }],
+    weekStartsOn: [{ type: Input }],
+    dayClicked: [{ type: Output }],
+    handleEvent: [{ type: Output }]
 };
 
 /**
@@ -149,4 +116,4 @@ MapfreCalendarModule.decorators = [
 
 export { MapfreCalendarModule, CalendarComponent as ɵb, CustomDateFormatter as ɵa };
 
-//# sourceMappingURL=components.js.map
+//# sourceMappingURL=okode-ngx-components.js.map
