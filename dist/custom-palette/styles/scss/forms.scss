@@ -110,7 +110,7 @@ ion-content[custom-palette] {
     &.item-has-focus {
       &:after {
         border-color: var(--input-focus-color) !important;
-        opacity: .7;
+        box-shadow: inset 0 0 0 1px var(--input-focus-color) !important;
       }
     }
     /*

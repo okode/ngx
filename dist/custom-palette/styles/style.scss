@@ -13,9 +13,9 @@
   // Custom
   --content-bg: #ffffff;
   --content-padding: 18px;
-  --input-focus-color: var(--ion-color-dark);
+  --input-focus-color: var(--ion-color-secondary);
   --input-error-color: var(--ion-color-primary);
-  --item-border-color: #e2e2e2;
+  --item-border-color: var(--ion-color-medium-light);
 }
 
 @import 'scss/ionic-variables.scss';
