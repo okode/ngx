@@ -448,7 +448,7 @@
             this.el = el;
             this.enabledText = '';
             this.disabledText = '';
-            this.shadowCss = "\n    :host {\n      width: 80px;\n    }\n    :host(.toggle-checked) .toggle-inner {\n      -webkit-transform: translate3d(48px, 0, 0);\n      transform: translate3d(48px, 0, 0);\n    }\n    :host .toggle-icon:after {\n      line-height: 33px;\n      color: white;\n      text-transform: uppercase;\n      font-weight: 800;\n      font-size: 13px;\n      width: 50px;\n      display: inline-block;\n      text-align: center;\n    }\n    :host(.toggle-checked) .toggle-icon:after {}\n    :host(:not(.toggle-checked)) .toggle-icon:after {\n      position: absolute;\n      margin-left: 28px;\n      color: #ccc;\n    }\n  ";
+            this.shadowCss = "\n    :host {\n      width: 80px;\n    }\n    :host(.toggle-checked) .toggle-inner {\n      -webkit-transform: translate3d(48px, 0, 0);\n      transform: translate3d(48px, 0, 0);\n    }\n    :host .toggle-icon:after {\n      line-height: 33px;\n      color: white;\n      text-transform: uppercase;\n      font-weight: 800;\n      font-size: 13px;\n      width: 50px;\n      display: inline-block;\n      text-align: center;\n    }\n    :host(.toggle-checked) .toggle-icon:after {}\n    :host(:not(.toggle-checked)) .toggle-icon:after {\n      position: absolute;\n      margin-left: 28px;\n    }\n    :host(:not(.toggle-checked)) .toggle-icon {\n      background-color: #919191;\n    }\n    :host(:not(.toggle-checked)) .toggle-icon:before {\n      background: #919191;\n    }\n  ";
         }
         /**
          * @return {?}

@@ -30,7 +30,12 @@ export class IonToggleDirective implements OnInit, OnChanges {
     :host(:not(.toggle-checked)) .toggle-icon:after {
       position: absolute;
       margin-left: 28px;
-      color: #ccc;
+    }
+    :host(:not(.toggle-checked)) .toggle-icon {
+      background-color: #919191;
+    }
+    :host(:not(.toggle-checked)) .toggle-icon:before {
+      background: #919191;
     }
   `;
 
