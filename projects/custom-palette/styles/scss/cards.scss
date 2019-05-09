@@ -17,6 +17,7 @@ ion-content[custom-palette] {
   ion-card[flat] {
     -webkit-box-shadow: none;
     box-shadow: none;
+    border-radius: 2px !important;
   }
   ion-card[rect] {
     border-radius: 0px;
@@ -26,7 +27,7 @@ ion-content[custom-palette] {
     position: absolute;
     font-size: 30px;
     line-height: 30px;
-    top: calc(50% - 15px);
+    top: 15px;
     left: 15px;
     & + ion-card-content {
       padding-left: 60px;
