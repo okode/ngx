@@ -18,6 +18,9 @@ ion-alert.custom-alert-message {
   }
   .alert-wrapper {
     max-height: 80% !important;
+    min-width: 280px !important;
+    max-width: 360px !important;
+    margin: 20px !important;
   }
   .alert-head {
     padding: 0px !important;
@@ -28,14 +31,14 @@ ion-alert.custom-alert-message {
     text-align: center;
     .title {
       font-size: 20px;
-      line-height: 21px;
+      line-height: 24px;
       font-weight: 600;
       margin: 16px 0;
       color: var(--ion-color-dark);
     }
     .desc {
       font-size: 16px;
-      line-height: 18px;
+      line-height: 20px;
       margin: 16px 0;
       color: var(--ion-color-medium);
     }
@@ -69,22 +72,59 @@ ion-alert.custom-alert-modal-full-screen {
   }
   .alert-wrapper {
     max-height: calc(100% - 30px - var(--ion-safe-area-top) - var(--ion-safe-area-bottom)) !important;
-    max-width: calc(100% - 30px) !important;
+    max-width: 600px !important;
+    margin-left: 15px !important;
+    margin-right: 15px !important;
   }
   .alert-head {
-    padding: 0px !important;
-    .alert-title {
-      margin: 0 20px;
-      padding: 20px 0 15px 0;
-      font-size: 24px;
-      border-bottom: 1px solid rgba(0, 0, 0, .2);
-    }
+    display: none;
   }
   .alert-message {
     max-height: 100% !important;
     max-width: 100% !important;
-    padding: 20px;
-    font-size: 15px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .header {
+      padding: 15px 0;
+      font-size: 24px;
+      color: var(--ion-color-dark);
+      border-bottom: 2px solid var(--ion-color-light);
+      line-height: 24px;
+      font-size: 20px;
+      margin-left: 24px;
+      margin-right: 24px;
+      img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        margin: 5px 10px -5px 0;
+      }
+    }
+    .content {
+      flex: 1 1 auto;
+      overflow-y: scroll;
+      padding-left: 24px;
+      padding-right: 24px;
+      color: var(--ion-color-medium-dark);
+      ion-item.checkbox {
+        margin: 20px 0;
+        --padding-start: 0px;
+        --padding-end: 0px;
+        ion-checkbox {
+          float: left;
+          margin-right: 20px;
+        }
+        ion-label {
+          font-size: 16px;
+          line-height: 20px;
+          color: var(--ion-color-medium-dark);
+        }
+      }
+    }
   }
   .alert-button-group, .alert-button-group.sc-ion-alert-md {
     height: 60px !important;
