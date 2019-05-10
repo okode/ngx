@@ -113,6 +113,8 @@ class IonItemDirective {
       display: none !important;
     }
   `;
+        this.floatingLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
+        this.staticLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
     }
     /**
      * @return {?}
@@ -121,9 +123,9 @@ class IonItemDirective {
         /** @type {?} */
         const e = this.el.nativeElement;
         /** @type {?} */
-        const inputFloatingLabel = e.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
+        const inputFloatingLabel = e.querySelector(this.floatingLabelSelector);
         /** @type {?} */
-        const inputStaticLabel = e.querySelector('ion-checkbox, ion-toggle');
+        const inputStaticLabel = e.querySelector(this.staticLabelSelector);
         /** @type {?} */
         const label = e.querySelector('ion-label');
         if (label && (inputFloatingLabel || inputStaticLabel)) {

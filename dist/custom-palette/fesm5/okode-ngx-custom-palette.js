@@ -96,6 +96,8 @@ var IonItemDirective = /** @class */ (function () {
     function IonItemDirective(el) {
         this.el = el;
         this.shadowCss = "\n    :host(.ion-focused) .item-native {\n      background: transparent;\n    }\n    .item-native {\n      border: none;\n      padding: 0px;\n      background: transparent;\n    }\n    .item-native .item-inner {\n      border: 0px;\n      padding: 0px;\n      min-height: 68px;\n    }\n    .item-highlight {\n      display: none !important;\n    }\n  ";
+        this.floatingLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
+        this.staticLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
     }
     /**
      * @return {?}
@@ -107,9 +109,9 @@ var IonItemDirective = /** @class */ (function () {
         /** @type {?} */
         var e = this.el.nativeElement;
         /** @type {?} */
-        var inputFloatingLabel = e.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
+        var inputFloatingLabel = e.querySelector(this.floatingLabelSelector);
         /** @type {?} */
-        var inputStaticLabel = e.querySelector('ion-checkbox, ion-toggle');
+        var inputStaticLabel = e.querySelector(this.staticLabelSelector);
         /** @type {?} */
         var label = e.querySelector('ion-label');
         if (label && (inputFloatingLabel || inputStaticLabel)) {
