@@ -114,7 +114,7 @@ class IonItemDirective {
     }
   `;
         this.floatingLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
-        this.staticLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
+        this.staticLabelSelector = 'ion-checkbox, ion-toggle';
     }
     /**
      * @return {?}

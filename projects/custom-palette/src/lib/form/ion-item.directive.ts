@@ -25,7 +25,7 @@ export class IonItemDirective implements OnInit {
   `;
 
   private floatingLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
-  private staticLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
+  private staticLabelSelector = 'ion-checkbox, ion-toggle';
 
   constructor(private el: ElementRef) {}
 

@@ -97,7 +97,7 @@ var IonItemDirective = /** @class */ (function () {
         this.el = el;
         this.shadowCss = "\n    :host(.ion-focused) .item-native {\n      background: transparent;\n    }\n    .item-native {\n      border: none;\n      padding: 0px;\n      background: transparent;\n    }\n    .item-native .item-inner {\n      border: 0px;\n      padding: 0px;\n      min-height: 68px;\n    }\n    .item-highlight {\n      display: none !important;\n    }\n  ";
         this.floatingLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
-        this.staticLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
+        this.staticLabelSelector = 'ion-checkbox, ion-toggle';
     }
     /**
      * @return {?}
