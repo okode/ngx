@@ -106,7 +106,7 @@ export class DialogsPage {
 
       <ion-item class="checkbox item-lines-none">
         <ion-checkbox></ion-checkbox>
-        <ion-label>I read and accept the terms and conditions</ion-label>
+        <ion-label>I read and accept the terms</ion-label>
       </ion-item>
     `;
     const alert = await this.alertController.create({
