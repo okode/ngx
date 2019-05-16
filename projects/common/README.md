@@ -28,6 +28,7 @@ npm i @okode/ngx-common
 
 In app/core module:
 ```typescript
+
 import { NgModule } from '@angular/core';
 import { OkodeNgxCommonModule } from '@okode/ngx-common';
 import { IonicStorageModule } from '@ionic/storage';
@@ -38,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     IonicStorageModule.forRoot(), // Required
     HttpClientModule, // Required
     OkodeNgxCommonModule.forRoot(),
+
 ```
 
 
