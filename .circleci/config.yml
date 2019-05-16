@@ -1,60 +1,112 @@
 version: 2.1
+description: Okode ngx
 
-allbranches: &allbranches
+branches: &branches
   context: org-global
 
-orbs:
-  aws-s3: circleci/aws-s3@1.0.7
+tags: &tags
+  context: org-global
+  filters:
+    branches:
+      ignore:
+        - /.*/
+    tags:
+      only: /.*/
 
-jobs:
-  build:
-    docker:
-      - image: circleci/node:11
-    steps:
-      - checkout
-      - restore_cache:
-          key: cache-01-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-      - run:
-          name: Installing npm dependencies
-          command: if [ ! -d "node_modules" ]; then npm ci; fi
-      - run:
-          name: Building ngx
-          command: npm run build
-      - run:
-          name: Building docs
-          command: npm run doc
-      - run:
-          name: Copying docs
-          command: cp -R documentation www
-      - persist_to_workspace:
-          root: .
-          paths:
-            - www
-      - run:
-          name: Restoring package-lock.json
-          command: git checkout package-lock.json
-      - save_cache:
-          key: cache-01-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-  deploy:
-    docker:
-      - image: circleci/python:3
-    steps:
-      - attach_workspace:
-          at: /tmp/workspace
-      - aws-s3/sync:
-          from: /tmp/workspace/www
-          to: s3://ngx-doc
-          arguments: --acl public-read
-          overwrite: true
+orbs:
+  lib:
+    jobs:
+      test:
+        executor: browsers
+        steps:
+          - build:
+              package: false
+      package:
+        executor: node
+        steps:
+          - build:
+              package: true
+    commands:
+      build:
+        parameters:
+          package:
+            type: boolean
+          project:
+            type: string
+        steps:
+          - checkout
+          - restore_cache:
+              key: cache-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+          - run:
+              name: Installing NPM dependencies
+              command: if [ ! -d "node_modules" ]; then npm ci; fi
+          - when:
+              condition: << parameters.package >>
+              steps:
+                - run:
+                    name: Installing Angular CLI and NPM CLI Login
+                    command: sudo npm install -g @angular/cli npm-cli-login
+                - run:
+                    name: Building
+                    command: ng build @okode/<< parameters.project >>
+                - run:
+                    name: Authenticating NPM
+                    command: npm-cli-login
+                - run:
+                    name: Publishing NPM package
+                    command: cd dist/<< parameters.project >> && npm publish --access=public
+          - unless:
+              condition: << parameters.package >>
+              steps:
+                - run:
+                    name: Installing Angular CLI
+                    command: sudo npm install -g @angular/cli
+                - run:
+                    name: Building
+                    command: ng build @okode/<< parameters.project >>
+                - run:
+                    name: Running unit tests
+                    command: ng test @okode/<< parameters.project >> --watch false --progress false
+          - run:
+              name: Restoring package-lock.json
+              command: git checkout package-lock.json
+          - save_cache:
+              key: cache-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+              paths:
+                - node_modules
+
+    executors:
+      browsers:
+        docker:
+          - image: circleci/node:11-browsers
+      node:
+        docker:
+          - image: circleci/node:11
 
 workflows:
-  default:
+  workflow:
     jobs:
-      - build:
-          <<: *allbranches
-      - deploy:
-          <<: *allbranches
-          requires:
-            - build
+      - lib/test:
+          <<: *branches
+          name: test-common
+          project: common
+      - lib/package:
+          <<: *tags
+          name: package-common
+          project: common
+      - lib/test:
+          <<: *branches
+          name: test-components
+          project: components
+      - lib/package:
+          <<: *tags
+          name: package-components
+          project: components
+      - lib/test:
+          <<: *branches
+          name: test-custom-palette
+          project: custom-palette
+      - lib/package:
+          <<: *tags
+          name: package-custom-palette
+          project: custom-palette
