@@ -56,7 +56,7 @@ orbs:
                     command: sudo npm install -g @angular/cli npm-cli-login
                 - run:
                     name: Building
-                    command: ng build @okode/<< parameters.project >>
+                    command: ng build << parameters.project >>
                 - run:
                     name: Authenticating NPM
                     command: npm-cli-login
@@ -71,10 +71,10 @@ orbs:
                     command: sudo npm install -g @angular/cli
                 - run:
                     name: Building
-                    command: ng build @okode/<< parameters.project >>
+                    command: ng build << parameters.project >>
                 - run:
                     name: Running unit tests
-                    command: ng test @okode/<< parameters.project >> --watch false --progress false
+                    command: ng test << parameters.project >> --watch false --progress false
           - run:
               name: Restoring package-lock.json
               command: git checkout package-lock.json
