@@ -10,7 +10,7 @@ import { Injectable, NgModule, APP_INITIALIZER } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var Environment = /** @class */ (function () {
     function Environment(http, storage, actionSheetCtrl, platform) {
@@ -51,10 +51,15 @@ var Environment = /** @class */ (function () {
             this.isInitializing = true;
             this.initEnvs();
         }
-        return new Promise(function (resolve, reject) {
+        return new Promise((/**
+         * @param {?} resolve
+         * @param {?} reject
+         * @return {?}
+         */
+        function (resolve, reject) {
             _this.readyPromiseResolve.push(resolve);
             _this.readyPromiseReject.push(reject);
-        });
+        }));
     };
     /**
      * @private
@@ -66,20 +71,39 @@ var Environment = /** @class */ (function () {
      */
     function () {
         var _this = this;
-        this.http.get(this.JSON_PATH).subscribe(function (json) {
+        this.http.get(this.JSON_PATH).subscribe((/**
+         * @param {?} json
+         * @return {?}
+         */
+        function (json) {
             if (json == null || Object.keys(json).length === 0) {
-                _this.readyPromiseReject.forEach(function (reject) { return reject(); });
+                _this.readyPromiseReject.forEach((/**
+                 * @param {?} reject
+                 * @return {?}
+                 */
+                function (reject) { return reject(); }));
                 console.error("EnvironmentService fails: '" + _this.JSON_PATH + "' is empty or invalid");
                 return;
             }
             /** @type {?} */
-            var environments = Object.keys(json).filter(function (environment) { return environment !== 'default'; });
+            var environments = Object.keys(json).filter((/**
+             * @param {?} environment
+             * @return {?}
+             */
+            function (environment) { return environment !== 'default'; }));
             if (environments == null || environments.length === 0) {
                 _this.setEnv(false, 'default', json['default']);
             }
             else {
-                _this.storage.ready().then(function () {
-                    _this.storage.get(_this.SELECTED_ENVIRONMENT_KEY).then(function (storedEnvironment) {
+                _this.storage.ready().then((/**
+                 * @return {?}
+                 */
+                function () {
+                    _this.storage.get(_this.SELECTED_ENVIRONMENT_KEY).then((/**
+                     * @param {?} storedEnvironment
+                     * @return {?}
+                     */
+                    function (storedEnvironment) {
                         if (storedEnvironment == null) {
                             if (environments.length > 1) {
                                 console.log('No saved environment detected, will prompt user for selection');
@@ -95,14 +119,22 @@ var Environment = /** @class */ (function () {
                             console.log("Detected saved environment: " + storedEnvironment);
                             _this.setEnv(false, storedEnvironment, json['default'], json[storedEnvironment]);
                         }
-                    });
-                });
+                    }));
+                }));
             }
-        }, function (err) {
+        }), (/**
+         * @param {?} err
+         * @return {?}
+         */
+        function (err) {
             console.log(err);
             console.error("EnvironmentService fails: Not found '" + _this.JSON_PATH + "'");
-            _this.readyPromiseReject.forEach(function (reject) { return reject(); });
-        });
+            _this.readyPromiseReject.forEach((/**
+             * @param {?} reject
+             * @return {?}
+             */
+            function (reject) { return reject(); }));
+        }));
     };
     /**
      * @private
@@ -131,7 +163,11 @@ var Environment = /** @class */ (function () {
             this.storage.set(this.SELECTED_ENVIRONMENT_KEY, environmentKey);
         }
         Environment.isReady = true;
-        this.readyPromiseResolve.forEach(function (resolve) { return resolve(); });
+        this.readyPromiseResolve.forEach((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        function (resolve) { return resolve(); }));
     };
     /**
      * @private
@@ -157,12 +193,19 @@ var Environment = /** @class */ (function () {
                         return [4 /*yield*/, this.actionSheetCtrl.create({
                                 header: 'Select environment',
                                 backdropDismiss: false,
-                                buttons: environments.map(function (environment) { return ({
+                                buttons: environments.map((/**
+                                 * @param {?} environment
+                                 * @return {?}
+                                 */
+                                function (environment) { return ({
                                     text: environment,
-                                    handler: function () {
+                                    handler: (/**
+                                     * @return {?}
+                                     */
+                                    function () {
                                         _this.setEnv(true, environment, configs['default'], configs[environment]);
-                                    }
-                                }); })
+                                    })
+                                }); }))
                             })];
                     case 2:
                         actionSheet = _a.sent();
@@ -189,7 +232,7 @@ var Environment = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var Navigator = /** @class */ (function () {
     function Navigator(navCtrl, config) {
@@ -198,6 +241,7 @@ var Navigator = /** @class */ (function () {
         this.animation = 'default';
         this.animationConfigReady = false;
         this.startNavFlow = false;
+        this.defaultAnimation = 'default';
     }
     /**
      * @return {?}
@@ -245,7 +289,12 @@ var Navigator = /** @class */ (function () {
      */
     function (url, params) {
         this.params = params;
-        return this.navCtrl.navigateBack(url || this.getPreviousPageUrl());
+        /** @type {?} */
+        var targetUrl = url || this.getPreviousPageUrl();
+        if (!targetUrl) {
+            return Promise.resolve(false);
+        }
+        return this.navCtrl.navigateBack(targetUrl);
     };
     /**
      * @return {?}
@@ -282,7 +331,11 @@ var Navigator = /** @class */ (function () {
         /** @type {?} */
         var views = __spread(this.getViews()).reverse();
         /** @type {?} */
-        var currentNavFlow = views.findIndex(function (v) { return v.element.getAttribute('new-nav-flow'); });
+        var currentNavFlow = views.findIndex((/**
+         * @param {?} v
+         * @return {?}
+         */
+        function (v) { return v.element.getAttribute('new-nav-flow'); }));
         /** @type {?} */
         var targetPage = currentNavFlow >= 0 && views.length > 1 ? views[currentNavFlow + 1] : null;
         return targetPage ? this.pop(targetPage.url, params) : this.popToRoot();
@@ -304,6 +357,17 @@ var Navigator = /** @class */ (function () {
         return views;
     };
     /**
+     * @param {?} animation
+     * @return {?}
+     */
+    Navigator.prototype.setDefaultAnimation = /**
+     * @param {?} animation
+     * @return {?}
+     */
+    function (animation) {
+        this.defaultAnimation = animation;
+    };
+    /**
      * @private
      * @return {?}
      */
@@ -314,7 +378,7 @@ var Navigator = /** @class */ (function () {
     function () {
         /** @type {?} */
         var views = this.getViews();
-        return (views && views.length > 1) ? views[views.length - 2].url : '';
+        return (views && views.length > 1) ? views[views.length - 2].url : null;
     };
     /**
      * @private
@@ -340,7 +404,13 @@ var Navigator = /** @class */ (function () {
     function () {
         var _this = this;
         this.animationConfigReady = true;
-        this.config.set('navAnimation', function (AnimationC, baseEl, opts) {
+        this.config.set('navAnimation', (/**
+         * @param {?} AnimationC
+         * @param {?} baseEl
+         * @param {?} opts
+         * @return {?}
+         */
+        function (AnimationC, baseEl, opts) {
             /** @type {?} */
             var anim = _this.animation;
             if (opts.direction === 'back') {
@@ -354,21 +424,20 @@ var Navigator = /** @class */ (function () {
             opts.leavingEl.setAttribute('animation-leave', _this.animation);
             /** @type {?} */
             var ios = (opts && opts.mode === 'ios');
+            if (anim === 'default') {
+                anim = _this.defaultAnimation;
+            }
             switch (anim) {
                 case 'default':
-                    if (ios) {
-                        return animationPush(AnimationC, baseEl, opts);
-                    }
-                    else {
-                        return animationModal(AnimationC, baseEl, opts);
-                    }
+                    return ios ? animationPush(AnimationC, baseEl, opts)
+                        : animationModal(AnimationC, baseEl, opts);
                 case 'push': return animationPush(AnimationC, baseEl, opts);
                 case 'modal': return animationModal(AnimationC, baseEl, opts);
                 case 'fade': return animationFade(AnimationC, baseEl, opts);
                 case 'safepush': return animationSafePush(AnimationC, baseEl, opts);
                 default: return animationModal(AnimationC, baseEl, opts);
             }
-        });
+        }));
     };
     Navigator.decorators = [
         { type: Injectable }
@@ -416,14 +485,18 @@ function animationSafePush(a, b, o) { return safePushAnimation(a, b, o); }
  */
 function fadeAnimation(AnimationC, _, opts) {
     /** @type {?} */
-    var getIonPageElement = function (element) {
+    var getIonPageElement = (/**
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
         if (element.classList.contains('ion-page')) {
             return element;
         }
         /** @type {?} */
         var page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
         return page || element;
-    };
+    });
     /** @type {?} */
     var enteringEl = opts.enteringEl;
     /** @type {?} */
@@ -467,14 +540,18 @@ function fadeAnimation(AnimationC, _, opts) {
  */
 function safePushAnimation(AnimationC, _, opts) {
     /** @type {?} */
-    var getIonPageElement = function (element) {
+    var getIonPageElement = (/**
+     * @param {?} element
+     * @return {?}
+     */
+    function (element) {
         if (element.classList.contains('ion-page')) {
             return element;
         }
         /** @type {?} */
         var page = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
         return page || element;
-    };
+    });
     /** @type {?} */
     var enteringEl = opts.enteringEl;
     /** @type {?} */
@@ -504,14 +581,17 @@ function safePushAnimation(AnimationC, _, opts) {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var HardwareBackButton = /** @class */ (function () {
     function HardwareBackButton(navCtrl, nav, platform) {
         this.navCtrl = navCtrl;
         this.nav = nav;
         this.platform = platform;
-        this.filterCondition = function () { return true; };
+        this.filterCondition = (/**
+         * @return {?}
+         */
+        function () { return true; });
         this.intialized = false;
     }
     /**
@@ -526,7 +606,10 @@ var HardwareBackButton = /** @class */ (function () {
         if (!this.intialized) {
             this.init();
         }
-        this.filterCondition = condition || (function () { return true; });
+        this.filterCondition = condition || ((/**
+         * @return {?}
+         */
+        function () { return true; }));
     };
     /**
      * @return {?}
@@ -538,7 +621,10 @@ var HardwareBackButton = /** @class */ (function () {
         if (!this.intialized) {
             this.init();
         }
-        this.filterCondition = function () { return false; };
+        this.filterCondition = (/**
+         * @return {?}
+         */
+        function () { return false; });
     };
     /**
      * @private
@@ -553,7 +639,13 @@ var HardwareBackButton = /** @class */ (function () {
         this.intialized = true;
         /** @type {?} */
         var hwBackSubject = new Subject();
-        hwBackSubject.pipe(throttleTime(500), filter(function () { return _this.filterCondition(); })).subscribe(function () { return __awaiter(_this, void 0, void 0, function () {
+        hwBackSubject.pipe(throttleTime(500), filter((/**
+         * @return {?}
+         */
+        function () { return _this.filterCondition(); }))).subscribe((/**
+         * @return {?}
+         */
+        function () { return __awaiter(_this, void 0, void 0, function () {
             var overlaySelector, overlay, view;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -585,11 +677,17 @@ var HardwareBackButton = /** @class */ (function () {
                         return [2 /*return*/];
                 }
             });
-        }); });
+        }); }));
         // Overring default hardware back button behaviour
-        this.platform.ready().then(function () {
-            _this.platform.backButton.subscribeWithPriority(9999, function () { hwBackSubject.next(event); });
-        });
+        this.platform.ready().then((/**
+         * @return {?}
+         */
+        function () {
+            _this.platform.backButton.subscribeWithPriority(9999, (/**
+             * @return {?}
+             */
+            function () { hwBackSubject.next(event); }));
+        }));
     };
     /**
      * @private
@@ -622,7 +720,7 @@ var HardwareBackButton = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 // @dynamic
 var OkodeNgxCommonModule = /** @class */ (function () {
@@ -665,7 +763,10 @@ var OkodeNgxCommonModule = /** @class */ (function () {
  */
 function moduleInitializer(environment) {
     var _this = this;
-    return function () { return __awaiter(_this, void 0, void 0, function () {
+    return (/**
+     * @return {?}
+     */
+    function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, environment.ready()];
@@ -674,17 +775,17 @@ function moduleInitializer(environment) {
                     return [2 /*return*/];
             }
         });
-    }); };
+    }); });
 }
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 export { Environment, fadeAnimation, safePushAnimation, Navigator, HardwareBackButton, moduleInitializer, OkodeNgxCommonModule };

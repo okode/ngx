@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 
 
 /**
- * <example-url>../../assets/playground?componentPath=forms</example-url>
+ * <example-url>../../assets/playground.html?componentPath=forms</example-url>
  */
 @Component({
   selector: 'forms-page',
@@ -10,5 +11,9 @@ import { Component } from '@angular/core';
   styleUrls: ['forms.page.scss'],
 })
 export class FormsPage {
+
+  selectHTMLValue;
+
+  constructor(public platform: Platform) {}
 
 }

@@ -1,61 +1,30 @@
-import { Component, ViewChild, TemplateRef, OnInit, ViewEncapsulation } from '@angular/core';
-import { startOfDay, subDays, addDays, endOfMonth, addHours } from 'date-fns';
-import { CalendarEvent, CalendarView, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CalendarEvent } from 'angular-calendar';
 import { ToastController } from '@ionic/angular';
-
-class CustomDateFormatter extends CalendarDateFormatter {
-  public monthViewColumnHeader({ date, locale }: DateFormatterParams): string {
-    return new DatePipe(locale).transform(date, 'EEE', locale);
-  }
-  public monthViewTitle({ date, locale }: DateFormatterParams): string {
-    return new DatePipe(locale).transform(date, 'MMMM y', locale);
-  }
-}
-
+import { DatePipe } from '@angular/common';
+import { subDays, startOfDay, addDays, endOfMonth, addHours } from 'date-fns';
 /**
- * <example-url>../../assets/playground?componentPath=calendar</example-url>
+ * <example-url>../../assets/playground.html?componentPath=calendar</example-url>
  */
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.page.html',
-  styleUrls: ['./calendar.page.scss'],
-  encapsulation: ViewEncapsulation.None,
-  // Important to import '~angular-calendar/css/angular-calendar.css' in calendar.page.scss
-  providers: [
-    {
-      provide: CalendarDateFormatter,
-      useClass: CustomDateFormatter
-    }
-  ]
+  styleUrls: ['./calendar.page.scss']
 })
 export class CalendarPage implements OnInit {
 
-  // Documentation: https://github.com/mattlewis92/angular-calendar
-
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
-
-  CalendarView = CalendarView;
-  viewDate: Date = new Date();
-  events: CalendarEvent[] = [];
-
   constructor(
     private toastController: ToastController
-  ) {}
+  ) { }
+
+
+  viewDate = new Date();
+  events: CalendarEvent[] = [];
+  activeDayIsOpen = false;
+  weekStartsOn = '1';
 
   ngOnInit() {
     this.addEvents();
-  }
-
-  async dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }) {
-    const toast = await this.toastController.create({
-      message: 'Day selected: ' + new DatePipe('en').transform(date, 'yyyy-MM-dd', 'en'),
-      color: 'medium',
-      position: 'bottom',
-      duration: 2000
-    });
-    toast.present();
-    console.log(date, events);
   }
 
   addEvents() {
@@ -74,6 +43,28 @@ export class CalendarPage implements OnInit {
       end: new Date(),
       title: 'A draggable and resizable event',
     }];
+  }
+
+  async onDayClicked(event: { date: Date; events: CalendarEvent[] }) {
+    const toast = await this.toastController.create({
+      message: 'Day selected: ' + new DatePipe('en').transform(event.date, 'yyyy-MM-dd', 'en'),
+      color: 'medium',
+      position: 'bottom',
+      duration: 2000
+    });
+    toast.present();
+    console.log(event.date, event.events);
+  }
+
+  async onHandleEvent(event: { action: string, event: CalendarEvent }) {
+    const toast = await this.toastController.create({
+      message: 'Event selected: ' + event.event.title,
+      color: 'medium',
+      position: 'bottom',
+      duration: 2000
+    });
+    toast.present();
+    console.log(event.action, event);
   }
 
 }

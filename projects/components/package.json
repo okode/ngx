@@ -1,0 +1,10 @@
+{
+  "name": "@okode/ngx-components",
+  "version": "0.0.2",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "angular-calendar": "^0.27.3",
+    "date-fns": "^1.30.1"
+  }
+}

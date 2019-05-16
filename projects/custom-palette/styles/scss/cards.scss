@@ -12,6 +12,10 @@ ion-content[custom-palette] {
         white-space: inherit;
       }
     }
+    ion-card-content {
+      padding: 20px;
+      font-size: 16px;
+    }
   }
   /* flat, flat-light, flat-dark */
   ion-card[flat] {
@@ -19,14 +23,14 @@ ion-content[custom-palette] {
     box-shadow: none;
   }
   ion-card[rect] {
-    border-radius: 0px;
+    border-radius: 2px !important;
   }
   /* Basic content with icon */
   ion-card > ion-icon {
     position: absolute;
     font-size: 30px;
     line-height: 30px;
-    top: calc(50% - 15px);
+    top: 15px;
     left: 15px;
     & + ion-card-content {
       padding-left: 60px;

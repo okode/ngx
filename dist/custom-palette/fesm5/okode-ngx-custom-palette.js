@@ -1,5 +1,5 @@
 import { Platform } from '@ionic/angular';
-import { Directive, ElementRef, NgModule } from '@angular/core';
+import { Directive, ElementRef, Input, NgModule } from '@angular/core';
 
 /**
  * @fileoverview added by tsickle
@@ -96,6 +96,8 @@ var IonItemDirective = /** @class */ (function () {
     function IonItemDirective(el) {
         this.el = el;
         this.shadowCss = "\n    :host(.ion-focused) .item-native {\n      background: transparent;\n    }\n    .item-native {\n      border: none;\n      padding: 0px;\n      background: transparent;\n    }\n    .item-native .item-inner {\n      border: 0px;\n      padding: 0px;\n      min-height: 68px;\n    }\n    .item-highlight {\n      display: none !important;\n    }\n  ";
+        this.floatingLabelSelector = 'ion-input, ion-select, select, ion-textarea, ion-datetime';
+        this.staticLabelSelector = 'ion-checkbox, ion-toggle';
     }
     /**
      * @return {?}
@@ -107,9 +109,9 @@ var IonItemDirective = /** @class */ (function () {
         /** @type {?} */
         var e = this.el.nativeElement;
         /** @type {?} */
-        var inputFloatingLabel = e.querySelector('ion-input, ion-select, ion-textarea, ion-datetime');
+        var inputFloatingLabel = e.querySelector(this.floatingLabelSelector);
         /** @type {?} */
-        var inputStaticLabel = e.querySelector('ion-checkbox, ion-toggle');
+        var inputStaticLabel = e.querySelector(this.staticLabelSelector);
         /** @type {?} */
         var label = e.querySelector('ion-label');
         if (label && (inputFloatingLabel || inputStaticLabel)) {
@@ -424,6 +426,77 @@ var IonRadioGroupDirective = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+var IonToggleDirective = /** @class */ (function () {
+    function IonToggleDirective(el) {
+        this.el = el;
+        this.enabledText = '';
+        this.disabledText = '';
+        this.shadowCss = "\n    :host {\n      width: 80px;\n    }\n    :host(.toggle-checked) .toggle-inner {\n      -webkit-transform: translate3d(48px, 0, 0);\n      transform: translate3d(48px, 0, 0);\n    }\n    :host .toggle-icon:after {\n      line-height: 33px;\n      color: white;\n      text-transform: uppercase;\n      font-weight: 800;\n      font-size: 13px;\n      width: 50px;\n      display: inline-block;\n      text-align: center;\n    }\n    :host(.toggle-checked) .toggle-icon:after {}\n    :host(:not(.toggle-checked)) .toggle-icon:after {\n      position: absolute;\n      margin-left: 28px;\n    }\n    :host(:not(.toggle-checked)) .toggle-icon {\n      background-color: #919191;\n    }\n    :host(:not(.toggle-checked)) .toggle-icon:before {\n      background: #919191;\n    }\n  ";
+    }
+    /**
+     * @return {?}
+     */
+    IonToggleDirective.prototype.ngOnInit = /**
+     * @return {?}
+     */
+    function () {
+        this.setShadowStyle();
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    IonToggleDirective.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        if (changes && (changes.enabledText || changes.disabledText)) {
+            this.getShadow().innerHTML += "<style>\n        :host(.toggle-checked) .toggle-icon:after { content: '" + this.enabledText + "'; }\n        :host(:not(.toggle-checked)) .toggle-icon:after { content: '" + this.disabledText + "'; }\n      </style>";
+        }
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    IonToggleDirective.prototype.getShadow = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        return this.el.nativeElement.shadowRoot || this.el.nativeElement.attachShadow({ mode: 'open' });
+    };
+    /**
+     * @private
+     * @return {?}
+     */
+    IonToggleDirective.prototype.setShadowStyle = /**
+     * @private
+     * @return {?}
+     */
+    function () {
+        this.getShadow().innerHTML += "<style>" + this.shadowCss + "</style>";
+    };
+    IonToggleDirective.decorators = [
+        { type: Directive, args: [{
+                    selector: "ion-toggle[custom-palette-toggle][mode='ios']"
+                },] }
+    ];
+    /** @nocollapse */
+    IonToggleDirective.ctorParameters = function () { return [
+        { type: ElementRef }
+    ]; };
+    IonToggleDirective.propDecorators = {
+        enabledText: [{ type: Input }],
+        disabledText: [{ type: Input }]
+    };
+    return IonToggleDirective;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 /** @type {?} */
 var DECLARATIONS = [
     IonHeaderDirective,
@@ -434,7 +507,8 @@ var DECLARATIONS = [
     IonTextAreaDirective,
     IonSelectDirective,
     IonDateTimeDirective,
-    IonRadioGroupDirective
+    IonRadioGroupDirective,
+    IonToggleDirective
 ];
 var OkodeNgxCustomPaletteModule = /** @class */ (function () {
     function OkodeNgxCustomPaletteModule() {
@@ -459,6 +533,6 @@ var OkodeNgxCustomPaletteModule = /** @class */ (function () {
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
+export { OkodeNgxCustomPaletteModule, IonDateTimeDirective as ɵh, IonInputDirective as ɵe, IonItemDirective as ɵd, IonRadioGroupDirective as ɵi, IonSelectDirective as ɵg, IonTextAreaDirective as ɵf, IonToggleDirective as ɵj, IonContentDirective as ɵb, IonFooterDirective as ɵc, IonHeaderDirective as ɵa };
 
 //# sourceMappingURL=okode-ngx-custom-palette.js.map

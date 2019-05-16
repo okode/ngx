@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, ActionSheetController, LoadingController, ToastController } from '@ionic/angular';
 
 /**
- * <example-url>../../assets/playground?componentPath=dialogs</example-url>
+ * <example-url>../../assets/playground.html?componentPath=dialogs</example-url>
  */
 @Component({
   selector: 'dialogs-page',
@@ -75,7 +75,7 @@ export class DialogsPage {
   }
 
   async presentCustomAlertModalInfo() {
-    const header = `Information`;
+    const header = `<img src="https://via.placeholder.com/100x100.png"> Information`;
     const content = `
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent maximus sagittis urna ut
       volutpat. Donec <b>id eros ac elit vulputate vehicula</b>. Donec vel imperdiet mauris, vel
@@ -103,18 +103,28 @@ export class DialogsPage {
       Curabitur a nisi sed magna consectetur scelerisque nec a lorem. Nulla sed magna diam. Nulla
       quis dolor quis leo sodales tempus sed nec leo. Maecenas blandit, ligula eget efficitur
       feugiat, diam nisi faucibus metus, a luctus lectus nisl vel nibh.</p>
+
+      <ion-item class="checkbox item-lines-none">
+        <ion-checkbox></ion-checkbox>
+        <ion-label>I read and accept the terms</ion-label>
+      </ion-item>
     `;
     const alert = await this.alertController.create({
-      header: header,
       message: `
-        <p class="content" *ngIf="${content}">${content}</p>
+        <div class="header" *ngIf="${header !== null}">${header}</div>
+        <div class="content" *ngIf="${content !== null}">${content}</div>
       `,
       mode: 'md',
       backdropDismiss: false,
       cssClass: 'custom-alert-modal-full-screen',
       buttons: [{
         text: 'Close',
-        handler: () => { console.log('Confirm Okay'); }
+        handler: () => {
+          const modal = document.getElementsByClassName('custom-alert-modal-full-screen')[0];
+          const checkbox = modal ? modal.querySelector('ion-checkbox') : null;
+          const checkedTerms = (checkbox && checkbox.getAttribute('aria-checked') === 'true');
+          console.log('On close. Checked terms: ' + checkedTerms);
+        }
       }]
     });
     await alert.present();

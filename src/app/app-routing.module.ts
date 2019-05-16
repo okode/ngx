@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'buttons', loadChildren: './buttons/buttons.module#ButtonsPageModule' },
   { path: 'texts', loadChildren: './texts/texts.module#TextsPageModule' },
   { path: 'dialogs', loadChildren: './dialogs/dialogs.module#DialogsPageModule' },
-  { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarPageModule' }
+  { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarPageModule' },
+  { path: 'theming', loadChildren: './theming/theming.module#ThemingPageModule' }
 ];
 
 @NgModule({

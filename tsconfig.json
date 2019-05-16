@@ -30,6 +30,12 @@
       ],
       "custom-palette/*": [
         "dist/custom-palette/*"
+      ],
+      "components": [
+        "dist/components"
+      ],
+      "components/*": [
+        "dist/components/*"
       ]
     }
   }

@@ -8,9 +8,12 @@ ion-content[custom-palette] {
     --background: transparent;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-    margin-block-start: 8px;
-    margin-block-end: 16px;
+    font-weight: 300;
+    margin-block-start: .5em;
+    margin-block-end: 1em;
+    b, strong {
+      font-weight: 600;
+    }
     ion-icon {
       margin-right: .25em;
       margin-left: .25em;
