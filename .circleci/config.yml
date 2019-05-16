@@ -17,15 +17,23 @@ orbs:
   lib:
     jobs:
       test:
+        parameters:
+          project:
+            type: string
         executor: browsers
         steps:
           - build:
               package: false
+              project: << parameters.project >>
       package:
+        parameters:
+          project:
+            type: string
         executor: node
         steps:
           - build:
               package: true
+              project: << parameters.project >>
     commands:
       build:
         parameters:
