@@ -72,9 +72,6 @@ orbs:
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
-                - run:
-                    name: Running unit tests
-                    command: ng test << parameters.project >> --watch false --progress false
           - run:
               name: Restoring package-lock.json
               command: git checkout package-lock.json
