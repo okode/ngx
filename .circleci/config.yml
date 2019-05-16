@@ -1,11 +1,7 @@
 version: 2.1
 
-defaults: &all-except-master
+allbranches: &allbranches
   context: org-global
-  filters:
-    branches:
-      ignore:
-        - master
 
 orbs:
   aws-s3: circleci/aws-s3@1.0.7
@@ -57,8 +53,8 @@ workflows:
   default:
     jobs:
       - build:
-          <<: *all-except-master
+          <<: *allbranches
       - deploy:
-          <<: *all-except-master
+          <<: *allbranches
           requires:
             - build
