@@ -128,7 +128,7 @@ orbs:
               at: dist
           - run:
               name: Building
-              command: ionic build --prod
+              command: ionic build
           - run:
               name: Building docs
               command: npm run doc
