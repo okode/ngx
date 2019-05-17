@@ -15,6 +15,7 @@ ion-content[custom-palette] {
     ion-card-content {
       padding: 20px;
       font-size: 16px;
+      line-height: 20px;
     }
   }
   /* flat, flat-light, flat-dark */
@@ -45,5 +46,4 @@ ion-content[custom-palette] {
   ion-card[bordered-bottom] {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   }
-
 }
