@@ -43,11 +43,15 @@ orbs:
         parameters:
           project:
             type: string
+          copy-styles:
+            type: boolean
+            default: false
         executor: node
         steps:
           - build:
               package: true
               project: << parameters.project >>
+              copy-styles: << parameters.copy-styles >>
       pwa:
         executor: node
         steps:
@@ -71,6 +75,9 @@ orbs:
             type: boolean
           project:
             type: string
+          copy-styles:
+            type: boolean
+            default: false
         steps:
           - checkout
           - restore_cache:
@@ -87,6 +94,12 @@ orbs:
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
+                - when:
+                    condition: << parameters.copy-styles >>
+                    steps:
+                      - run:
+                          name: Copy styles
+                          command: cp -R projects/<< parameters.project >>/styles dist/<< parameters.project >>/
                 - persist_to_workspace:
                     root: dist
                     paths:
@@ -174,6 +187,7 @@ workflows:
           <<: *tags
           name: package-custom-palette
           project: custom-palette
+          copy-styles: true
       - lib/pwa:
           <<: *tags
           name: pwa
