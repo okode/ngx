@@ -13,7 +13,7 @@
   // Custom
   --content-bg: #ffffff;
   --content-padding: 18px;
-  --input-focus-color: var(--ion-color-secondary);
+  --input-focus-color: rgba(var(--ion-color-secondary-rgb), .5);
   --input-error-color: var(--ion-color-primary);
   --item-border-color: var(--ion-color-medium-light);
 }

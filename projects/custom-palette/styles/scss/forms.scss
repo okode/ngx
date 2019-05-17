@@ -11,7 +11,7 @@ ion-content[custom-palette] {
     &:after {
       content: ' ';
       position: absolute;
-      z-index: 1;
+      z-index: 10;
       left: 0px;
       top: 0px;
       height: calc(100% - 22px);
@@ -40,6 +40,7 @@ ion-content[custom-palette] {
       }
       &.label-floating {
         transform: translate3d(0, 28px, 0) !important;
+        z-index: 20;
       }
     }
     ion-label[position="floating"]::first-line {
@@ -139,7 +140,7 @@ ion-content[custom-palette] {
     /*
      *  item-has-error
      */
-    &.item-has-error {
+    &.item-has-error:not(.item-has-focus) {
       &:after {
         border-color: var(--input-error-color) !important;
         opacity: 1;
@@ -165,6 +166,7 @@ ion-content[custom-palette] {
     padding: 0px 16px 10px 16px;
     ion-label {
       white-space: normal;
+      color: var(--ion-color-medium-dark);
     }
     ion-toggle {
       z-index: 9999;

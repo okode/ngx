@@ -50,6 +50,11 @@ ion-content[custom-palette] {
     font-size: 16px;
     line-height: 20px;
   }
+  a {
+    background-color: transparent;
+    color: var(--ion-color-primary);
+    text-decoration: underline;
+  }
   [margin] {
     margin: var(--content-padding) !important;
   }
