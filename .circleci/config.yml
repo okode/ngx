@@ -88,9 +88,9 @@ orbs:
                     name: Building
                     command: ng build << parameters.project >>
                 - persist_to_workspace:
-                    root: .
+                    root: dist
                     paths:
-                      - dist/<< parameters.project >>
+                      - << parameters.project >>
                 - run:
                     name: Authenticating NPM
                     command: npm-cli-login
