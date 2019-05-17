@@ -2,6 +2,12 @@
 
 Okode libraries for Ionic 4+ projects.
 
+## Publish all libraries
+
+```
+./release.sh CURRENT_VERSION NEXT_VERSION
+```
+
 ## Libraries
 
 ### [@okode/ngx-common](projects/common/README.md)

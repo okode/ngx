@@ -4,19 +4,13 @@ Okode custom Ionic 4+ components
 
 #### Local build
 
-npm run build -- custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
+ng build custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
 
-#### Build and publish
+#### Publish all projects
 
-- Make sure you're logged in as `okode`:
-   - `npm whoami` / `npm logout`
-   - `npm adduser` (username: okode, email: developers@okode.com)
-- Bump version `projects/custom-palette/package.json`
-- Build and publish
 ```
-npm run build -- custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/ && cd dist/custom-palette && npm publish --access=public && cd ../..
+./release.sh CURRENT_VERSION NEXT_VERSION
 ```
-- Commit changes
 
 #### Install package
 

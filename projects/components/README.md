@@ -4,19 +4,13 @@ Okode custom functional components for Ionic 4+ projects.
 
 #### Local build
 
-npm run build -- components
+ng build components
 
-#### Build and publish
+#### Publish all projects
 
-- Make sure you're logged in as `okode`:
-   - `npm whoami` / `npm logout`
-   - `npm adduser` (username: okode, email: developers@okode.com)
-- Bump version `projects/components/package.json`
-- Build and publish
 ```
-npm run build -- components && cd dist/components && npm publish --access=public && cd ../..
+./release.sh CURRENT_VERSION NEXT_VERSION
 ```
-- Commit changes
 
 #### Install package
 
