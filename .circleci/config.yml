@@ -1,5 +1,9 @@
 version: 2.1
+
 description: Okode ngx
+
+cache-key-npm: &cache-key-npm
+  key: cache-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
 
 branches: &branches
   context: org-global
@@ -15,6 +19,16 @@ tags: &tags
 
 orbs:
   lib:
+    executors:
+      browsers:
+        docker:
+          - image: circleci/node:11-browsers
+      node:
+        docker:
+          - image: circleci/node:11
+      python:
+        docker:
+          - image: circleci/python:3
     jobs:
       test:
         parameters:
@@ -34,6 +48,22 @@ orbs:
           - build:
               package: true
               project: << parameters.project >>
+      pwa:
+        executor: node
+        steps:
+          - pwa
+      pwadeploy:
+        executor: python
+        steps:
+          - attach_workspace:
+              at: /tmp/workspace
+          - run:
+              name: Deploying PWA to AWS S3
+              command: |
+                sudo pip install awscli
+                aws s3 rm s3://ngx-doc --recursive
+                aws s3 sync /tmp/workspace/www s3://ngx-doc --acl public-read
+
     commands:
       build:
         parameters:
@@ -44,7 +74,7 @@ orbs:
         steps:
           - checkout
           - restore_cache:
-              key: cache-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+              << : *cache-key-npm
           - run:
               name: Installing NPM dependencies
               command: if [ ! -d "node_modules" ]; then npm ci; fi
@@ -57,6 +87,10 @@ orbs:
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
+                - persist_to_workspace:
+                    root: .
+                    paths:
+                      - dist/<< parameters.project >>
                 - run:
                     name: Authenticating NPM
                     command: npm-cli-login
@@ -76,17 +110,42 @@ orbs:
               name: Restoring package-lock.json
               command: git checkout package-lock.json
           - save_cache:
-              key: cache-npm-{{ arch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "package-lock.json" }}
+              << : *cache-key-npm
               paths:
                 - node_modules
-
-    executors:
-      browsers:
-        docker:
-          - image: circleci/node:11-browsers
-      node:
-        docker:
-          - image: circleci/node:11
+      pwa:
+        steps:
+          - checkout
+          - restore_cache:
+              << : *cache-key-npm
+          - run:
+              name: Installing NPM dependencies
+              command: if [ ! -d "node_modules" ]; then npm ci; fi
+          - run:
+              name: Installing Ionic
+              command: sudo npm install -g ionic
+          - attach_workspace:
+              at: dist
+          - run:
+              name: Building
+              command: ionic build --prod
+          - run:
+              name: Building docs
+              command: npm run doc
+          - run:
+              name: Copying docs
+              command: cp -R documentation www
+          - persist_to_workspace:
+              root: .
+              paths:
+                - www
+          - run:
+              name: Restoring package-lock.json
+              command: git checkout package-lock.json
+          - save_cache:
+              << : *cache-key-npm
+              paths:
+                - node_modules
 
 workflows:
   workflow:
@@ -115,3 +174,16 @@ workflows:
           <<: *tags
           name: package-custom-palette
           project: custom-palette
+      - lib/pwa:
+          <<: *tags
+          name: pwa
+          requires:
+            - package-common
+            - package-components
+            - package-custom-palette
+      - lib/pwadeploy:
+          <<: *tags
+          name: pwadeploy
+          requires:
+            - pwa
+
