@@ -173,14 +173,6 @@ workflows:
           project: common
       - lib/test:
           <<: *branches
-          name: test-components
-          project: components
-      - lib/package:
-          <<: *tags
-          name: package-components
-          project: components
-      - lib/test:
-          <<: *branches
           name: test-custom-palette
           project: custom-palette
       - lib/package:
