@@ -22,7 +22,6 @@ git push --tags
 
 # Bump version
 sed -i '' "s/$CURRENT/$NEXT/" projects/common/package.json
-sed -i '' "s/$CURRENT/$NEXT/" projects/components/package.json
 sed -i '' "s/$CURRENT/$NEXT/" projects/custom-palette/package.json
 
 # Update develop with new bumped version
