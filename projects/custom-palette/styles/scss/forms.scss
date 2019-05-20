@@ -71,11 +71,12 @@ ion-content[custom-palette] {
       height: 20px;
       line-height: 20px;
     }
-    ion-input input[type="date"] {
+    ion-input input[type="date"] {    
       opacity: 0;
       &::-webkit-clear-button { display: none; }
       &::-webkit-inner-spin-button { display: none; }
       &::-webkit-calendar-picker-indicator { color: #2c3e50; }
+      &::-webkit-calendar-picker-indicator{ display: none; }
     }
     ion-input.has-value input[type="date"], ion-input.has-focus input[type="date"] {
       opacity: 1;
@@ -215,9 +216,11 @@ ion-content[custom-palette] {
     }
     &.item-has-focus ion-icon {
       color: var(--input-focus-color);
+      opacity: 1 !important;
     }
     &.item-has-error ion-icon {
       color: var(--custom-error-color);
+      opacity: 1 !important;
     }
   }
 }
