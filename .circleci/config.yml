@@ -185,7 +185,6 @@ workflows:
           name: pwa
           requires:
             - package-common
-            - package-components
             - package-custom-palette
       - lib/pwadeploy:
           <<: *tags
