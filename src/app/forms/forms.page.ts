@@ -13,6 +13,8 @@ import { Platform } from '@ionic/angular';
 export class FormsPage {
 
   selectHTMLValue;
+  date;
+  name;
 
   constructor(public platform: Platform) {}
 
