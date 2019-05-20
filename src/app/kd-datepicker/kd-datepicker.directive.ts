@@ -1,15 +1,16 @@
-import { Directive, ElementRef, OnInit, Output, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import * as WindowDatePicker from './kd-datepicker.lib';
 import { KdDatepickerCssStyle } from './kd-datepicker.style';
 
 @Directive({
   selector: '[kdDatepicker]'
 })
-export class KdDatepickerDirective implements OnInit {
+export class KdDatepickerDirective implements OnInit, OnChanges {
 
   private picker;
   private container;
-  @Output() dateSelected = new EventEmitter();
+  @Input() date;
+  @Output() onDateChange = new EventEmitter();
 
   constructor(private elem: ElementRef) {}
 
@@ -18,10 +19,12 @@ export class KdDatepickerDirective implements OnInit {
     this.elem.nativeElement.style.cursor = 'pointer';
     this.addCssStyle();
     this.createPickerContainer();
+    const lang = this.detectLanguage();
     this.picker = new WindowDatePicker({
       el: this.container,
       toggleEl: this.elem.nativeElement,
-      type: 'DATE'
+      type: 'DATE',
+      lang: lang
     });
     this.picker.el.addEventListener('wdp.open', () => { ScrollUtil.disableScroll(); });
     this.picker.el.addEventListener('wdp.close', () => { ScrollUtil.enableScroll(); });
@@ -31,11 +34,17 @@ export class KdDatepickerDirective implements OnInit {
       if (val.year &&  val.month && val.day) {
         date = `${val.year}-${('0' + val.month).slice(-2)}-${('0' + val.day).slice(-2)}`;
       }
-      this.dateSelected.emit(date);
+      this.onDateChange.emit(date);
       setTimeout(() => {
         this.picker.close();
       }, 200);
     });
+  }
+
+  ngOnChanges() {
+    if (this.picker && this.date) {
+      this.picker.set(new Date(this.date));
+    }
   }
 
   private createPickerContainer() {
@@ -52,6 +61,16 @@ export class KdDatepickerDirective implements OnInit {
     style.id = 'kdDatepickerStyleTag';
     style.appendChild(document.createTextNode(KdDatepickerCssStyle));
     document.body.appendChild(style);
+  }
+
+  private detectLanguage() {
+    let lang = window.navigator.language || navigator.language;
+    if (lang) { lang = lang.split('-')[0]; }
+    switch (lang) {
+      case 'es': return 'es';
+      case 'ca': return 'ca';
+      default:   return 'en';
+    }
   }
 
 }

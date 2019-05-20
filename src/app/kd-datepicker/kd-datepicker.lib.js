@@ -403,6 +403,22 @@
     BUTTONS: ['CANCEL', 'OK'],
     INVALID_DATE: 'Invalid Date'
   };
+  var ES = {
+    DAYS_ABBR: ['', 'L', 'M', 'X', 'J', 'V', 'S', 'D'],
+    MONTHS: ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    MONTHS_ABBR: ['', 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    AM_PM: ['AM', 'PM'],
+    BUTTONS: ['Cancelar', 'Aceptar'],
+    INVALID_DATE: 'Fecha no válida'
+  };
+  var CA = {
+    DAYS_ABBR: ['', 'Dl', 'Dt', 'Dc', 'Dj', 'Dv', 'Ds', 'Dg'],
+    MONTHS: ['', 'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
+    MONTHS_ABBR: ['', 'Gen', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Des'],
+    AM_PM: ['AM', 'PM'],
+    BUTTONS: ['Cancel·lar', 'Acceptar'],
+    INVALID_DATE: 'Data no vàlida'
+  };
 
   var CHANGE = Util.createEvent('wdp.change');
   var OPEN = Util.createEvent('wdp.open');
@@ -2050,7 +2066,8 @@
   }();
   WindowDatePicker.LANG = {};
   WindowDatePicker.createLanguage('en', EN);
+  WindowDatePicker.createLanguage('es', ES);
+  WindowDatePicker.createLanguage('ca', CA);
 
   return WindowDatePicker;
-
 })));
