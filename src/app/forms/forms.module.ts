@@ -4,8 +4,8 @@ import { FormsPage } from './forms.page';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { OkodeNgxCustomPaletteModule } from 'custom-palette'; // from local
-import { KdDatepickerModule } from '../kd-datepicker/kd-datepicker.module';
+import { OkodeNgxCustomPaletteModule, OkodeNgxDatepickerModule } from 'custom-palette'; // from local
+
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import { KdDatepickerModule } from '../kd-datepicker/kd-datepicker.module';
     FormsModule,
     IonicModule,
     OkodeNgxCustomPaletteModule,
-    KdDatepickerModule,
+    OkodeNgxDatepickerModule,
     RouterModule.forChild([{ path: '', component: FormsPage }])
   ],
   exports: [],
