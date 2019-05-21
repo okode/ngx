@@ -26,6 +26,14 @@ ion-content[custom-palette] {
   ion-card[rect] {
     border-radius: 2px !important;
   }
+  ion-card[translucent] {
+    background: rgba(var(--ion-color-base-rgb), .2);
+    color: var(--ion-color-shade);
+    &.ion-color-warning {
+      background: rgba(var(--ion-color-base-rgb), .4);
+      color: var(--ion-color-warning-contrast);
+    }
+  }
   /* Basic content with icon */
   ion-card > ion-icon {
     position: absolute;
