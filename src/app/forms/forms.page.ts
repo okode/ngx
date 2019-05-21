@@ -14,7 +14,6 @@ export class FormsPage {
 
   selectHTMLValue;
   date;
-  name;
 
   constructor(public platform: Platform) {}
 

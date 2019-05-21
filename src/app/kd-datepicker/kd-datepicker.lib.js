@@ -1,11 +1,3 @@
-/*!
-* Window Date Picker
-* version: 1.0.1
-*  author: Cevad Tokatli <cevadtokatli@hotmail.com>
-* website: http://cevadtokatli.com
-*  github: https://github.com/cevadtokatli/window-date-picker
-* license: MIT
-*/
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -1749,27 +1741,17 @@
     }, {
       key: "setPosition",
       value: function setPosition() {
-        var rect = this.parentEl.getBoundingClientRect(),
-            ow = this.el.offsetWidth,
-            oh = this.el.offsetHeight,
-            x = rect.left + ow,
-            _x = rect.left - ow,
-            y = rect.top + rect.height + oh,
-            _y = rect.top - oh,
-            w = window.innerWidth,
-            h = window.innerHeight;
-
-        if (x >= w && _x > 0) {
-          this.el.style.left = rect.left + rect.width - ow + 'px';
-        } else {
-          this.el.style.left = rect.left + 'px';
+        var ionMenuWidth = 0;
+        if (document.getElementsByTagName('ion-menu')) {
+          var menu = document.getElementsByTagName('ion-menu')[0];
+          if (menu && menu.getAttribute('side') === 'start') { // rigth menu showed
+            ionMenuWidth = menu.getBoundingClientRect().width;
+          }
         }
-
-        if (y >= h && _y > 0) {
-          this.el.style.top = rect.top - oh + 'px';
-        } else {
-          this.el.style.top = rect.top + rect.height + 'px';
-        }
+        var parent = this.parentEl.getBoundingClientRect();
+        var element = this.el;
+        this.el.style.left = parent.left - element.offsetWidth - ionMenuWidth + 'px';
+        this.el.style.top = parent.top + parent.height + 'px';
       }
       /**
       * Increases date value by one.

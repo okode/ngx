@@ -219,7 +219,7 @@ ion-content[custom-palette] {
       opacity: 1 !important;
     }
     &.item-has-error ion-icon {
-      color: var(--custom-error-color);
+      color: var(--input-error-color);
       opacity: 1 !important;
     }
   }
