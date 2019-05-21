@@ -36,3 +36,26 @@ Import main style in `src/global.scss`
 ```typescript
 @import '~@okode/ngx-custom-palette/styles/style.scss';
 ```
+
+# Aditional directives and components
+
+### kdDatepicker directive
+In page module:
+```typescript
+import { OkodeNgxCustomPaletteModule, OkodeNgxDatepickerModule } from '@okode/ngx-custom-palette';
+@NgModule({
+  imports: [
+    OkodeNgxCustomPaletteModule,
+    OkodeNgxDatepickerModule,
+    ...
+  ],
+```
+HTML:
+```html
+<ion-item>
+  <ion-label>Date</ion-label>
+  <ion-input type="date" [(ngModel)]="date"></ion-input>
+  <ion-icon name="md-calendar" kdDatepicker [date]="date" (onDateChange)="date = $event"></ion-icon>
+</ion-item>
+```
+

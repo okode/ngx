@@ -2,4 +2,5 @@
  * Public API Surface of ngx-custom-palette
  */
 
-export * from './lib/custom-palette.module';
+export { OkodeNgxCustomPaletteModule } from './lib/custom-palette/custom-palette.module';
+export { OkodeNgxDatepickerModule } from './lib/kd-datepicker/kd-datepicker.module';
