@@ -1,5 +1,6 @@
 export const KdDatepickerCssStyle = `
   .wdp {
+    position: initial !important;
     z-index: 999999 !important;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
