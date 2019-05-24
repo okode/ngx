@@ -11,6 +11,7 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
 
   private picker;
   private container;
+  private parentContainer;
   @Input() date;
   @Output() onDateChange = new EventEmitter();
   @Input() maxDate: string;
@@ -42,6 +43,7 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
     this.picker.el.addEventListener('wdp.close', () => {});
     this.picker.el.addEventListener('wdp.viewchange', () => this.onPickerViewChange());
     this.picker.el.addEventListener('wdp.change', (data) => this.onPickerSelectDate(data));
+    window.addEventListener('resize', () => { this.setPosition(); });
   }
 
   private onPickerSelectDate(data) {
@@ -69,15 +71,26 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
   }
 
   private createPickerContainer() {
-    const div = document.createElement('div');
-    div.setAttribute('style', 'z-index:9999999; position:absolute; right:0px; margin:75px 16px;');
-    if (this.elem.nativeElement.closest('ion-item')) {
-      this.elem.nativeElement.closest('ion-item').insertAdjacentElement('beforebegin', div);
-    } else {
-      this.elem.nativeElement.insertAdjacentElement('beforebegin', div);
-    }
     this.container = document.createElement('div');
-    div.appendChild(this.container);
+    this.container.setAttribute('style', `
+      z-index: 9999999 !important;
+      position: absolute !important;
+    `);
+    if (this.elem.nativeElement.closest('ion-item')) {
+      this.parentContainer = this.elem.nativeElement.closest('ion-item');
+    } else {
+      this.parentContainer = this.elem.nativeElement;
+    }
+    this.parentContainer.insertAdjacentElement('beforebegin', this.container);
+    setTimeout(() => { this.setPosition(); }, 200);
+  }
+
+  private setPosition() {
+    const rect = this.parentContainer.getBoundingClientRect();
+    if (rect.left + rect.width > 350) {
+      this.container.style.marginLeft = rect.width - 310 + 'px';
+    }
+    this.container.style.marginTop = rect.height + 'px';
   }
 
   private setCssStyle() {

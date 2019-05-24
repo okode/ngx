@@ -1392,17 +1392,6 @@
     }, {
       key: "setPosition",
       value: function setPosition() {
-        var ionMenuWidth = 0;
-        if (document.getElementsByTagName('ion-menu')) {
-          var menu = document.getElementsByTagName('ion-menu')[0];
-          if (menu && menu.getAttribute('side') === 'start') { // rigth menu showed
-            ionMenuWidth = menu.getBoundingClientRect().width;
-          }
-        }
-        var parent = this.parentEl.getBoundingClientRect();
-        var element = this.el;
-        this.el.style.left = parent.left - element.offsetWidth - ionMenuWidth + 'px';
-        this.el.style.top = parent.top + parent.height + 'px';
       }
     }, {
       key: "increaseDateValue",
