@@ -1,3 +1,4 @@
+/* tslint:disable */
 (function (global, factory) {
   (global.WindowDatePicker = factory());
 }(this, (function () { 'use strict';
@@ -37,26 +38,6 @@
     }
 
     return obj;
-  }
-
-  function _objectSpread(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-      var ownKeys = Object.keys(source);
-
-      if (typeof Object.getOwnPropertySymbols === 'function') {
-        let keys : any = Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-        })
-        ownKeys = ownKeys.concat(keys);
-      }
-
-      ownKeys.forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    }
-
-    return target;
   }
 
   function _slicedToArray(arr, i) {
