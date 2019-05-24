@@ -9,11 +9,19 @@ export const KdDatepickerCssStyle = `
   .wdp-header {
     display: none !important;
   }
-  .wdp .wdp-container .wdp-date-container ul li.wdp-active:before {
+  .wdp .wdp-container .wdp-date-container ul li.wdp-today:before {
     background: #919191 !important;
   }
-  .wdp .wdp-container .wdp-date-container ul li:hover {
-    cursor: pointer;
+  .wdp .wdp-container .wdp-date-container .wdp-week-body ul li:hover {
+    cursor: pointer !important;
+  }
+  .wdp .wdp-container .wdp-date-container .wdp-week-body ul li:hover:before {
+    background: #919191 !important;
+  }
+  .wdp .wdp-container .wdp-date-container ul li.wdp-disabled {
+    pointer-events: none !important;
+    opacity: 0.3 !important;
+    default: default !important;
   }
   .wdp .wdp-container .wdp-body .wdp-date-container .wdp-date-header > div div {
     transform: rotate(-90deg);

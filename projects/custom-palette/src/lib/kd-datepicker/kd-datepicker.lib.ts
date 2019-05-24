@@ -314,6 +314,7 @@
   var SAVE = Util.createEvent('wdp.save');
   var CANCEL = Util.createEvent('wdp.cancel');
   var DESTROY = Util.createEvent('wdp.destroy');
+  var VIEWCHANGE = Util.createEvent('wdp.viewchange');
 
   var _WindowDatePicker;
 
@@ -408,7 +409,6 @@
         Util.addEventListener(this.els.body.querySelector('.wdp-date-header > div > div:last-child svg'), [Util.MOUSE_DOWN], !this.orientation ? this.increaseDateValue : this.decreaseDateValue);
         this.els.weekBody = this.el.querySelector('.wdp-date-container .wdp-date-body .wdp-week-body');
         this.renderMonth();
-        this.setActiveDayClass();
         this.els.yearContainer = this.el.querySelector('.wdp-date-body .wdp-week-container + .wdp-list-container');
         this.els.yearRangeContainer = this.el.querySelector('.wdp-date-body .wdp-list-container:last-child');
       }
@@ -633,8 +633,7 @@
             txt = _this2.LANG.MONTHS_ABBR[i - 12];
             li.classList.add('wdp-muted');
           }
-
-          li.setAttribute('date', ''.concat(n + '', '"').concat(y));
+          li.setAttribute('date', (y) + '-' + ('0' + n).slice(-2) + '-01');
           li.innerHTML = txt;
           Util.addEventListener(li, [Util.MOUSE_DOWN], function () {
             _this2.tmpValue = {
@@ -687,7 +686,7 @@
             li.classList.add('wdp-muted');
           }
 
-          li.setAttribute('date', y);
+          li.setAttribute('date', y + '-01-01');
           Util.addEventListener(li, [Util.MOUSE_DOWN], function () {
             _this3.tmpYearValue = {
               year: y,
@@ -738,7 +737,6 @@
         } catch (ignored) {
           this.setInvalidValue();
           this.initialValue = { ...this.value };
-          this.setActiveDayClass();
           this.setInputText();
         } finally {
           this.resetHourPage();
@@ -830,7 +828,6 @@
         if (val == MONTH) {
           n = this.els.weekContainer;
           this.renderMonth();
-          this.setActiveDayClass();
         } else if (val == YEAR) {
           n = this.els.yearContainer;
 
@@ -915,7 +912,6 @@
           }
 
           this.renderMonth();
-          this.setActiveDayClass();
           this.setDateSpanText();
           this.els.weekContainer.classList.remove('wdp-d-none');
           this.els.yearContainer.classList.add('wdp-d-none');
@@ -1145,13 +1141,11 @@
       key: "setDay",
       value: function setDay(day, month, year) {
         var txt = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
         if (this.type != DATE && txt) {
           if (!this.value.hour) {
             this.setHour(NaN, true, false);
           }
         }
-
         var weekDay = this.getWeekDay(new Date(year, month - 1, day));
         this.value = { ...this.value, ...{
           day: day,
@@ -1159,29 +1153,11 @@
           month: month,
           year: year
         }};
-        this.setActiveDayClass();
-
         if (txt) {
           this.value.value = this.getValueText(this.value);
           this.setSpanText();
           this.setInputText();
           this.el.dispatchEvent(CHANGE);
-        }
-      }
-    }, {
-      key: "setActiveDayClass",
-      value: function setActiveDayClass() {
-        if (this.type != HOUR) {
-          var inact = this.els.weekBody.querySelector('.wdp-week > li.wdp-active'),
-              act = this.els.weekBody.querySelector(".wdp-week > li[date=\"".concat(this.value.day, "-").concat(this.value.month, "-").concat(this.value.year, "\"]"));
-
-          if (inact) {
-            inact.classList.remove('wdp-active');
-          }
-
-          if (act) {
-            act.classList.add('wdp-active');
-          }
         }
       }
     }, {
@@ -1193,7 +1169,7 @@
         };
         this.renderMonth();
         this.setDateSpanText();
-        this.setActiveDayClass();
+        this.el.dispatchEvent(VIEWCHANGE);
       }
     }, {
       key: "setTmpYear",
@@ -1492,7 +1468,7 @@
         var _this5 = this;
 
         var li = document.createElement('li');
-        li.setAttribute('date', "".concat(d, "-").concat(m, "-").concat(y));
+        li.setAttribute('date', (y) + '-' + ('0' + m).slice(-2) + '-' + ('0' + d).slice(-2));
 
         if (muted) {
           li.classList.add('wdp-muted');
