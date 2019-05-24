@@ -861,6 +861,7 @@
         }
 
         this.setPageAnimation(o, n, a, b);
+        this.el.dispatchEvent(VIEWCHANGE);
       }
     }, {
       key: "focusHoursInput",
@@ -1178,17 +1179,16 @@
         this.renderYear();
         this.setDateSpanText();
         this.setActiveMonthClass();
+        this.el.dispatchEvent(VIEWCHANGE);
       }
     }, {
       key: "setActiveMonthClass",
       value: function setActiveMonthClass() {
         var inact = this.els.yearContainer.querySelector('.wdp-list > li.wdp-active'),
             act = this.els.yearContainer.querySelector(".wdp-list > li[date=\"".concat(this.tmpValue.month, "-").concat(this.tmpValue.year, "\"]"));
-
         if (inact) {
           inact.classList.remove('wdp-active');
         }
-
         if (act) {
           act.classList.add('wdp-active');
         }
@@ -1201,6 +1201,7 @@
         this.renderYearRange();
         this.setDateSpanText();
         this.setActiveYearClass();
+        this.el.dispatchEvent(VIEWCHANGE);
       }
     }, {
       key: "setActiveYearClass",

@@ -9,22 +9,31 @@ export const KdDatepickerCssStyle = `
   .wdp-header {
     display: none !important;
   }
-  .wdp .wdp-container .wdp-date-container ul li.wdp-today:before {
-    background: #919191 !important;
+  .wdp .wdp-container .wdp-date-container ul li {
+    color: #3d3d3d !important;
   }
-  .wdp .wdp-container .wdp-date-container .wdp-week-body ul li:hover {
+  .wdp .wdp-container .wdp-date-container ul li.wdp-today {
+    background: #f0f0f0 !important;
+    border-radius: 50%;
+  }
+  .wdp .wdp-container .wdp-date-container ul li:hover {
     cursor: pointer !important;
-  }
-  .wdp .wdp-container .wdp-date-container .wdp-week-body ul li:hover:before {
-    background: #919191 !important;
+    background: #e2e2e2 !important;
+    border-radius: 50%;
   }
   .wdp .wdp-container .wdp-date-container ul li.wdp-disabled {
     pointer-events: none !important;
     opacity: 0.3 !important;
     default: default !important;
+    font-weight: 400 !important;
   }
-  .wdp .wdp-container .wdp-body .wdp-date-container .wdp-date-header > div div {
+  .wdp .wdp-container .wdp-date-container ul li.wdp-muted {
+  }
+  .wdp .wdp-date-header > div div {
     transform: rotate(-90deg);
+  }
+  .wdp .wdp-date-header > div div, .wdp .wdp-date-header > span {
+    cursor: pointer !important;
   }
 
 

@@ -13,9 +13,8 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
   private container;
   @Input() date;
   @Output() onDateChange = new EventEmitter();
-  private maxDate = '2019-05-25';
-  private minDate = '2019-05-12';
-
+  @Input() maxDate: string;
+  @Input() minDate: string;
 
   constructor(private elem: ElementRef) {}
 
