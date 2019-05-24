@@ -5,6 +5,7 @@ export const KdDatepickerCssStyle = `
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+    text-transform: uppercase !important;
   }
   .wdp-header {
     display: none !important;
@@ -13,30 +14,46 @@ export const KdDatepickerCssStyle = `
     color: #3d3d3d !important;
   }
   .wdp .wdp-container .wdp-date-container ul li.wdp-today {
-    background: #f0f0f0 !important;
+    background: #f0f0f0;
     border-radius: 50%;
   }
   .wdp .wdp-container .wdp-date-container .wdp-week-body ul li:hover,
   .wdp .wdp-container .wdp-date-container .wdp-list-container ul li:hover {
     cursor: pointer !important;
-    background: #e2e2e2 !important;
+    background: #e2e2e2;
     border-radius: 50%;
+  }
+  .wdp .wdp-container .wdp-date-container ul li.wdp-muted {
+    color: #919191 !important;
   }
   .wdp .wdp-container .wdp-date-container ul li.wdp-disabled {
     pointer-events: none !important;
-    opacity: 0.3 !important;
     default: default !important;
-    font-weight: 400 !important;
+    color: #e2e2e2 !important;
   }
-  .wdp .wdp-container .wdp-date-container ul li.wdp-muted {
+  .wdp .wdp-container .wdp-date-container ul li.wdp-selected {
+    background: #d81e05 !important;
+    color: white !important;
+    border-radius: 50%;
+  }
+  .wdp .wdp-container .wdp-body .wdp-date-container ul li {
+    font-weight: 500 !important;
+  }
+  .wdp .wdp-container .wdp-date-container .wdp-week-header ul li {
+    color: #919191 !important;
+    font-weight: 400 !important;
   }
   .wdp .wdp-date-header > div div {
     transform: rotate(-90deg);
-  }
-  .wdp .wdp-date-header > div div, .wdp .wdp-date-header > span {
     cursor: pointer !important;
   }
-
+  .wdp .wdp-date-header > span:hover {
+    cursor: pointer !important;
+    display: block;
+    padding: 10px;
+    margin: -10px;
+    background: #e2e2e2 !important;
+  }
 
   .wdp {
     position: fixed;

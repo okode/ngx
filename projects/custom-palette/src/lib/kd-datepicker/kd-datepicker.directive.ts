@@ -57,10 +57,13 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
   }
 
   private onPickerViewChange() {
+    const selectedDate = this.date ? new Date(this.date).toISOString().substring(0, 10) : null;
     const today = new Date().toISOString().substring(0, 10);
     document.querySelectorAll('.wdp li[date]').forEach((elem) => {
       const date = elem.getAttribute('date');
-      if (date === today) {
+      if (date === selectedDate) {
+        elem.classList.add('wdp-selected');
+      } else if (date === today) {
         elem.classList.add('wdp-today');
       } else if (this.maxDate && new Date(date) > new Date(this.maxDate)) {
         elem.classList.add('wdp-disabled');
