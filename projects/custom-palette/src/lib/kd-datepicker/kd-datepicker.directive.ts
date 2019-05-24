@@ -13,7 +13,7 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
   private container;
   private parentContainer;
   @Input() date;
-  @Output() onDateChange = new EventEmitter();
+  @Output() dateChange = new EventEmitter();
   @Input() maxDate: string;
   @Input() minDate: string;
 
@@ -52,7 +52,7 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
     if (val.year && val.month && val.day) {
       date = `${val.year}-${('0' + val.month).slice(-2)}-${('0' + val.day).slice(-2)}`;
     }
-    this.onDateChange.emit(date);
+    this.dateChange.emit(date);
     setTimeout(() => { this.picker.close(); }, 200);
   }
 
