@@ -58,4 +58,11 @@ HTML:
   <ion-icon name="md-calendar" kdDatepicker [date]="date" (onDateChange)="date = $event"></ion-icon>
 </ion-item>
 ```
+Inputs and outputs (optionals)
+```typescript
+@Input() date: string;           // Set selected date 'YYYY-MM-DD'
+@Output() onDateChange: Event;   // Return selected date 'YYYY-MM-DD'
+@Input() maxDate: string;        // Set max date selectable 'YYYY-MM-DD'
+@Input() minDate: string;        // Set min date selectable 'YYYY-MM-DD'
+```
 
