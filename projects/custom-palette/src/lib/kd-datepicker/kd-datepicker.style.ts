@@ -47,6 +47,10 @@ export const KdDatepickerCssStyle = `
     transform: rotate(-90deg);
     cursor: pointer !important;
   }
+  .wdp .wdp-date-header > span svg {
+    float: right;
+    margin-left: 5px;
+  }
   .wdp .wdp-date-header > span:hover {
     cursor: pointer !important;
     display: block;

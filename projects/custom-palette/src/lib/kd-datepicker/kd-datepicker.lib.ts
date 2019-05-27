@@ -577,6 +577,13 @@
             w += 1;
           }
         }
+
+        if (this.value.year && this.value.month && this.value.day) {
+          const selectedDate = `${this.value.year}-${('0' + this.value.month).slice(-2)}-${('0' + this.value.day).slice(-2)}`;
+          const selectedDay = document.querySelector(`.wdp li[date="${selectedDate}"]`);
+          if (selectedDay) { selectedDay.classList.add('wdp-selected'); }
+        }
+    
       }
       /**
        * Renders a year and attach event listeners.
@@ -1344,7 +1351,6 @@
       key: "setDateSpanText",
       value: function setDateSpanText() {
         var val;
-
         if (this.datePage == MONTH) {
           val = "".concat(this.LANG.MONTHS[this.tmpValue.month], " ").concat(this.tmpValue.year);
         } else if (this.datePage == YEAR) {
@@ -1352,7 +1358,7 @@
         } else {
           val = "".concat(this.tmpYearRangeValue.start, " - ").concat(this.tmpYearRangeValue.end);
         }
-
+        val += "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><defs><path id=\"a\" d=\"M7 10l5 5 5-5z\"/></defs><use fill=\"#4d4d4d\" fill-rule=\"evenodd\" xlink:href=\"#a\"/></svg>";
         this.els.dateSpan.innerHTML = val;
       }
     }, {
