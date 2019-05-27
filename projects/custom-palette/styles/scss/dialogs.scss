@@ -1,13 +1,17 @@
 .ios {
   ion-alert .alert-button {
-    color: #3880ff !important;
+    // color: #3880ff !important;
   }
   ion-action-sheet .sc-ion-action-sheet-ios {
-    color: #3880ff !important;
+    // color: #3880ff !important;
   }
   ion-picker .picker-toolbar * {
-    color: #3880ff !important;
+    // color: #3880ff !important;
   }
+}
+ion-picker .picker-wrapper .picker-toolbar-cancel button,
+ion-alert .alert-button-group button:first-child:not(:last-child) {
+  color: var(--ion-color-medium) !important;
 }
 /*
  *  ALERT
@@ -141,10 +145,27 @@ ion-alert.custom-alert-modal-full-screen {
     }
   }
   .alert-button-group, .alert-button-group.sc-ion-alert-md {
+    flex-direction: initial !important;
     height: 60px !important;
     min-height: 60px !important;
+  }
+}
+ion-alert.custom-alert-modal,
+ion-alert.custom-alert-modal-full-screen {
+  .alert-button-group.sc-ion-alert-md {
+    padding-bottom: 16px;
     button {
       height: 40px !important;
+      &.primary-fill {
+        color: var(--ion-color-light) !important;
+        background: var(--ion-color-primary);
+      }
+      &.primary {
+        color: var(--ion-color-primary) !important;
+      }
+      &.secondary {
+        color: var(--ion-color-medium) !important;
+      }
     }
   }
 }

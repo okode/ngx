@@ -118,7 +118,14 @@ export class DialogsPage {
       backdropDismiss: false,
       cssClass: 'custom-alert-modal-full-screen',
       buttons: [{
+        cssClass: 'secondary',
         text: 'Close',
+      }, {
+        cssClass: 'primary',
+        text: 'Cancel',
+      }, {
+        cssClass: 'primary-fill',
+        text: 'Accept',
         handler: () => {
           const modal = document.getElementsByClassName('custom-alert-modal-full-screen')[0];
           const checkbox = modal ? modal.querySelector('ion-checkbox') : null;
