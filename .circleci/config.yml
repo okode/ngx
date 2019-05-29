@@ -93,7 +93,7 @@ orbs:
                     command: yes | sudo npm install -g @angular/cli || true
                 - run:
                     name: Installing NPM CLI Login
-                    command: install -g npm-cli-login
+                    command: npm install -g npm-cli-login
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
