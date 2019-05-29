@@ -22,10 +22,10 @@ orbs:
     executors:
       browsers:
         docker:
-          - image: circleci/node:11-browsers
+          - image: circleci/node:12-browsers
       node:
         docker:
-          - image: circleci/node:11
+          - image: circleci/node:12
       python:
         docker:
           - image: circleci/python:3
@@ -90,7 +90,7 @@ orbs:
               steps:
                 - run:
                     name: Installing Angular CLI and NPM CLI Login
-                    command: sudo npm install -g @angular/cli npm-cli-login --non-interactive
+                    command: sudo yes | npm install -g @angular/cli npm-cli-login
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
@@ -115,7 +115,7 @@ orbs:
               steps:
                 - run:
                     name: Installing Angular CLI
-                    command: sudo npm install -g @angular/cli --non-interactive
+                    command: sudo yes | npm install -g @angular/cli
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
