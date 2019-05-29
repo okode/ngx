@@ -89,8 +89,11 @@ orbs:
               condition: << parameters.package >>
               steps:
                 - run:
-                    name: Installing Angular CLI and NPM CLI Login
-                    command: yes | sudo npm install -g @angular/cli npm-cli-login
+                    name: Installing Angular CLI
+                    command: yes | sudo npm install -g @angular/cli || true
+                - run:
+                    name: Installing NPM CLI Login
+                    command: install -g npm-cli-login
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
@@ -115,7 +118,7 @@ orbs:
               steps:
                 - run:
                     name: Installing Angular CLI
-                    command: yes | sudo npm install -g @angular/cli
+                    command: yes | sudo npm install -g @angular/cli || true
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
