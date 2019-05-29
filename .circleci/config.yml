@@ -90,7 +90,7 @@ orbs:
               steps:
                 - run:
                     name: Installing Angular CLI and NPM CLI Login
-                    command: sudo npm install -g @angular/cli npm-cli-login
+                    command: sudo npm install -g @angular/cli npm-cli-login --non-interactive
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
@@ -115,7 +115,7 @@ orbs:
               steps:
                 - run:
                     name: Installing Angular CLI
-                    command: sudo npm install -g @angular/cli
+                    command: sudo npm install -g @angular/cli --non-interactive
                 - run:
                     name: Building
                     command: ng build << parameters.project >>
