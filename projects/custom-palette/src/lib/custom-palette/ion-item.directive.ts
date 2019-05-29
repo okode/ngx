@@ -44,16 +44,16 @@ export class IonItemDirective implements OnInit {
       }
       // has icon?
       if (e.querySelector('ion-icon')) { e.classList.add('item-has-icon'); }
-      this.setShadowStyle();
+      this.setShadowStyle(this.shadowCss);
     }
   }
 
-  private getShadow() {
-    return this.el.nativeElement.shadowRoot || this.el.nativeElement.attachShadow({ mode: 'open' });
-  }
-
-  private setShadowStyle() {
-    this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
+  private setShadowStyle(style) {
+    try {
+      const shadow = this.el.nativeElement.shadowRoot ||
+                     this.el.nativeElement.attachShadow({ mode: 'open' });
+      if (shadow) { shadow.innerHTML += `<style>${style}</style>`; }
+    } catch (e) {}
   }
 
 }

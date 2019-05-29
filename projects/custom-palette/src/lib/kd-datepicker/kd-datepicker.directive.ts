@@ -29,6 +29,9 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
     if (this.picker && this.date) {
       this.picker.set(new Date(this.date));
     }
+    if (this.picker) {
+      this.initPicker();
+    }
   }
 
   private initPicker() {

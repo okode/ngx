@@ -23,7 +23,7 @@ export class IonTextAreaDirective implements AfterViewChecked {
   }
 
   private fixScrollAndCaret() {
-    // workaroud to flix floating caret
+    // workaroud to fix floating caret
     if (this.platform.is('ios')) {
       const val = this.el.nativeElement.value;
       this.el.nativeElement.value = val + '.';

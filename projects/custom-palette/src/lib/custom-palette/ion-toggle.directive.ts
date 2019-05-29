@@ -42,24 +42,24 @@ export class IonToggleDirective implements OnInit, OnChanges {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    this.setShadowStyle();
+    this.setShadowStyle(this.shadowCss);
   }
 
   ngOnChanges(changes) {
     if (changes && (changes.enabledText || changes.disabledText)) {
-      this.getShadow().innerHTML += `<style>
+      this.setShadowStyle(`<style>
         :host(.toggle-checked) .toggle-icon:after { content: '${this.enabledText}'; }
         :host(:not(.toggle-checked)) .toggle-icon:after { content: '${this.disabledText}'; }
-      </style>`;
+      </style>`);
     }
   }
 
-  private getShadow() {
-    return this.el.nativeElement.shadowRoot || this.el.nativeElement.attachShadow({ mode: 'open' });
-  }
-
-  private setShadowStyle() {
-    this.getShadow().innerHTML += `<style>${this.shadowCss}</style>`;
+  private setShadowStyle(style) {
+    try {
+      const shadow = this.el.nativeElement.shadowRoot ||
+                     this.el.nativeElement.attachShadow({ mode: 'open' });
+      if (shadow) { shadow.innerHTML += `<style>${style}</style>`; }
+    } catch (e) {}
   }
 
 }
