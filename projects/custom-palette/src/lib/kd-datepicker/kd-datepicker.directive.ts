@@ -56,7 +56,12 @@ export class KdDatepickerDirective implements OnInit, OnChanges {
       date = `${val.year}-${('0' + val.month).slice(-2)}-${('0' + val.day).slice(-2)}`;
     }
     this.dateChange.emit(date);
-    setTimeout(() => { this.picker.close(); }, 200);
+    setTimeout(() => {
+      this.picker.close();
+      if (document.querySelectorAll('.wdp.wdp-active').length) {
+        document.querySelectorAll('.wdp.wdp-active')[0].classList.remove('wdp-active');
+      }
+    }, 200);
   }
 
   private onPickerViewChange() {
