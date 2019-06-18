@@ -11,8 +11,8 @@ export interface OnHardwareBackButton {
 @Injectable()
 export class HardwareBackButton {
 
-  private filterCondition = () => true;
   private intialized = false;
+  private filterCondition = () => true;
 
   constructor(
     private navCtrl: NavController,
@@ -20,7 +20,7 @@ export class HardwareBackButton {
     private platform: Platform
   ) {}
 
-  enable(condition?:() => boolean) {
+  enable(condition?: () => boolean) {
     if (!this.intialized) { this.init(); }
     this.filterCondition = condition || (() => true);
   }
@@ -47,16 +47,21 @@ export class HardwareBackButton {
         return;
       }
       // check if active view has implemented `onHardwareBack()`, else performs nav.pop()
-      let view = this.getActiveViewRefInstance();
+      const view = this.getActiveViewRefInstance();
       if (view && view.kdOnHardwareBackButton) {
         view.kdOnHardwareBackButton();
       } else {
         this.nav.pop();
       }
     });
-    // Overring default hardware back button behaviour
+    // Overring default hardware back button behaviour (Android)
     this.platform.ready().then(() => {
-      this.platform.backButton.subscribeWithPriority(9999, () => { hwBackSubject.next(event); });
+      this.platform.backButton.subscribeWithPriority(9999, () => hwBackSubject.next());
+    });
+    // Overring default browser back button behaviour
+    window.addEventListener('popstate', () => {
+      history.pushState('mock_state_disable_forward_button', null, null);
+      hwBackSubject.next();
     });
   }
 
