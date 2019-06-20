@@ -101,7 +101,7 @@ navToDetail(id: number) {
 
 ### HardwareBackButton
 This service allows you to control the behavior of the Android physical button. If is enabled will try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading). 
-It is not initialized when importing the module, it is necessary to call the `enable ()` function when starting if you want to use it.
+It is not initialized when importing the module, it is necessary to call the `enable()` function when starting if you want to use it.
 
 ##### Functions
 ```typescript
@@ -126,3 +126,26 @@ export class MyPage implements OnHardwareBackButton {
 kdOnHardwareBackButton() { /* overwrite back button behavior () on this page */ }
 ```
 
+
+### HttpCacheInterceptor
+
+Allows caching GET responses (temporally in memory)
+
+**Register provider in app @NgModule**
+```typescript
+  { provide: HTTP_CACHE_INTERCEPTOR_DURATION_MINS, useValue: 5 },
+  { provide: HTTP_INTERCEPTORS, useClass: HttpCacheInterceptor, multi: true },
+```
+>`HTTP_CACHE_INTERCEPTOR_DURATION_MINS` (minutes number) is optional, default: `null` (temporal cache in memory not expires)
+
+**Add header to services that you want to cache (applies in GETs)**
+```typescript
+  headers = headers.append('X-NGX-CACHE-INTERCEPTOR', 'cache-response');
+````
+>`X-NGX-CACHE-INTERCEPTOR` header will not be sent to the server
+
+**Clear all cache responses (applies in all HTTP methods)**
+```typescript
+  headers = headers.append('X-NGX-CACHE-INTERCEPTOR', 'clear-cache');
+````
+**Important:** `X-NGX-CACHE-INTERCEPTOR` header will not be sent to the server
