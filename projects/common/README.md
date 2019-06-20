@@ -100,7 +100,8 @@ navToDetail(id: number) {
 ```
 
 ### HardwareBackButton
-This service allows you to control the behavior of the Android physical button. If is enabled will try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading).
+This service allows you to control the behavior of the Android physical button. If is enabled will try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading). 
+It is not initialized when importing the module, it is necessary to call the `enable ()` function when starting if you want to use it.
 
 ##### Functions
 ```typescript
@@ -116,7 +117,7 @@ disable()
 ```typescript
 import { HardwareBackButton } from '@okode/ngx-common';
 constructor(private hardwareBackButton: HardwareBackButton) {}
-this.hardwareBackButton.disable();
+this.hardwareBackButton.enable();
 ```
 `OnHardwareBackButton` inferface:
 ```typescript
