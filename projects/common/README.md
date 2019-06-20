@@ -36,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 ```
 
+<hr>
 
 # Services
 
@@ -66,7 +67,7 @@ import { Environment } from '@okode/ngx-common';
 console.log('Selected environment', Environment.config().envName);
 ```
 
-### Navigator
+## Navigator
 Ionic NavController wrapper with custom transitions
 
 ##### Functions
@@ -99,7 +100,7 @@ navToDetail(id: number) {
 }
 ```
 
-### HardwareBackButton
+## HardwareBackButton
 This service allows you to control the behavior of the Android physical button. If is enabled will try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading). 
 It is not initialized when importing the module, it is necessary to call the `enable()` function when starting if you want to use it.
 
@@ -127,7 +128,7 @@ kdOnHardwareBackButton() { /* overwrite back button behavior () on this page */ 
 ```
 
 
-### HttpCacheInterceptor
+## HttpCacheInterceptor
 
 Allows caching GET responses (temporally in memory)
 

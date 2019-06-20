@@ -37,9 +37,11 @@ Import main style in `src/global.scss`
 @import '~@okode/ngx-custom-palette/styles/style.scss';
 ```
 
+<hr>
+
 # Aditional directives and components
 
-### kdDatepicker directive
+## kdDatepicker directive
 In page module:
 ```typescript
 import { OkodeNgxCustomPaletteModule, OkodeNgxDatepickerModule } from '@okode/ngx-custom-palette';
