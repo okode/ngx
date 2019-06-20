@@ -38,11 +38,22 @@ import { HttpClientModule } from '@angular/common/http';
 
 <hr>
 
+
+
+
+
 # Services
 
-### Environment
-This service allows the selection of environment config before starting the app.
+  - [Environment](#Environment)
+  - [Navigator](#Navigator)
+  - [HardwareBackButton](#HardwareBackButton)
+  - [HttpCacheInterceptor](#HttpCacheInterceptor)
 
+
+
+
+## Environment
+This service allows the selection of environment config before starting the app.
 It requires that the file  `src/assets/environments.json` exists in the project: 
 
 ```
@@ -67,6 +78,9 @@ import { Environment } from '@okode/ngx-common';
 console.log('Selected environment', Environment.config().envName);
 ```
 
+
+
+
 ## Navigator
 Ionic NavController wrapper with custom transitions
 
@@ -87,7 +101,6 @@ setDefaultAnimation(animation: 'default' | 'push' | 'modal' | 'fade' | 'safepus
 
 > It is possible to open a new navigation flow `startNavFlow` as` true` in  `push()`, this allows to return to previous page at any moment calling `closeCurrentNavFlow()`
 
-
 ##### Usage
 ```typescript
 import { Navigator } from '@okode/ngx-common';
@@ -99,6 +112,9 @@ navToDetail(id: number) {
   this.nav.push(`/foo/detail/${id}`);
 }
 ```
+
+
+
 
 ## HardwareBackButton
 This service allows you to control the behavior of the Android physical button. If is enabled will try to `pop()` current view via `Navigator` if no Ionic overlay presented (alert, action-sheet, loading). 
@@ -126,6 +142,8 @@ import { OnHardwareBackButton } from '@okode/ngx-common';
 export class MyPage implements OnHardwareBackButton {
 kdOnHardwareBackButton() { /* overwrite back button behavior () on this page */ }
 ```
+
+
 
 
 ## HttpCacheInterceptor
