@@ -1,6 +1,15 @@
 # @okode/ngx-custom-palette
 
-Okode custom Ionic 4+ components
+Okode custom palette for Ionic 4+ components
+
+### Tested versions supported:
+
+| @okode/ngx-custom-palette   |      @ionic/angular |
+|-----------------------------|---------------------|
+| `1.5.0`                     | `4.6.0`             |
+| `1.4.1`                     | `4.4.2`             |
+
+
 
 #### Local build
 

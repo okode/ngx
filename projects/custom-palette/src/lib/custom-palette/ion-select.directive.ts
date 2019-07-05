@@ -7,17 +7,17 @@ export class IonSelectDirective implements OnInit {
 
   private shadowCss = `
     .select-icon-inner {
-      left: -15px;
-      margin-top: -4px;
-      border-top: 8px solid;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
-      opacity: .5;
+      left: -15px !important;
+      margin-top: -4px !important;
+      border-top: 8px solid !important;
+      border-right: 5px solid transparent !important;
+      border-left: 5px solid transparent !important;
+      opacity: .5 !important;
     }
     .select-text {
-      min-height: 24px;
-      padding-right: 30px;
-      margin-bottom: 5px;
+      min-height: 24px !important;
+      padding-right: 30px !important;
+      margin-bottom: 5px !important;
     }
   `;
 

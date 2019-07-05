@@ -7,17 +7,17 @@ export class IonItemDirective implements OnInit {
 
   private shadowCss = `
     :host(.ion-focused) .item-native {
-      background: transparent;
+      background: transparent !important;
     }
     .item-native {
-      border: none;
-      padding: 0px;
-      background: transparent;
+      border: none !important;
+      padding: 0px !important;
+      background: transparent !important;
     }
     .item-native .item-inner {
-      border: 0px;
-      padding: 0px;
-      min-height: 68px;
+      border: 0px !important;
+      padding: 0px !important;
+      min-height: 68px !important;
     }
     .item-highlight {
       display: none !important;

@@ -5,6 +5,9 @@ ion-content[custom-palette] {
   [disabled] {
     pointer-events: none;
   }
+  ion-item {
+    --ripple-color: transparent !important;
+  }
   ion-item[custom-palette-style="floating-label"] {
     min-height: 80px;
     margin: 5px 0;
