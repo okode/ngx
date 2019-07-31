@@ -16,8 +16,8 @@ NEXT=$2
 
 # Building
 npm ci
-ng build common
-ng build custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
+npx ng build common
+npx ng build custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
 
 # Create new tag
 git tag -a $CURRENT -m $CURRENT
