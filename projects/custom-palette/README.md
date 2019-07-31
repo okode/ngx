@@ -9,12 +9,6 @@ Okode custom palette for Ionic 4+ components
 | `1.5.0`                     | `4.6.0`             |
 | `1.4.1`                     | `4.4.2`             |
 
-
-
-#### Local build
-
-ng build custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
-
 #### Install package in client App
 
 ```

@@ -2,6 +2,13 @@
 
 Okode libraries for Ionic 4+ projects.
 
+## Building
+
+```
+$ ng build common
+$ ng build custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
+```
+
 ## Publish all libraries
 
 ```

@@ -2,10 +2,6 @@
 
 Okode Common for Ionic 4+ projects.
 
-#### Local build
-
-ng build common
-
 #### Install package in client App
 
 ```

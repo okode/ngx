@@ -14,6 +14,11 @@ fi
 CURRENT=$1
 NEXT=$2
 
+# Building
+npm ci
+ng build common
+ng build custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
+
 # Create new tag
 git tag -a $CURRENT -m $CURRENT
 
