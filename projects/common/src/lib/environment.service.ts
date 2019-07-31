@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import { ActionSheetController, Platform } from '@ionic/angular';
+import { ActionSheetController, Platform, Events } from '@ionic/angular';
 
 @Injectable()
 export class Environment {
@@ -19,7 +19,8 @@ export class Environment {
     private http: HttpClient,
     private storage: Storage,
     private actionSheetCtrl: ActionSheetController,
-    private platform: Platform
+    private platform: Platform,
+    private events: Events
   ) {}
 
   static config() {
@@ -57,6 +58,7 @@ export class Environment {
             if (storedEnvironment == null) {
               if (environments.length > 1) {
                 console.log('No saved environment detected, will prompt user for selection');
+                this.events.publish('ngx_common:environment_prompted');
                 this.showEnvironmentActionSheet(environments, json);
               } else {
                 const environment = environments[0];
