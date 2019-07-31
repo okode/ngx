@@ -15,13 +15,7 @@ Okode custom palette for Ionic 4+ components
 
 ng build custom-palette && cp -R projects/custom-palette/styles dist/custom-palette/
 
-#### Publish all projects
-
-```
-./release.sh CURRENT_VERSION NEXT_VERSION
-```
-
-#### Install package
+#### Install package in client App
 
 ```
 npm i @okode/ngx-custom-palette

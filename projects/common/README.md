@@ -6,13 +6,7 @@ Okode Common for Ionic 4+ projects.
 
 ng build common
 
-#### Publish all projects
-
-```
-./release.sh CURRENT_VERSION NEXT_VERSION
-```
-
-#### Install package
+#### Install package in client App
 
 ```
 npm i @okode/ngx-common
