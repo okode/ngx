@@ -41,7 +41,8 @@ export class HardwareBackButton {
       // check ionic overlays (dismiss if is presented and backdropDismiss == true)
       const overlaySelector = 'ion-alert, ion-alert-controller, ' +
                               'ion-loading, ion-loading-controller, ' +
-                              'ion-action-sheet, ion-action-sheet-controller';
+                              'ion-action-sheet, ion-action-sheet-controller' +
+                              'ion-popover, ion-popover-controller';
       let overlay: any = document.querySelector(overlaySelector);
       if (overlay && overlay.getTop) { overlay = await overlay.getTop(); }
       if (overlay) {
