@@ -168,6 +168,7 @@
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
+            "vendorSourceMap": true,
             "tsConfig": "projects/common/tsconfig.lib.json",
             "project": "projects/common/ng-package.json"
           }
@@ -203,6 +204,7 @@
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
+            "vendorSourceMap": true,
             "tsConfig": "projects/custom-palette/tsconfig.lib.json",
             "project": "projects/custom-palette/ng-package.json"
           }
@@ -228,7 +230,7 @@
           }
         }
       }
-    },
+    }
   },
   "cli": {
     "defaultCollection": "@ionic/angular-toolkit"
