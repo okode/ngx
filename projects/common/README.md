@@ -38,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
   - [Navigator](#Navigator)
   - [HardwareBackButton](#HardwareBackButton)
   - [HttpCacheInterceptor](#HttpCacheInterceptor)
-
+  - [SentryErrorHandler](#SentryErrorHandler)
+  - [MMobileService](#MMobileService)
 
 
 
@@ -158,3 +159,11 @@ Allows caching GET responses (temporally in memory)
   headers = headers.append('X-NGX-CACHE-INTERCEPTOR', 'clear-cache');
 ````
 **Important:** `X-NGX-CACHE-INTERCEPTOR` header will not be sent to the server
+
+## SentryErrorHandler
+
+TODO: Document.
+
+## MMobileService
+
+TODO: Document.
