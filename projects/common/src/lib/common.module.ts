@@ -3,7 +3,6 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { Environment } from './environment.service';
 import { Navigator } from './navigator.service';
 import { HardwareBackButton } from './hardware-back-button.service';
-import { Device } from '@ionic-native/device/ngx';
 
 // @dynamic
 @NgModule({
@@ -18,7 +17,6 @@ export class OkodeNgxCommonModule {
       providers: [
         Environment,
         Navigator,
-        Device,
         HardwareBackButton,
         {
           provide: APP_INITIALIZER,

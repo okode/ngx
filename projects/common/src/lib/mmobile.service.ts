@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { timeout } from 'rxjs/operators';
-// @ts-ignore
 import { Device } from '@ionic-native/device/ngx';
 
 @Injectable()
