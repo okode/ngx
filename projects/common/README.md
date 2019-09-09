@@ -183,7 +183,7 @@ In app init
 ```typescript
 import { SentryErrorHandler } from '@okode/ngx-common';
 ...
-SentryErrorHandler.init(dsn, release, environment, ignoreErrors);
+SentryErrorHandler.init(dsn, release, environment, ignoreErrors?);
 ```
 
 ##### Functions
