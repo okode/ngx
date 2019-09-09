@@ -204,23 +204,12 @@ handleError(error) // base function override
 ##### Usage
 
 ```typescript
-
-import { NgModule } from '@angular/core';
-import { OkodeNgxCommonModule } from '@okode/ngx-common';
-import { IonicStorageModule } from '@ionic/storage';
-import { HttpClientModule } from '@angular/common/http';
-import { Device } from '@ionic-native/device/ngx';
+import { MMobileService } from '@okode/ngx-common';
 
 @NgModule({
   imports: [
-    IonicStorageModule.forRoot(), // Required
-    HttpClientModule, // Required
-    OkodeNgxCommonModule.forRoot(),
-    ...
-  ]
   providers: [
     ...
-    Device, // Required
     MMobileService
 ```
 
