@@ -160,10 +160,84 @@ Allows caching GET responses (temporally in memory)
 ````
 **Important:** `X-NGX-CACHE-INTERCEPTOR` header will not be sent to the server
 
+
+
+
+
 ## SentryErrorHandler
 
-TODO: Document.
+SentryErrorHandler service for Angular ErrorHandler provide
+
+##### Usage
+In app/core module:
+```typescript
+import { NgModule, ..., ErrorHandler } from '@angular/core';
+import { SentryErrorHandler } from '@okode/ngx-common';
+
+@NgModule({
+  providers: [
+    ...
+    { provide: ErrorHandler, useClass: SentryErrorHandler }
+```
+In app init
+```typescript
+import { SentryErrorHandler } from '@okode/ngx-common';
+...
+SentryErrorHandler.init(dsn, release, environment, ignoreErrors);
+```
+
+##### Functions
+
+```typescript
+static init(dsn: string, release: string, environment: string, ignoreErrors = [])
+static sendServerError(error: HttpErrorResponse) // HTTP ERROR WARNING
+static sendServerErrorHandled(error: HttpErrorResponse, errorCode: string) // HTTP ERROR DEBUG
+static sendCustomError(title: string, level: Sentry.Severity, transaction: string, error: any)
+handleError(error) // base function override
+```
+
+
+
 
 ## MMobileService
 
-TODO: Document.
+##### Usage
+
+```typescript
+
+import { NgModule } from '@angular/core';
+import { OkodeNgxCommonModule } from '@okode/ngx-common';
+import { IonicStorageModule } from '@ionic/storage';
+import { HttpClientModule } from '@angular/common/http';
+import { Device } from '@ionic-native/device/ngx';
+
+@NgModule({
+  imports: [
+    IonicStorageModule.forRoot(), // Required
+    HttpClientModule, // Required
+    OkodeNgxCommonModule.forRoot(),
+    ...
+  ]
+  providers: [
+    ...
+    Device, // Required
+    MMobileService
+```
+
+##### Functions
+
+```typescript
+init(baseUrl: string, appName: string, version: string, jwtConfigName?: string, timeoutMillis?: number)
+//
+reloadConfig()
+getCustomConfig()
+getServiceUrl(key: string)
+getJwtLoginUrl()
+getJwtRefreshUrl()
+getVersion()
+getTimeout()
+isActive() {
+getFeatures()
+isDeviceLocked()isInitialized()
+async getLastUpdatedDate()
+```

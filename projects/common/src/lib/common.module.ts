@@ -1,9 +1,8 @@
-import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { Environment } from './environment.service';
 import { Navigator } from './navigator.service';
 import { HardwareBackButton } from './hardware-back-button.service';
-import { SentryErrorHandler } from './sentry-error-handler.service';
 
 // @dynamic
 @NgModule({
@@ -24,8 +23,7 @@ export class OkodeNgxCommonModule {
           useFactory: moduleInitializer,
           deps: [Environment],
           multi: true
-        },
-        { provide: ErrorHandler, useClass: SentryErrorHandler }
+        }
       ]
     };
   }

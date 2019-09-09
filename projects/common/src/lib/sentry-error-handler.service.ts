@@ -1,14 +1,23 @@
 import { Injectable, ErrorHandler, isDevMode } from '@angular/core';
 import * as Sentry from '@sentry/browser';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Platform } from '@ionic/angular';
 
 @Injectable()
 export class SentryErrorHandler extends ErrorHandler {
 
-  static init(dsn: string, release: string, environment: string) {
+  constructor(
+    private platform: Platform,
+  ) {
+    super();
+  }
+
+  static init(dsn: string, release: string, environment: string, ignoreErrors = []) {
     Sentry.init({
       dsn,
       release,
       environment,
+      ignoreErrors,
       transport: Sentry.Transports.FetchTransport,
       beforeSend: (event) => {
         if (event && event.tags && event.tags.url) {
@@ -25,11 +34,43 @@ export class SentryErrorHandler extends ErrorHandler {
     });
   }
 
-  handleError(error: any) {
-    if (isDevMode()) {
-      super.handleError(error);
+  static sendServerError(error: HttpErrorResponse) {
+    Sentry.captureEvent({
+      message: `ServerError [${error.status}] ${new URL(error.url).pathname}`,
+      level: Sentry.Severity.Warning,
+      transaction: `[${error.status}] ${error.url}`,
+      extra: { response: error }
+    });
+  }
+
+  static sendServerErrorHandled(error: HttpErrorResponse, errorCode: string) {
+    Sentry.captureEvent({
+      message: `ServerErrorHandled [${errorCode}]`,
+      level: Sentry.Severity.Debug,
+      transaction: `[${error.status}] ${error.url}`,
+      extra: { response: error }
+    });
+  }
+
+  static sendCustomError(title: string, level: Sentry.Severity, transaction: string, error: any) {
+    Sentry.captureEvent({
+      message: title,
+      level: level,
+      transaction: transaction,
+      extra: { response: error }
+    });
+  }
+
+  handleError(error) {
+    if (error instanceof HttpErrorResponse) {
+      SentryErrorHandler.sendServerError(error);
     } else {
-      Sentry.captureException(error.originalError || error);
+      if (this.platform.is('hybrid')) {
+        Sentry.captureException(error.originalError || error);
+      } else {
+        super.handleError(error);
+      }
+      if (isDevMode()) { console.log('ErrorHandler:', error.originalError || error); }
     }
   }
 
