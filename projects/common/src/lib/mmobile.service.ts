@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Device } from '@ionic-native/device/ngx';
 import { Storage } from '@ionic/storage';
 import { timeout } from 'rxjs/operators';
+// @ts-ignore
+import { Device } from '@ionic-native/device/ngx';
 
 @Injectable()
 export class MMobileService {
@@ -20,8 +21,8 @@ export class MMobileService {
 
   constructor(
     private http: HttpClient,
-    private device: Device,
-    private storage: Storage
+    private storage: Storage,
+    private device: Device
   ) {}
 
   init(

@@ -203,13 +203,17 @@ handleError(error) // base function override
 
 ##### Usage
 
+Plugin '@ionic-native/device/ngx' required
+
 ```typescript
 import { MMobileService } from '@okode/ngx-common';
+import { Device } from '@ionic-native/device/ngx';
 
 @NgModule({
   imports: [
   providers: [
     ...
+    Device, // Required
     MMobileService
 ```
 
