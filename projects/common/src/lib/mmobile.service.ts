@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { timeout } from 'rxjs/operators';
-import { Device } from '@ionic-native/device/ngx';
 
 @Injectable()
 export class MMobileService {
@@ -20,8 +19,7 @@ export class MMobileService {
 
   constructor(
     private http: HttpClient,
-    private storage: Storage,
-    private device: Device
+    private storage: Storage
   ) {}
 
   init(
@@ -114,15 +112,15 @@ export class MMobileService {
     return this.config.features;
   }
 
-  isDeviceLocked() {
+  isDeviceLocked(device: { version: string, model: string, platform: string }) {
     this.checkIfIsInitialized();
     const mobileLockInfo = this.config.lockingConfig;
     if (mobileLockInfo == null || !mobileLockInfo.active) {
       return false;
     }
-    const deviceVersion = this.device.version;
-    const deviceModel = this.device.model;
-    const devicePlatform = this.device.platform;
+    const deviceVersion = device.version;
+    const deviceModel = device.model;
+    const devicePlatform = device.platform;
     let deviceMatched = false;
     mobileLockInfo.devices.forEach((deviceLockInfo: any) => {
       if (deviceMatched) {
