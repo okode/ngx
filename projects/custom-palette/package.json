@@ -1,6 +1,6 @@
 {
   "name": "@okode/ngx-custom-palette",
-  "version": "1.5.12",
+  "version": "1.5.13",
   "peerDependencies": {
     "@angular/common": ">= 7.1.0",
     "@angular/core": ">= 7.1.0"
