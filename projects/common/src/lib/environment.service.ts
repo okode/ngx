@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { ActionSheetController, Platform, Events } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class Environment {
@@ -9,6 +10,7 @@ export class Environment {
   private static isReady = false;
   private static environmentConfig: any = {};
 
+  private readonly hasEnvironmentProptedSource = new BehaviorSubject<boolean>(false);
   private readonly JSON_PATH = 'assets/environments.json';
   private readonly SELECTED_ENVIRONMENT_KEY = 'selectedEnvironmentKey';
   private isInitializing = false;
@@ -42,6 +44,8 @@ export class Environment {
     });
   }
 
+  hasEnvironmentPrompted$() { return this.hasEnvironmentProptedSource.asObservable(); }
+
   private initEnvs() {
     this.http.get(this.JSON_PATH).subscribe(json => {
       if (json == null || Object.keys(json).length === 0) {
@@ -58,7 +62,7 @@ export class Environment {
             if (storedEnvironment == null) {
               if (environments.length > 1) {
                 console.log('No saved environment detected, will prompt user for selection');
-                this.events.publish('ngx_common:environment_prompted');
+                this.notifyEnvironmentPrompted();
                 this.showEnvironmentActionSheet(environments, json);
               } else {
                 const environment = environments[0];
@@ -105,6 +109,16 @@ export class Environment {
       }))
     });
     actionSheet.present();
+  }
+
+  /** @description
+   * This two lines do the same, one using the deprecated Ionic Events and the other with rxjs.
+   * Used hasEnvironmentProptedSource for new apps
+   */
+  private notifyEnvironmentPrompted() {
+    // TODO Delete ngx_common:environment_prompted when all apps are migrated to the new system
+    this.events.publish('ngx_common:environment_prompted');
+    this.hasEnvironmentProptedSource.next(true);
   }
 
 }
