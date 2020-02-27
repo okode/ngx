@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Navigator } from './navigator.service';
 import { Subject } from 'rxjs';
 import { throttleTime, filter } from 'rxjs/operators';
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, MenuController } from '@ionic/angular';
 
 export interface OnHardwareBackButton {
   kdOnHardwareBackButton();
@@ -17,7 +17,8 @@ export class HardwareBackButton {
   constructor(
     private navCtrl: NavController,
     private nav: Navigator,
-    private platform: Platform
+    private platform: Platform,
+    private menuCtrl: MenuController
   ) {}
 
   enable(condition?: () => boolean) {
@@ -47,6 +48,10 @@ export class HardwareBackButton {
       if (overlay && overlay.getTop) { overlay = await overlay.getTop(); }
       if (overlay) {
         if (overlay && overlay.backdropDismiss === true) { overlay.dismiss(); }
+        return;
+      }
+      if (this.menuCtrl.isOpen()) {
+        this.menuCtrl.close();
         return;
       }
       // check if active view has implemented `onHardwareBack()`, else performs nav.pop()
