@@ -47,10 +47,10 @@ export class HardwareBackButton {
       let overlay: any = document.querySelector(overlaySelector);
       if (overlay && overlay.getTop) { overlay = await overlay.getTop(); }
       if (overlay) {
-        if (overlay && overlay.backdropDismiss === true) { overlay.dismiss(); }
+        if (overlay.backdropDismiss === true) { overlay.dismiss(); }
         return;
       }
-      if (this.menuCtrl.isOpen()) {
+      if (await this.menuCtrl.isOpen()) {
         this.menuCtrl.close();
         return;
       }
