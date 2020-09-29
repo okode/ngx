@@ -1,5 +1,4 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { NgModule, APP_INITIALIZER, ModuleWithProviders } from '@angular/core';
 import { Environment } from './environment.service';
 import { Navigator } from './navigator.service';
 import { HardwareBackButton } from './hardware-back-button.service';
