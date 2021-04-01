@@ -36,7 +36,7 @@ export class SentryErrorHandler extends ErrorHandler {
 
   static sendServerError(error: HttpErrorResponse) {
     Sentry.captureEvent({
-      message: `ServerError [${error.status}] ${new URL(error.url).pathname}`,
+      message: `ServerError [${error.status}] ${new URL(error.url, 'https://tempuri.org').pathname}`,
       level: Sentry.Severity.Warning,
       transaction: `[${error.status}] ${error.url}`,
       extra: { response: error }
